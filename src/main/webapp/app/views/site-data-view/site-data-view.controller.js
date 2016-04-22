@@ -5,30 +5,27 @@
         .module('vivaxDataManagerApp')
         .controller('SiteDataViewController', SiteDataViewController);
     
-    SiteDataViewController.$inject = ['$scope', '$state','$http', 'SiteDataViewDTO', 'SiteDataSearch'];
+    SiteDataViewController.$inject = ['$scope', '$state', 'SiteDataViewDTO', 'SiteDataSearch'];
     console.log('in controller function')
-    function SiteDataViewController ($scope, $state, $http, SiteDataViewDTO, SiteDataSearch) {
-    	
-        var vm = this;
-        vm.siteDataViewDTOS = [];
-        vm.loadAll = function() {
-        	var data = [{name:'country', query:'China'}];
-            $http.post('api/siteData/searchByFilters', data).success(function(data, status) {
-                alert("uee");
-            });
-            /*SiteDataViewDTO.query(function(result) {
-                vm.siteDataViewDTOS = result;
-            });*/
+    function SiteDataViewController ($scope, $state, SiteDataViewDTO, SiteDataSearch) {
+   	
+        
+        $scope.siteDataViewDTOS = [];
+        $scope.loadAll = function() {
+            var data = [{name:'country', query:'China'}];
+            $scope.siteDataViewDTOS = SiteDataViewDTO.query(data);
+             $scope.authors=$scope.siteDataViewDTOS;
+            console.log($scope.authors);
         };
 
-        vm.search = function () {
-            if (!vm.searchQuery) {
-                return vm.loadAll();
+        $scope.search = function () {
+            if (!$scope.searchQuery) {
+                return $scope.loadAll();
             }
-            SiteDataSearch.query({query: vm.searchQuery}, function(result) {
-                vm.siteDataViewDTOS = result;
+            SiteDataSearch.query({query: $scope.searchQuery}, function(result) {
+                $scope.siteDataViewDTOS = result;
             });
         };
-        vm.loadAll();
+        $scope.loadAll();
      }
 })();

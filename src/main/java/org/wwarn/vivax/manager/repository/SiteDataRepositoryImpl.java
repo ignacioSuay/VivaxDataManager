@@ -58,22 +58,33 @@ public class SiteDataRepositoryImpl implements SiteDataRepositoryCustom{
         List<SiteDataViewDTO> siteDataViewDTOList=new ArrayList<SiteDataViewDTO>();
         
         //filling SiteDataViewDTO list
-        
-        siteDataList.stream().forEach(sd->{
-        	 SiteDataViewDTO temp = new SiteDataViewDTO();
-        	 temp.setId(id);
-        	 temp.setTypeStudy(sd.getTypeStudy() + "id SiteData: " + sd.getId());
-      		 temp.setRef(sd.getStudy().getRef());
-        	 temp.setCategory(sd.getCategory().getName());
-      		 temp.setUpper95CI(sd.getUpper95CI());
-     		 temp.setYearStart(sd.getYearStart());
-     		 temp.setYearEnd(sd.getYearEnd());
-     		 temp.setListPublications(sd.getStudy().getPublicationss());
-     		 temp.setListTreatments(sd.getTreatments());
-     		 
-     		 siteDataViewDTOList.add(temp);
-     		 id++;
-     	});
+        for (SiteData siteData : siteDataList) {
+            
+            SiteDataViewDTO temp = new SiteDataViewDTO();
+            List<Integer> tempPubMedList = new ArrayList<Integer>();
+            List<String> tempTreatmentList = new ArrayList<String>();    
+            temp.setId(id);
+            temp.setTypeStudy(siteData.getTypeStudy());
+            temp.setRef(siteData.getStudy().getRef());
+            temp.setLocation(siteData.getLocation());
+            temp.setCategory(siteData.getCategory().getName());
+            temp.setUpper95CI(siteData.getUpper95CI());
+            temp.setYearStart(siteData.getYearStart());
+            temp.setYearEnd(siteData.getYearEnd());
+            temp.setListPublications(siteData.getStudy().getPublicationss());
+            temp.setListTreatments(siteData.getTreatments());
+            siteData.getStudy().getPublicationss().stream().forEach(sg ->{
+                tempPubMedList.add(sg.getPubMedId());
+            });
+            temp.setListPubMedIds(tempPubMedList);
+            siteData.getTreatments().stream().forEach(sh ->{
+                tempTreatmentList.add(sh.getTreatmentName());
+            });
+            temp.setListTreatmentArmCodes(tempTreatmentList);
+
+            siteDataViewDTOList.add(temp);
+            id++;
+     	};
         return siteDataViewDTOList;
 	}
 	

@@ -2,14 +2,10 @@
     'use strict';
     angular
         .module('vivaxDataManagerApp')
-        .factory('SiteDataViewDTO', SiteDataViewDTO);
-
-    SiteDataViewDTO.$inject = ['$resource'];
-
-    function SiteDataViewDTO ($resource) {
-    	var resourceUrl =  'api/siteDataView/:id';
-
-        return $resource(resourceUrl, {}, {
+        .factory('SiteDataViewDTO', function($resource) {
+            var data = [{name:'country', query:'China'}];
+               //return $resource('api/siteData/searchByFilters');
+               return $resource('api/siteData/searchByFilters', {}, {
             'query': { method: 'POST', isArray: true},
             'post': {
                 method: 'POST',
@@ -18,7 +14,7 @@
                     return data;
                 }
             },
-            'update': { method:'PUT' }
+           'update': { method:'PUT' }
         });
     }
-})();
+)})();

@@ -200,7 +200,7 @@ public class SiteDataResource {
             produces = MediaType.APPLICATION_JSON_VALUE)
         @Timed
         public List<SiteDataViewDTO> getAllSiteDataFiltered(@RequestBody List<Filter>listFilters) {
-    		log.debug("@@@@@@@@@@@@@@@REST request to get all SiteData filtered"+listFilters.get(0).toString());
+    		log.debug("request to get all SiteData filtered"+listFilters.get(0).toString());
     		List<SiteDataViewDTO> siteData = siteDataRepository.searchSiteDataByFilter(listFilters); 
     	        return siteData;
         }
