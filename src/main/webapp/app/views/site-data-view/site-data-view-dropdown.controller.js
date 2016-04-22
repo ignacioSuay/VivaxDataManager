@@ -3,7 +3,7 @@ angular.module('vivaxDataManagerApp').controller('DropDownCtrl', DropDownCtrl);
 DropDownCtrl.$inject = [ '$scope', '$state', 'SiteDataViewDTO', 'SiteDataSearch' ];
 
 function DropDownCtrl($scope, $state, SiteDataViewDTO, SiteDataSearch) {
-	$scope.items = [ 'Study Type', 'Study Ref', 'Category', 'Country', 'Year Start', 'Year End', 'Upper95CI', 'PubMedId' ];
+	$scope.items = [ 'Study Type', 'Study Ref', 'Category', 'Country', 'Year Start', 'Year End', 'Upper95CI', 'PubMedId', 'Treatments' ];
 
 	$scope.status = {
 		isopen : false

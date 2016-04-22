@@ -24,32 +24,37 @@
             </button>
         </div>
     </div>
-    <div class="table-responsive">
+    <div class="table-responsive" ng-controller="SiteDataViewController">
         <table class="jh-table table table-striped">
             <thead>
                 <tr jh-sort="vm.predicate" ascending="vm.reverse" callback="vm.transition()">
                     <th jh-sort-by="id"><span>Study Type</span> <span class="glyphicon glyphicon-sort"></span></th>
                     <th jh-sort-by="studyRef"><span>StudyRef</span> <span class="glyphicon glyphicon-sort"></span></th>
                     <th jh-sort-by="country"><span>Country</span> <span class="glyphicon glyphicon-sort"></span></th>
+                    <th jh-sort-by="country"><span>Location</span> <span class="glyphicon glyphicon-sort"></span></th>
                     <th jh-sort-by="category"><span>Category</span> <span class="glyphicon glyphicon-sort"></span></th>
                     <th jh-sort-by="upper95CI"><span>Upper95CI</span> <span class="glyphicon glyphicon-sort"></span></th>
                     <th jh-sort-by="yearStart"><span>Year Start</span> <span class="glyphicon glyphicon-sort"></span></th>
                     <th jh-sort-by="yearEnd"><span>Year End</span> <span class="glyphicon glyphicon-sort"></span></th>
                     <th jh-sort-by="pubMedId"><span>PubMedId</span> <span class="glyphicon glyphicon-sort"></span></th>
+                    <th jh-sort-by="listTreatments"><span>Treatments</span> <span class="glyphicon glyphicon-sort"></span></th>
                     <th></th>
                 </tr>
             </thead>
             <tbody> 
-                <tr ng-repeat="siteData in siteDataList track by siteData.id">
-                    <td><a ui-sref="siteDataView.detail">{{siteData.id}}</a></td>
-                    <td>{{siteData.typeStudy}}</td>
-                    <td>{{siteData.ref}}</td>
-                    <td>{{siteData.location.location}}</td>
-                    <td>{{siteData.upper95CI}}</td>
-                    <td>{{siteData.yearStart}}</td>
-                    <td>{{siteData.yearEnd}}</td>
+                <tr ng-repeat="siteDataViewDTO in siteDataViewDTOS track by siteDataViewDTO.id">
+                    <!--<td><a ui-sref="siteDataView.detail">{{siteData.id}}</a></td><tr>-->
+                    <td>{{siteDataViewDTO.typeStudy}}</td>
+                    <td>{{siteDataViewDTO.ref}}</td>
+                    <td>{{siteDataViewDTO.location.country}}</td>
+                    <td>{{siteDataViewDTO.location.location}}</td>
+                    <td>{{siteDataViewDTO.category}}</td>
+                    <td>{{siteDataViewDTO.upper95CI}}</td>
+                    <td>{{siteDataViewDTO.yearStart}}</td>
+                    <td>{{siteDataViewDTO.yearEnd}}</td>
+                    <td>{{siteDataViewDTO.listPubMedIds}}</td>
+                    <td>{{siteDataViewDTO.listTreatmentArmCodes}}</td>
                 </tr>
             </tbody>
         </table>
     </div>
-

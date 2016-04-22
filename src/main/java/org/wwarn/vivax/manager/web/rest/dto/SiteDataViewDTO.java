@@ -1,6 +1,9 @@
 package org.wwarn.vivax.manager.web.rest.dto;
 
 import java.io.Serializable;
+import java.util.Arrays;
+import java.util.List;
+import java.util.Objects;
 import java.util.Set;
 
 import org.wwarn.vivax.manager.domain.Treatment;
@@ -19,27 +22,25 @@ public class SiteDataViewDTO implements Serializable{
 	private Location location;
 	private Set <Treatment> listTreatments;
 	private Set <Publication> listPublications;
-	
-	public SiteDataViewDTO() {
-		super();
-		// TODO Auto-generated constructor stub
-	}
-	
-	public SiteDataViewDTO(long id, String typeStudy, String upper95ci, Integer yearStart, Integer yearEnd,
-			String category, String ref, Set<Treatment> listTreatments, Set<Publication> listPublications, Location location) {
-		super();
-		this.location = location;
-		this.id = id;
-		this.typeStudy = typeStudy;
-		this.upper95CI = upper95ci;
-		this.yearStart = yearStart;
-		this.yearEnd = yearEnd;
-		this.category = category;
-		this.ref = ref;
-		this.listTreatments = listTreatments;
-		this.listPublications = listPublications;
-	}
-	
+        private List <String> listTreatmentArmCodes;
+        private List <Integer> listPubMedIds;
+
+        public List <String> getListTreatmentArmCodes() {
+            return listTreatmentArmCodes;
+        }
+
+        public void setListTreatmentArmCodes(List <String> listTreatmentArmCodes) {
+            this.listTreatmentArmCodes = listTreatmentArmCodes;
+        }
+
+        public List <Integer> getListPubMedIds() {
+            return listPubMedIds;
+        }
+
+        public void setListPubMedIds(List <Integer> listPubMedIds) {
+            this.listPubMedIds = listPubMedIds;
+        }
+
 	public Location getLocation() {
 		return location;
 	}
@@ -103,88 +104,103 @@ public class SiteDataViewDTO implements Serializable{
 		this.listPublications = listPublications;
 	}
 
-	@Override
-	public String toString() {
-		return "SiteDataViewDTO [id=" + id + ", typeStudy=" + typeStudy + ", upper95CI=" + upper95CI + ", yearStart="
-				+ yearStart + ", yearEnd=" + yearEnd + ", category=" + category + ", ref=" + ref + ", location="
-				+ location + ", listTreatments=" + listTreatments + ", listPublications=" + listPublications + "]";
-	}
+    public SiteDataViewDTO(long id, String typeStudy, String upper95CI, Integer yearStart, Integer yearEnd, String category, String ref, Location location, Set<Treatment> listTreatments, Set<Publication> listPublications, List <String> listTreatmentArmCodes, List <Integer> listPubMedIds) {
+        this.id = id;
+        this.typeStudy = typeStudy;
+        this.upper95CI = upper95CI;
+        this.yearStart = yearStart;
+        this.yearEnd = yearEnd;
+        this.category = category;
+        this.ref = ref;
+        this.location = location;
+        this.listTreatments = listTreatments;
+        this.listPublications = listPublications;
+        this.listTreatmentArmCodes = listTreatmentArmCodes;
+        this.listPubMedIds = listPubMedIds;
+    }
 
-	@Override
-	public int hashCode() {
-		final int prime = 31;
-		int result = 1;
-		result = prime * result + ((category == null) ? 0 : category.hashCode());
-		result = prime * result + (int) (id ^ (id >>> 32));
-		result = prime * result + ((listPublications == null) ? 0 : listPublications.hashCode());
-		result = prime * result + ((listTreatments == null) ? 0 : listTreatments.hashCode());
-		result = prime * result + ((location == null) ? 0 : location.hashCode());
-		result = prime * result + ((ref == null) ? 0 : ref.hashCode());
-		result = prime * result + ((typeStudy == null) ? 0 : typeStudy.hashCode());
-		result = prime * result + ((upper95CI == null) ? 0 : upper95CI.hashCode());
-		result = prime * result + ((yearEnd == null) ? 0 : yearEnd.hashCode());
-		result = prime * result + ((yearStart == null) ? 0 : yearStart.hashCode());
-		return result;
-	}
+    public SiteDataViewDTO() {
+        super();
+    }
 
-	@Override
-	public boolean equals(Object obj) {
-		if (this == obj)
-			return true;
-		if (obj == null)
-			return false;
-		if (getClass() != obj.getClass())
-			return false;
-		SiteDataViewDTO other = (SiteDataViewDTO) obj;
-		if (category == null) {
-			if (other.category != null)
-				return false;
-		} else if (!category.equals(other.category))
-			return false;
-		if (id != other.id)
-			return false;
-		if (listPublications == null) {
-			if (other.listPublications != null)
-				return false;
-		} else if (!listPublications.equals(other.listPublications))
-			return false;
-		if (listTreatments == null) {
-			if (other.listTreatments != null)
-				return false;
-		} else if (!listTreatments.equals(other.listTreatments))
-			return false;
-		if (location == null) {
-			if (other.location != null)
-				return false;
-		} else if (!location.equals(other.location))
-			return false;
-		if (ref == null) {
-			if (other.ref != null)
-				return false;
-		} else if (!ref.equals(other.ref))
-			return false;
-		if (typeStudy == null) {
-			if (other.typeStudy != null)
-				return false;
-		} else if (!typeStudy.equals(other.typeStudy))
-			return false;
-		if (upper95CI == null) {
-			if (other.upper95CI != null)
-				return false;
-		} else if (!upper95CI.equals(other.upper95CI))
-			return false;
-		if (yearEnd == null) {
-			if (other.yearEnd != null)
-				return false;
-		} else if (!yearEnd.equals(other.yearEnd))
-			return false;
-		if (yearStart == null) {
-			if (other.yearStart != null)
-				return false;
-		} else if (!yearStart.equals(other.yearStart))
-			return false;
-		return true;
-	}
+    @Override
+    public int hashCode() {
+        int hash = 3;
+        hash = 53 * hash + (int) (this.id ^ (this.id >>> 32));
+        hash = 53 * hash + Objects.hashCode(this.typeStudy);
+        hash = 53 * hash + Objects.hashCode(this.upper95CI);
+        hash = 53 * hash + Objects.hashCode(this.yearStart);
+        hash = 53 * hash + Objects.hashCode(this.yearEnd);
+        hash = 53 * hash + Objects.hashCode(this.category);
+        hash = 53 * hash + Objects.hashCode(this.ref);
+        hash = 53 * hash + Objects.hashCode(this.location);
+        hash = 53 * hash + Objects.hashCode(this.listTreatments);
+        hash = 53 * hash + Objects.hashCode(this.listPublications);
+        hash = 53 * hash + Objects.hashCode(this.listTreatmentArmCodes);
+        hash = 53 * hash + Objects.hashCode(this.listPubMedIds);
+        return hash;
+    }
+
+    @Override
+    public boolean equals(Object obj) {
+        if (this == obj) {
+            return true;
+        }
+        if (obj == null) {
+            return false;
+        }
+        if (getClass() != obj.getClass()) {
+            return false;
+        }
+        final SiteDataViewDTO other = (SiteDataViewDTO) obj;
+        if (this.id != other.id) {
+            return false;
+        }
+        if (!Objects.equals(this.typeStudy, other.typeStudy)) {
+            return false;
+        }
+        if (!Objects.equals(this.upper95CI, other.upper95CI)) {
+            return false;
+        }
+        if (!Objects.equals(this.category, other.category)) {
+            return false;
+        }
+        if (!Objects.equals(this.ref, other.ref)) {
+            return false;
+        }
+        if (!Objects.equals(this.yearStart, other.yearStart)) {
+            return false;
+        }
+        if (!Objects.equals(this.yearEnd, other.yearEnd)) {
+            return false;
+        }
+        if (!Objects.equals(this.location, other.location)) {
+            return false;
+        }
+        if (!Objects.equals(this.listTreatments, other.listTreatments)) {
+            return false;
+        }
+        if (!Objects.equals(this.listPublications, other.listPublications)) {
+            return false;
+        }
+        if (!Objects.equals(this.listTreatmentArmCodes, other.listTreatmentArmCodes)) {
+            return false;
+        }
+        if (!Objects.equals(this.listPubMedIds, other.listPubMedIds)) {
+            return false;
+        }
+        return true;
+    }
+
+   
+
+    @Override
+    public String toString() {
+        return "SiteDataViewDTO{" + "id=" + id + ", typeStudy=" + typeStudy + ", upper95CI=" + upper95CI + ", yearStart=" + yearStart + ", yearEnd=" + yearEnd + ", category=" + category + ", ref=" + ref + ", location=" + location + ", listTreatments=" + listTreatments + ", listPublications=" + listPublications + ", listTreatmentArmCodes=" + listTreatmentArmCodes + ", listPubMedIds=" + listPubMedIds + '}';
+    }
+    
+    
+
 	
 }
 
