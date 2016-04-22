@@ -1,0 +1,33 @@
+{
+    "relationships": [
+        {
+            "relationshipName": "siteData",
+            "otherEntityName": "siteData",
+            "relationshipType": "one-to-many",
+            "otherEntityRelationshipName": "location"
+        }
+    ],
+    "fields": [
+        {
+            "fieldName": "country",
+            "fieldType": "String"
+        },
+        {
+            "fieldName": "latitude",
+            "fieldType": "Float"
+        },
+        {
+            "fieldName": "location",
+            "fieldType": "String"
+        },
+        {
+            "fieldName": "longitude",
+            "fieldType": "Float"
+        }
+    ],
+    "changelogDate": "20160404142920",
+    "dto": "no",
+    "service": "no",
+    "entityTableName": "location",
+    "pagination": "pager"
+}

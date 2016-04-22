@@ -1,0 +1,80 @@
+{
+    "relationships": [
+        {
+            "relationshipName": "category",
+            "otherEntityName": "category",
+            "relationshipType": "many-to-one",
+            "otherEntityField": "name"
+        },
+        {
+            "relationshipName": "location",
+            "otherEntityName": "location",
+            "relationshipType": "many-to-one",
+            "otherEntityField": "location"
+        },
+        {
+            "relationshipName": "study",
+            "otherEntityName": "study",
+            "relationshipType": "many-to-one",
+            "otherEntityField": "studyType"
+        },
+        {
+            "relationshipName": "treatments",
+            "otherEntityName": "treatment",
+            "relationshipType": "many-to-many",
+            "otherEntityField": "treatmentName",
+            "ownerSide": true
+        }
+    ],
+    "fields": [
+        {
+            "fieldName": "comments",
+            "fieldType": "String"
+        },
+        {
+            "fieldName": "day28Recurrence",
+            "fieldType": "String"
+        },
+        {
+            "fieldName": "lowest95CI",
+            "fieldType": "String"
+        },
+        {
+            "fieldName": "numEnroled",
+            "fieldType": "Integer"
+        },
+        {
+            "fieldName": "numPatientsTreatCQ",
+            "fieldType": "Integer"
+        },
+        {
+            "fieldName": "primaquine",
+            "fieldType": "String"
+        },
+        {
+            "fieldName": "timePrimaquine",
+            "fieldType": "String"
+        },
+        {
+            "fieldName": "typeStudy",
+            "fieldType": "String"
+        },
+        {
+            "fieldName": "upper95CI",
+            "fieldType": "String"
+        },
+        {
+            "fieldName": "yearEnd",
+            "fieldType": "Integer"
+        },
+        {
+            "fieldName": "yearStart",
+            "fieldType": "Integer"
+        }
+    ],
+    "changelogDate": "20160404171040",
+    "dto": "no",
+    "service": "serviceClass",
+    "entityTableName": "site_data",
+    "pagination": "pager"
+}

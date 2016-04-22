@@ -1,0 +1,90 @@
+
+<div>
+    <h2><span>SiteData</span> {{vm.siteData.id}}</h2>
+    <hr>
+    <dl class="dl-horizontal">
+        <dt><span>Comments</dt></dt>
+        <dd>
+            <span>{{vm.siteData.comments}}<span>
+        </dd>
+        <hr>
+        <dt><span>Day28Recurrence</dt></dt>
+        <dd>
+            <span>{{vm.siteData.day28Recurrence}}<span>
+        </dd>
+        <hr>
+        <dt><span>Lowest95CI</dt></dt>
+        <dd>
+            <span>{{vm.siteData.lowest95CI}}<span>
+        </dd>
+        <hr>
+        <dt><span>NumEnroled</dt></dt>
+        <dd>
+            <span>{{vm.siteData.numEnroled}}<span>
+        </dd>
+        <hr>
+        <dt><span>NumPatientsTreatCQ</dt></dt>
+        <dd>
+            <span>{{vm.siteData.numPatientsTreatCQ}}<span>
+        </dd>
+        <hr>
+        <dt><span>Primaquine</dt></dt>
+        <dd>
+            <span>{{vm.siteData.primaquine}}<span>
+        </dd>
+        <hr>
+        <dt><span>TimePrimaquine</dt></dt>
+        <dd>
+            <span>{{vm.siteData.timePrimaquine}}<span>
+        </dd>
+        <hr>
+        <dt><span>TypeStudy</dt></dt>
+        <dd>
+            <span>{{vm.siteData.typeStudy}}<span>
+        </dd>
+        <hr>
+        <dt><span>Upper95CI</dt></dt>
+        <dd>
+            <span>{{vm.siteData.upper95CI}}<span>
+        </dd>
+        <hr>
+        <dt><span>YearEnd</dt></dt>
+        <dd>
+            <span>{{vm.siteData.yearEnd}}<span>
+        </dd>
+        <hr>
+        <dt><span>YearStart</dt></dt>
+        <dd>
+            <span>{{vm.siteData.yearStart}}<span>
+        </dd>
+        <hr>
+        <dt><span>category</span></dt>
+        <dd>
+            <a ui-sref="category-detail({id:vm.siteData.category.id})">{{vm.siteData.category.name}}</a>
+        </dd>
+        <hr>
+        <dt><span>location</span></dt>
+        <dd>
+            <a ui-sref="location-detail({id:vm.siteData.location.id})">{{vm.siteData.location.location}}</a>
+        </dd>
+        <hr>
+        <dt><span>study</span></dt>
+        <dd>
+            <a ui-sref="study-detail({id:vm.siteData.study.id})">{{vm.siteData.study.studyType}}</a>
+        </dd>
+        <hr>
+        <dt><span>treatments</span></dt>
+        <dd>
+            <span ng-repeat="treatments in vm.siteData.treatmentss">
+                <a ui-sref="treatment-detail({id: {{treatments.id}}})">{{treatments.treatmentName}}</a>{{$last ? '' : ', '}}
+            </span>
+        </dd>
+        <hr>
+    </dl>
+
+    <button type="submit"
+            onclick="window.history.back()"
+            class="btn btn-info">
+        <span class="glyphicon glyphicon-arrow-left"></span>&nbsp;<span> Back</span>
+    </button>
+</div>

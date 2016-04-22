@@ -1,0 +1,43 @@
+
+<div>
+    <h2><span>Publication</span> {{vm.publication.id}}</h2>
+    <hr>
+    <dl class="dl-horizontal">
+        <dt><span>Authors</dt></dt>
+        <dd>
+            <span>{{vm.publication.authors}}<span>
+        </dd>
+        <hr>
+        <dt><span translate="vivaxDataManagerApp.publication.first_author">First_author</dt></dt>
+        <dd>
+            <span>{{vm.publication.first_author}}<span>
+        </dd>
+        <hr>
+        <dt><span>Journal</dt></dt>
+        <dd>
+            <span>{{vm.publication.journal}}<span>
+        </dd>
+        <hr>
+        <dt><span>PubMedId</dt></dt>
+        <dd>
+            <span>{{vm.publication.pubMedId}}<span>
+        </dd>
+        <hr>
+        <dt><span>Title</dt></dt>
+        <dd>
+            <span>{{vm.publication.title}}<span>
+        </dd>
+        <hr>
+        <dt><span translate="vivaxDataManagerApp.publication.year_publish">Year_publish</dt></dt>
+        <dd>
+            <span>{{vm.publication.year_publish}}<span>
+        </dd>
+        <hr>
+    </dl>
+
+    <button type="submit"
+            onclick="window.history.back()"
+            class="btn btn-info">
+        <span class="glyphicon glyphicon-arrow-left"></span>&nbsp;<span> Back</span>
+    </button>
+</div>

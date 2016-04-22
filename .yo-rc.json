@@ -1,0 +1,26 @@
+{
+  "generator-jhipster": {
+    "jhipsterVersion": "3.0.0",
+    "baseName": "VivaxDataManager",
+    "packageName": "org.wwarn.vivax.manager",
+    "packageFolder": "org/wwarn/vivax/manager",
+    "serverPort": "8080",
+    "authenticationType": "session",
+    "hibernateCache": "ehcache",
+    "clusteredHttpSession": "no",
+    "websocket": "no",
+    "databaseType": "sql",
+    "devDatabaseType": "mysql",
+    "prodDatabaseType": "mysql",
+    "searchEngine": "elasticsearch",
+    "buildTool": "maven",
+    "enableSocialSignIn": false,
+    "rememberMeKey": "967b43d6a12b423523d06450565633f697d93ade",
+    "useSass": true,
+    "applicationType": "monolith",
+    "testFrameworks": [
+      "protractor"
+    ],
+    "enableTranslation": false
+  }
+}

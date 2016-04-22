@@ -1,0 +1,26 @@
+{
+    "relationships": [
+        {
+            "relationshipName": "siteData",
+            "otherEntityName": "siteData",
+            "relationshipType": "many-to-many",
+            "ownerSide": false,
+            "otherEntityRelationshipName": "treatments"
+        }
+    ],
+    "fields": [
+        {
+            "fieldName": "treatmentName",
+            "fieldType": "String"
+        },
+        {
+            "fieldName": "treatmentArmCode",
+            "fieldType": "String"
+        }
+    ],
+    "changelogDate": "20160404164356",
+    "dto": "no",
+    "service": "no",
+    "entityTableName": "treatment",
+    "pagination": "pager"
+}

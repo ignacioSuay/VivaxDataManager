@@ -1,0 +1,114 @@
+
+<form name="editForm" role="form" novalidate ng-submit="vm.save()">
+
+    <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-hidden="true"
+                ng-click="vm.clear()">&times;</button>
+        <h4 class="modal-title" id="mySiteDataLabel">Create or edit a SiteData</h4>
+    </div>
+    <div class="modal-body">
+        <jhi-alert-error></jhi-alert-error>
+        <div class="form-group">
+            <label for="id">ID</label>
+            <input type="text" class="form-control" id="id" name="id"
+                    ng-model="vm.siteData.id" readonly />
+        </div>
+        <div class="form-group">
+            <label class="control-label" for="field_comments">Comments</label>
+            <input type="text" class="form-control" name="comments" id="field_comments"
+                    ng-model="vm.siteData.comments"
+                     />
+        </div>
+        <div class="form-group">
+            <label class="control-label" for="field_day28Recurrence">Day28Recurrence</label>
+            <input type="text" class="form-control" name="day28Recurrence" id="field_day28Recurrence"
+                    ng-model="vm.siteData.day28Recurrence"
+                     />
+        </div>
+        <div class="form-group">
+            <label class="control-label" for="field_lowest95CI">Lowest95CI</label>
+            <input type="text" class="form-control" name="lowest95CI" id="field_lowest95CI"
+                    ng-model="vm.siteData.lowest95CI"
+                     />
+        </div>
+        <div class="form-group">
+            <label class="control-label" for="field_numEnroled">NumEnroled</label>
+            <input type="number" class="form-control" name="numEnroled" id="field_numEnroled"
+                    ng-model="vm.siteData.numEnroled"
+                     />
+        </div>
+        <div class="form-group">
+            <label class="control-label" for="field_numPatientsTreatCQ">NumPatientsTreatCQ</label>
+            <input type="number" class="form-control" name="numPatientsTreatCQ" id="field_numPatientsTreatCQ"
+                    ng-model="vm.siteData.numPatientsTreatCQ"
+                     />
+        </div>
+        <div class="form-group">
+            <label class="control-label" for="field_primaquine">Primaquine</label>
+            <input type="text" class="form-control" name="primaquine" id="field_primaquine"
+                    ng-model="vm.siteData.primaquine"
+                     />
+        </div>
+        <div class="form-group">
+            <label class="control-label" for="field_timePrimaquine">TimePrimaquine</label>
+            <input type="text" class="form-control" name="timePrimaquine" id="field_timePrimaquine"
+                    ng-model="vm.siteData.timePrimaquine"
+                     />
+        </div>
+        <div class="form-group">
+            <label class="control-label" for="field_typeStudy">TypeStudy</label>
+            <input type="text" class="form-control" name="typeStudy" id="field_typeStudy"
+                    ng-model="vm.siteData.typeStudy"
+                     />
+        </div>
+        <div class="form-group">
+            <label class="control-label" for="field_upper95CI">Upper95CI</label>
+            <input type="text" class="form-control" name="upper95CI" id="field_upper95CI"
+                    ng-model="vm.siteData.upper95CI"
+                     />
+        </div>
+        <div class="form-group">
+            <label class="control-label" for="field_yearEnd">YearEnd</label>
+            <input type="number" class="form-control" name="yearEnd" id="field_yearEnd"
+                    ng-model="vm.siteData.yearEnd"
+                     />
+        </div>
+        <div class="form-group">
+            <label class="control-label" for="field_yearStart">YearStart</label>
+            <input type="number" class="form-control" name="yearStart" id="field_yearStart"
+                    ng-model="vm.siteData.yearStart"
+                     />
+        </div>
+
+        <div class="form-group">
+            <label for="field_category">category</label>
+            <select class="form-control" id="field_category" name="category" ng-model="vm.siteData.category" ng-options="category as category.name for category in vm.categorys track by category.id">
+                <option value=""></option>
+            </select>
+        </div>
+        <div class="form-group">
+            <label for="field_location">location</label>
+            <select class="form-control" id="field_location" name="location" ng-model="vm.siteData.location" ng-options="location as location.location for location in vm.locations track by location.id">
+                <option value=""></option>
+            </select>
+        </div>
+        <div class="form-group">
+            <label for="field_study">study</label>
+            <select class="form-control" id="field_study" name="study" ng-model="vm.siteData.study" ng-options="study as study.studyType for study in vm.studys track by study.id">
+                <option value=""></option>
+            </select>
+        </div>
+        <div class="form-group">
+            <label for="field_treatments">treatments</label>
+            <select class="form-control" id="field_treatments" multiple name="treatments" ng-model="vm.siteData.treatmentss" ng-options="treatment as treatment.treatmentName for treatment in vm.treatments track by treatment.id"></select>
+        </div>
+    </div>
+    <div class="modal-footer">
+        <button type="button" class="btn btn-default" data-dismiss="modal" ng-click="vm.clear()">
+            <span class="glyphicon glyphicon-ban-circle"></span>&nbsp;<span>Cancel</span>
+        </button>
+        <button type="submit" ng-disabled="editForm.$invalid || isSaving" class="btn btn-primary">
+            <span class="glyphicon glyphicon-save"></span>&nbsp;<span>Save</span>
+        </button>
+    </div>
+</form>

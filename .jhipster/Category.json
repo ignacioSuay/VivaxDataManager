@@ -1,0 +1,21 @@
+{
+    "relationships": [
+        {
+            "relationshipName": "siteData",
+            "otherEntityName": "siteData",
+            "relationshipType": "one-to-many",
+            "otherEntityRelationshipName": "category"
+        }
+    ],
+    "fields": [
+        {
+            "fieldName": "name",
+            "fieldType": "String"
+        }
+    ],
+    "changelogDate": "20160404135341",
+    "dto": "no",
+    "service": "no",
+    "entityTableName": "category",
+    "pagination": "no"
+}

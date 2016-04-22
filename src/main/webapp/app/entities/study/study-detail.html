@@ -1,0 +1,35 @@
+
+<div>
+    <h2><span>Study</span> {{vm.study.id}}</h2>
+    <hr>
+    <dl class="dl-horizontal">
+        <dt><span>NumSites</dt></dt>
+        <dd>
+            <span>{{vm.study.numSites}}<span>
+        </dd>
+        <hr>
+        <dt><span>Ref</dt></dt>
+        <dd>
+            <span>{{vm.study.ref}}<span>
+        </dd>
+        <hr>
+        <dt><span>StudyType</dt></dt>
+        <dd>
+            <span>{{vm.study.studyType}}<span>
+        </dd>
+        <hr>
+        <dt><span>publications</span></dt>
+        <dd>
+            <span ng-repeat="publications in vm.study.publicationss">
+                <a ui-sref="publication-detail({id: {{publications.id}}})">{{publications.title}}</a>{{$last ? '' : ', '}}
+            </span>
+        </dd>
+        <hr>
+    </dl>
+
+    <button type="submit"
+            onclick="window.history.back()"
+            class="btn btn-info">
+        <span class="glyphicon glyphicon-arrow-left"></span>&nbsp;<span> Back</span>
+    </button>
+</div>

@@ -1,0 +1,36 @@
+{
+    "relationships": [
+        {
+            "relationshipName": "publications",
+            "otherEntityName": "publication",
+            "relationshipType": "many-to-many",
+            "otherEntityField": "title",
+            "ownerSide": true
+        },
+        {
+            "relationshipName": "siteData",
+            "otherEntityName": "siteData",
+            "relationshipType": "one-to-many",
+            "otherEntityRelationshipName": "study"
+        }
+    ],
+    "fields": [
+        {
+            "fieldName": "numSites",
+            "fieldType": "Integer"
+        },
+        {
+            "fieldName": "ref",
+            "fieldType": "String"
+        },
+        {
+            "fieldName": "studyType",
+            "fieldType": "String"
+        }
+    ],
+    "changelogDate": "20160404162756",
+    "dto": "no",
+    "service": "serviceClass",
+    "entityTableName": "study",
+    "pagination": "pager"
+}

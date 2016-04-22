@@ -1,0 +1,42 @@
+{
+    "relationships": [
+        {
+            "relationshipName": "studies_id",
+            "otherEntityName": "study",
+            "relationshipType": "many-to-many",
+            "ownerSide": false,
+            "otherEntityRelationshipName": "publications_id"
+        }
+    ],
+    "fields": [
+        {
+            "fieldName": "authors",
+            "fieldType": "String"
+        },
+        {
+            "fieldName": "first_author",
+            "fieldType": "String"
+        },
+        {
+            "fieldName": "journal",
+            "fieldType": "String"
+        },
+        {
+            "fieldName": "pubMedId",
+            "fieldType": "Integer"
+        },
+        {
+            "fieldName": "title",
+            "fieldType": "String"
+        },
+        {
+            "fieldName": "year_publish",
+            "fieldType": "Integer"
+        }
+    ],
+    "changelogDate": "20160404145304",
+    "dto": "no",
+    "service": "serviceClass",
+    "entityTableName": "publication",
+    "pagination": "pager"
+}

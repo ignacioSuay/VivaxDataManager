@@ -1,0 +1,55 @@
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-md-7 marginBottom10 ng-scope">
+            <div class="input-group">
+                <div class="input-group-btn" uib-dropdown is-open="status.isopen" ng-controller="DropDownCtrl">
+                    <button id="single-button" type="button" class="btn btn-primary" uib-dropdown-toggle ng-disabled="disabled">
+                        Filters <span class="caret"></span>
+                    </button>
+                    <ul class="dropdown-menu" uib-dropdown-menu role="menu" aria-labelledby="single-button">
+                        <li role="menuitem" ng-repeat="item in items">
+                            <a href>{{item}}</a>
+                        </li>
+                    </ul>
+                </div>
+                <input type="text" class="form-control" aria-label="Text input with dropdown button">
+            </div>
+        </div>
+        <div class="col-md-3 marginBottom10 ng-scope">
+            <button class="btn btn-success" ng-click="addFilter()">+</button>
+            <button class="btn btn-danger" ng-click="removeFilter()">-</button>
+            <button class="btn btn-success" ng-click="search()">
+                <span class="glyphicon glyphicon-search"></span>
+                Search
+            </button>
+        </div>
+    </div>
+    <div class="table-responsive">
+        <table class="jh-table table table-striped">
+            <thead>
+                <tr jh-sort="vm.predicate" ascending="vm.reverse" callback="vm.transition()">
+                    <th jh-sort-by="id"><span>Study Type</span> <span class="glyphicon glyphicon-sort"></span></th>
+                    <th jh-sort-by="studyRef"><span>StudyRef</span> <span class="glyphicon glyphicon-sort"></span></th>
+                    <th jh-sort-by="country"><span>Country</span> <span class="glyphicon glyphicon-sort"></span></th>
+                    <th jh-sort-by="category"><span>Category</span> <span class="glyphicon glyphicon-sort"></span></th>
+                    <th jh-sort-by="upper95CI"><span>Upper95CI</span> <span class="glyphicon glyphicon-sort"></span></th>
+                    <th jh-sort-by="yearStart"><span>Year Start</span> <span class="glyphicon glyphicon-sort"></span></th>
+                    <th jh-sort-by="yearEnd"><span>Year End</span> <span class="glyphicon glyphicon-sort"></span></th>
+                    <th jh-sort-by="pubMedId"><span>PubMedId</span> <span class="glyphicon glyphicon-sort"></span></th>
+                    <th></th>
+                </tr>
+            </thead>
+            <tbody> 
+                <tr ng-repeat="siteData in siteDataList track by siteData.id">
+                    <td><a ui-sref="siteDataView.detail">{{siteData.id}}</a></td>
+                    <td>{{siteData.typeStudy}}</td>
+                    <td>{{siteData.ref}}</td>
+                    <td>{{siteData.location.location}}</td>
+                    <td>{{siteData.upper95CI}}</td>
+                    <td>{{siteData.yearStart}}</td>
+                    <td>{{siteData.yearEnd}}</td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+

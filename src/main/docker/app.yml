@@ -1,0 +1,21 @@
+version: '2'
+services:
+    vivaxdatamanager-app:
+        image: vivaxdatamanager
+        external_links:
+            - vivaxdatamanager-mysql:mysql
+            - vivaxdatamanager-elasticsearch:elasticsearch
+        environment:
+            - SPRING_PROFILES_ACTIVE=prod
+            - SPRING_DATASOURCE_URL=jdbc:mysql://mysql:3306/vivaxdatamanager?useUnicode=true&characterEncoding=utf8&useSSL=false
+            - SPRING_DATA_ELASTICSEARCH_CLUSTER_NODES=elasticsearch:9300
+        ports:
+            - 8080:8080
+    vivaxdatamanager-mysql:
+        extends:
+            file: mysql.yml
+            service: vivaxdatamanager-mysql
+    vivaxdatamanager-elasticsearch:
+        extends:
+            file: elasticsearch.yml
+            service: vivaxdatamanager-elasticsearch
