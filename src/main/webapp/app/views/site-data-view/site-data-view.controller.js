@@ -4,28 +4,54 @@
     angular
         .module('vivaxDataManagerApp')
         .controller('SiteDataViewController', SiteDataViewController);
-    
+
     SiteDataViewController.$inject = ['$scope', '$state', 'SiteDataViewDTO', 'SiteDataSearch'];
     console.log('in controller function')
     function SiteDataViewController ($scope, $state, SiteDataViewDTO, SiteDataSearch) {
-   	
-        
+
+        $scope.names = [
+            {text: "Study Type", type: "text"},
+            {text: "Study Ref", type: "text"},
+            {text: "Category", type: "text"},
+            {text: "Country", type: "text"},
+            {text: "Year Start", type: "text"},
+            {text: "Year End", type: "text"},
+            {text: "Upper95CI", type:"text"},
+            {text: "PubMedId", type:"text"},
+            {text: "Treatments", type:"text"}];
+        $scope.filters = [{}];
         $scope.siteDataViewDTOS = [];
-        $scope.loadAll = function() {
-            var data = [{name:'country', query:'China'}];
-            $scope.siteDataViewDTOS = SiteDataViewDTO.query(data);
-             $scope.authors=$scope.siteDataViewDTOS;
-            console.log($scope.authors);
+
+        $scope.addFilter = function () {
+            $scope.filters.push({});
         };
 
+        $scope.removeFilter = function (index) {
+            $scope.filters.splice(index, 1);
+        };
+
+        $scope.loadAll = function () {
+            var data = [{name: 'country', query: 'China'}];
+            $scope.siteDataViewDTOS = SiteDataViewDTO.query(data);
+        };
+        $scope.loadAll();
+
         $scope.search = function () {
-            if (!$scope.searchQuery) {
-                return $scope.loadAll();
-            }
-            SiteDataSearch.query({query: $scope.searchQuery}, function(result) {
+            var filterDTO = $scope.formatFilters();
+            SiteDataSearch.query(filterDTO, function (result) {
                 $scope.siteDataViewDTOS = result;
             });
         };
-        $scope.loadAll();
-     }
+
+        $scope.formatFilters = function(){
+            var filterDTO = [];
+            $scope.filters.forEach(function(filter){
+                filterDTO.push({name: filter.name.text, query: filter.query});
+            });
+            return filterDTO;
+        };
+
+    }
+
+
 })();
