@@ -9,7 +9,6 @@
     console.log('in controller function')
     function SiteDataViewController ($scope, $state, SiteDataViewDTO, SiteDataSearch) {
 
-        //$scope.names = [ 'Study Type', 'Study Ref', 'Category', 'Country', 'Year Start', 'Year End', 'Upper95CI', 'PubMedId', 'Treatments' ];
         $scope.names = [
             {text: "Study Type", type: "text"},
             {text: "Study Ref", type: "text"},
@@ -38,21 +37,18 @@
         $scope.loadAll();
 
         $scope.search = function () {
-            //if (!$scope.searchQuery) {
-            //    return $scope.loadAll();
-            //}
-            alert(JSON.stringify($scope.filters));
-            SiteDataSearch.query({query: $scope.searchQuery}, function (result) {
+            var filterDTO = $scope.formatFilters();
+            SiteDataSearch.query(filterDTO, function (result) {
                 $scope.siteDataViewDTOS = result;
             });
         };
 
-        $scope.pickFilterQuery = function (queryBody) {
-            console.log($scope.name);
-            $scope.query = queryBody;
-            var filter = {name: $scope.name, query: $scope.query};
-            $scope.filters.push(filter);
-            alert(JSON.stringify($scope.filters));
+        $scope.formatFilters = function(){
+            var filterDTO = [];
+            $scope.filters.forEach(function(filter){
+                filterDTO.push({name: filter.name.text, query: filter.query});
+            });
+            return filterDTO;
         };
 
     }
