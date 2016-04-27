@@ -1,35 +1,36 @@
 <div class="container-fluid">
-    <div class="row">
+    <div class="row" >
         <div class="col-md-7 marginBottom10 ng-scope">
-            <div class="input-group">
-                <div class="input-group-btn" uib-dropdown is-open="status.isopen" ng-controller="DropDownCtrl">
-                    <button id="single-button" type="button" class="btn btn-primary" uib-dropdown-toggle ng-disabled="disabled">
-                        Filters <span class="caret"></span>
+
+            <div class="input-group" ng-repeat="filter in filters">
+                <div class="input-group-btn" uib-dropdown is-open="status.isopen">
+                    <button id="single-button" type="button" class="btn btn-primary" uib-dropdown-toggle ng-model="name">
+                        <span class="caret"></span>
                     </button>
-                    <ul class="dropdown-menu" uib-dropdown-menu role="menu" aria-labelledby="single-button">
-                        <li role="menuitem" ng-repeat="item in items">
-                            <a href>{{item}}</a>
+                    <ul class="dropdown-menu" uib-dropdown-menu role="menu" aria-labelledby="single-button" >
+                        <li role="menuitem" ng-repeat="nameBody in names">
+                            <a ng-click="pickFilterName(nameBody)">{{nameBody}}</a>
                         </li>
                     </ul>
                 </div>
-                <input type="text" class="form-control" aria-label="Text input with dropdown button">
+                <input type="text" class="form-control" aria-label="Text input with dropdown button" ng-model="queryBody">
             </div>
         </div>
         <div class="col-md-3 marginBottom10 ng-scope">
             <button class="btn btn-success" ng-click="addFilter()">+</button>
             <button class="btn btn-danger" ng-click="removeFilter()">-</button>
-            <button class="btn btn-success" ng-click="search()">
+            <button class="btn btn-success" ng-click="pickFilterQuery(queryBody)">
                 <span class="glyphicon glyphicon-search"></span>
                 Search
             </button>
         </div>
     </div>
-    <div class="table-responsive" ng-controller="SiteDataViewController">
+    <div class="table-responsive">
         <table class="jh-table table table-striped">
             <thead>
                 <tr jh-sort="vm.predicate" ascending="vm.reverse" callback="vm.transition()">
                     <th jh-sort-by="id"><span>Study Type</span> <span class="glyphicon glyphicon-sort"></span></th>
-                    <th jh-sort-by="studyRef"><span>StudyRef</span> <span class="glyphicon glyphicon-sort"></span></th>
+                    <th jh-sort-by="studyRef"><span>Study Ref</span> <span class="glyphicon glyphicon-sort"></span></th>
                     <th jh-sort-by="country"><span>Country</span> <span class="glyphicon glyphicon-sort"></span></th>
                     <th jh-sort-by="country"><span>Location</span> <span class="glyphicon glyphicon-sort"></span></th>
                     <th jh-sort-by="category"><span>Category</span> <span class="glyphicon glyphicon-sort"></span></th>
@@ -41,7 +42,7 @@
                     <th></th>
                 </tr>
             </thead>
-            <tbody> 
+            <tbody>
                 <tr ng-repeat="siteDataViewDTO in siteDataViewDTOS track by siteDataViewDTO.id">
                     <!--<td><a ui-sref="siteDataView.detail">{{siteData.id}}</a></td><tr>-->
                     <td>{{siteDataViewDTO.typeStudy}}</td>
@@ -58,3 +59,4 @@
             </tbody>
         </table>
     </div>
+</div>
