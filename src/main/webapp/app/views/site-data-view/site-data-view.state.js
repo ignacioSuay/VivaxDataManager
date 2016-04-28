@@ -8,7 +8,7 @@
     stateConfig.$inject = ['$stateProvider'];
 
     function stateConfig($stateProvider) {
-    	
+
         $stateProvider
         .state('siteDataView', {
             parent: 'views',
@@ -46,9 +46,10 @@
                     };
                 }]
             }
-            
-})
 
+        })
+}}());
+/*
         .state('siteDataView.detail', {
             parent: 'views',
             url: '/siteDataView/filter',
@@ -85,5 +86,4 @@
                     };
                 }]
             }
-})
-}}());
+})*/
