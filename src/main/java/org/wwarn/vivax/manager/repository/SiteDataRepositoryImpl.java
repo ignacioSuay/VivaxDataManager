@@ -29,7 +29,6 @@ import org.wwarn.vivax.manager.web.rest.dto.SiteDataViewDTO;
 public class SiteDataRepositoryImpl implements SiteDataRepositoryCustom{
 
 	Study s = new Study();
-	long id=0;
 
 	@PersistenceContext
 	private EntityManager em;
@@ -38,20 +37,27 @@ public class SiteDataRepositoryImpl implements SiteDataRepositoryCustom{
 	public List <SiteDataViewDTO> searchSiteDataByFilter(List<Filter> listFilters) {
 		TypedQuery<SiteData> query = buildQuery(listFilters);
 
-
         Hibernate.initialize(s.getPublicationss());
 		int count=0;
 		for (Filter filter: listFilters){
-			if("country".equals(filter.getName()))
+			if("Country".equals(filter.getName()))
                 query.setParameter(filter.getName(), filter.getQuery());
-            else if("category".equals(filter.getName()))
+            else if("Category".equals(filter.getName()))
                 query.setParameter(filter.getName(), filter.getQuery());
-            else if("studyRef".equals(filter.getName()))
+            else if("Study Ref".equals(filter.getName()))
             	query.setParameter(filter.getName(), filter.getQuery());
-            else if("studyType".equals(filter.getName()))
+            else if("Study Type".equals(filter.getName()))
             	query.setParameter(filter.getName(), filter.getQuery());
-            else if("pubMedId".equals(filter.getName()))
+            else if("Upper95CI".equals(filter.getName()))
+                query.setParameter(filter.getName(), filter.getQuery());
+            else if("Treatments".equals(filter.getName()))
+                query.setParameter(filter.getName(), filter.getQuery());
+            else if("PubMedId".equals(filter.getName()))
             	query.setParameter(filter.getName(), Integer.valueOf(filter.getQuery()));
+            else if("Year Start".equals(filter.getName()))
+                query.setParameter(filter.getName(), Integer.valueOf(filter.getQuery()));
+            else if("Year End".equals(filter.getName()))
+                query.setParameter(filter.getName(), Integer.valueOf(filter.getQuery()));
             count++;
         }
 
@@ -64,7 +70,7 @@ public class SiteDataRepositoryImpl implements SiteDataRepositoryCustom{
             SiteDataViewDTO temp = new SiteDataViewDTO();
             List<Integer> tempPubMedList = new ArrayList<Integer>();
             List<String> tempTreatmentList = new ArrayList<String>();
-            temp.setId(id);
+            temp.setId(siteData.getId());
             temp.setTypeStudy(siteData.getTypeStudy());
             temp.setRef(siteData.getStudy().getRef());
             temp.setLocation(siteData.getLocation());
@@ -84,8 +90,7 @@ public class SiteDataRepositoryImpl implements SiteDataRepositoryCustom{
             temp.setListTreatmentArmCodes(tempTreatmentList);
 
             siteDataViewDTOList.add(temp);
-            id++;
-     	};
+        };
         return siteDataViewDTOList;
 	}
 
@@ -101,21 +106,28 @@ public class SiteDataRepositoryImpl implements SiteDataRepositoryCustom{
         siteData.fetch("study").fetch("publications");
         cq.select(siteData).distinct(true);
 
-
         List<Predicate> predicates = new ArrayList<>();
         int index = 0;
 
         for(Filter filter : listFilters){
-            if("country".equals(filter.getName()))
+            if("Country".equals(filter.getName()))
                 predicates.add(cb.equal(loc.get("country"), cb.parameter(String.class, filter.getName())));
-            else if("category".equals(filter.getName()))
+            else if("Category".equals(filter.getName()))
                 predicates.add(cb.equal(cat.get("name"), cb.parameter(String.class, filter.getName())));
-            else if("studyRef".equals(filter.getName()))
+            else if("Study Ref".equals(filter.getName()))
                 predicates.add(cb.equal(stu.get("ref"), cb.parameter(String.class, filter.getName())));
-            else if("studyType".equals(filter.getName()))
+            else if("Study Type".equals(filter.getName()))
                 predicates.add(cb.equal(stu.get("studyType"), cb.parameter(String.class, filter.getName())));
-            else if("pubMedId".equals(filter.getName()))
+            else if("PubMedId".equals(filter.getName()))
                 predicates.add(cb.equal(pub.get("pubMedId"), cb.parameter(Integer.class, filter.getName())));
+            else if("Treatments".equals(filter.getName()))
+                predicates.add(cb.equal(tre.get("treatmentName"), cb.parameter(String.class, filter.getName())));
+            else if("Year Start".equals(filter.getName()))
+                predicates.add(cb.equal(siteData.get("yearStart"), cb.parameter(Integer.class, filter.getName())));
+            else if("Year End".equals(filter.getName()))
+                predicates.add(cb.equal(siteData.get("yearEnd"), cb.parameter(Integer.class, filter.getName())));
+            else if("Upper95CI".equals(filter.getName()))
+                predicates.add(cb.equal(siteData.get("upper95CI"), cb.parameter(String.class, filter.getName())));
             index++;
         }
         cq.where(cb.and(predicates.toArray(new Predicate[0])));

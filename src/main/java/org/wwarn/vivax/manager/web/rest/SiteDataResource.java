@@ -37,13 +37,13 @@ import static org.elasticsearch.index.query.QueryBuilders.*;
 public class SiteDataResource {
 
     private final Logger log = LoggerFactory.getLogger(SiteDataResource.class);
-        
+
     @Inject
     private SiteDataService siteDataService;
-    
+
     @Inject
     private SiteDataRepository siteDataRepository;
-  
+
      /**
      * POST  /site-data : Create a new siteData.
      *
@@ -104,7 +104,7 @@ public class SiteDataResource {
     public ResponseEntity<List<SiteData>> getAllSiteData(Pageable pageable)
         throws URISyntaxException {
         log.debug("REST request to get a page of SiteData");
-        Page<SiteData> page = siteDataService.findAll(pageable); 
+        Page<SiteData> page = siteDataService.findAll(pageable);
         HttpHeaders headers = PaginationUtil.generatePaginationHttpHeaders(page, "/api/site-data");
         return new ResponseEntity<>(page.getContent(), headers, HttpStatus.OK);
     }
@@ -163,7 +163,7 @@ public class SiteDataResource {
         HttpHeaders headers = PaginationUtil.generateSearchPaginationHttpHeaders(query, page, "/api/_search/site-data");
         return new ResponseEntity<>(page.getContent(), headers, HttpStatus.OK);
     }
-    
+
     @RequestMapping(value = "/site-data/siteData",
             method = RequestMethod.GET,
             produces = MediaType.APPLICATION_JSON_VALUE)
@@ -173,8 +173,8 @@ public class SiteDataResource {
     		 List<SiteData> siteData = siteDataRepository.showAllSiteDataAndRelatedClasses();
     	        return siteData;
         }
-    
-    
+
+
     @RequestMapping(value = "/categories/siteData",
             method = RequestMethod.GET,
             produces = MediaType.APPLICATION_JSON_VALUE)
@@ -184,25 +184,25 @@ public class SiteDataResource {
     		 Set<SiteData> siteData = siteDataRepository.findAllSiteDatasByCategory();
     	        return siteData;
         }
-    
+
     @RequestMapping(value = "/siteData/{country}",
             method = RequestMethod.GET,
             produces = MediaType.APPLICATION_JSON_VALUE)
         @Timed
         public Set<SiteData> getAllSiteDataByCountry(@PathVariable String country) {
     		log.debug("REST request to get all SiteData by Country");
-    		Set<SiteData> siteData = siteDataRepository.findAllSiteDatasByCountry(country); 
+    		Set<SiteData> siteData = siteDataRepository.findAllSiteDatasByCountry(country);
     	        return siteData;
         }
-    
+
     @RequestMapping(value = "/siteData/searchByFilters",
             method = RequestMethod.POST,
             produces = MediaType.APPLICATION_JSON_VALUE)
         @Timed
         public List<SiteDataViewDTO> getAllSiteDataFiltered(@RequestBody List<Filter>listFilters) {
     		log.debug("request to get all SiteData filtered"+listFilters.get(0).toString());
-    		List<SiteDataViewDTO> siteData = siteDataRepository.searchSiteDataByFilter(listFilters); 
-    	        return siteData;
+    		List<SiteDataViewDTO> siteData = siteDataRepository.searchSiteDataByFilter(listFilters);
+                return siteData;
         }
 
 }

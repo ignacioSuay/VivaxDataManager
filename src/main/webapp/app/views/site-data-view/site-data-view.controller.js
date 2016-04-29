@@ -31,7 +31,7 @@
         };
 
         $scope.loadAll = function () {
-            var data = [{name:'Country', query:'China'}];
+            var data = [{name:'', query:''}];
             $scope.siteDataViewDTOS = SiteDataViewDTO.query(data);
         };
         $scope.loadAll();
