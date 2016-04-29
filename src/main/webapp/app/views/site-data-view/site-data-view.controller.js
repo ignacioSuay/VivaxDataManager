@@ -31,10 +31,9 @@
         };
 
         $scope.loadAll = function () {
-            var data = [{name: 'country', query: 'china'}, {name: 'category', query: 'Uncategorised'}];
+            var data = [{name:'Country', query:'China'}];
             $scope.siteDataViewDTOS = SiteDataViewDTO.query(data);
         };
-
         $scope.loadAll();
 
         $scope.search = function () {
