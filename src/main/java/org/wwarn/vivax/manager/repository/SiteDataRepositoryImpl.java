@@ -27,17 +27,19 @@ import org.wwarn.vivax.manager.domain.util.Filter;
 import org.wwarn.vivax.manager.web.rest.dto.SiteDataViewDTO;
 
 public class SiteDataRepositoryImpl implements SiteDataRepositoryCustom{
-	
+
 	Study s = new Study();
 	long id=0;
-	
+
 	@PersistenceContext
 	private EntityManager em;
 
 	@Override
 	public List <SiteDataViewDTO> searchSiteDataByFilter(List<Filter> listFilters) {
 		TypedQuery<SiteData> query = buildQuery(listFilters);
-		Hibernate.initialize(s.getPublicationss());
+
+
+        Hibernate.initialize(s.getPublicationss());
 		int count=0;
 		for (Filter filter: listFilters){
 			if("country".equals(filter.getName()))
@@ -52,17 +54,16 @@ public class SiteDataRepositoryImpl implements SiteDataRepositoryCustom{
             	query.setParameter(filter.getName(), Integer.valueOf(filter.getQuery()));
             count++;
         }
-		
+
         List<SiteData> siteDataList = query.getResultList();
-     
+
         List<SiteDataViewDTO> siteDataViewDTOList=new ArrayList<SiteDataViewDTO>();
-        
+
         //filling SiteDataViewDTO list
         for (SiteData siteData : siteDataList) {
-            
             SiteDataViewDTO temp = new SiteDataViewDTO();
             List<Integer> tempPubMedList = new ArrayList<Integer>();
-            List<String> tempTreatmentList = new ArrayList<String>();    
+            List<String> tempTreatmentList = new ArrayList<String>();
             temp.setId(id);
             temp.setTypeStudy(siteData.getTypeStudy());
             temp.setRef(siteData.getStudy().getRef());
@@ -87,7 +88,7 @@ public class SiteDataRepositoryImpl implements SiteDataRepositoryCustom{
      	};
         return siteDataViewDTOList;
 	}
-	
+
 	private TypedQuery<SiteData> buildQuery(List<Filter> listFilters){
 		CriteriaBuilder cb = em.getCriteriaBuilder();
         CriteriaQuery<SiteData> cq = cb.createQuery(SiteData.class);
@@ -98,10 +99,12 @@ public class SiteDataRepositoryImpl implements SiteDataRepositoryCustom{
         Join<SiteData, Study> stu = siteData.join("study",JoinType.LEFT);
         Join<Study, Publication> pub = stu.join("publications",JoinType.LEFT);
         siteData.fetch("study").fetch("publications");
-        
+        cq.select(siteData).distinct(true);
+
+
         List<Predicate> predicates = new ArrayList<>();
         int index = 0;
-        
+
         for(Filter filter : listFilters){
             if("country".equals(filter.getName()))
                 predicates.add(cb.equal(loc.get("country"), cb.parameter(String.class, filter.getName())));
@@ -119,4 +122,4 @@ public class SiteDataRepositoryImpl implements SiteDataRepositoryCustom{
 
         return em.createQuery(cq);
 	}
-}	
+}

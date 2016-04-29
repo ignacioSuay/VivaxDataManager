@@ -3,7 +3,7 @@
     angular
         .module('vivaxDataManagerApp')
         .factory('SiteDataViewDTO', function($resource) {
-            var data = [{name:'country', query:'China'}];
+            //var data = [{name:'country', query:'China'}];
                //return $resource('api/siteData/searchByFilters');
                return $resource('api/siteData/searchByFilters', {}, {
             'query': { method: 'POST', isArray: true},

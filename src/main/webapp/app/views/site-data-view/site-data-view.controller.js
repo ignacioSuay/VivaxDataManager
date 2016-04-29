@@ -31,14 +31,15 @@
         };
 
         $scope.loadAll = function () {
-            var data = [{name: 'country', query: 'China'}];
+            var data = [{name: 'country', query: 'china'}, {name: 'category', query: 'Uncategorised'}];
             $scope.siteDataViewDTOS = SiteDataViewDTO.query(data);
         };
+
         $scope.loadAll();
 
         $scope.search = function () {
             var filterDTO = $scope.formatFilters();
-            SiteDataSearch.query(filterDTO, function (result) {
+            SiteDataViewDTO.query(filterDTO, function (result) {
                 $scope.siteDataViewDTOS = result;
             });
         };
