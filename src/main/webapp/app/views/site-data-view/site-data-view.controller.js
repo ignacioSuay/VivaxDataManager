@@ -46,12 +46,11 @@
         $scope.formatFilters = function(){
             var filterDTO = [];
             $scope.filters.forEach(function(filter){
-                filterDTO.push({name: filter.name.text, query: filter.query});
+                var text = filter.name.text.replace(/[\s]/g, '');
+                filterDTO.push({name: text, query: filter.query});
             });
             return filterDTO;
         };
 
     }
-
-
 })();

@@ -33,10 +33,10 @@ import static org.elasticsearch.index.query.QueryBuilders.*;
 public class PublicationResource {
 
     private final Logger log = LoggerFactory.getLogger(PublicationResource.class);
-        
+
     @Inject
     private PublicationService publicationService;
-    
+
     /**
      * POST  /publications : Create a new publication.
      *
@@ -97,7 +97,7 @@ public class PublicationResource {
     public ResponseEntity<List<Publication>> getAllPublications(Pageable pageable)
         throws URISyntaxException {
         log.debug("REST request to get a page of Publications");
-        Page<Publication> page = publicationService.findAll(pageable); 
+        Page<Publication> page = publicationService.findAll(pageable);
         HttpHeaders headers = PaginationUtil.generatePaginationHttpHeaders(page, "/api/publications");
         return new ResponseEntity<>(page.getContent(), headers, HttpStatus.OK);
     }
@@ -156,5 +156,21 @@ public class PublicationResource {
         HttpHeaders headers = PaginationUtil.generateSearchPaginationHttpHeaders(query, page, "/api/_search/publications");
         return new ResponseEntity<>(page.getContent(), headers, HttpStatus.OK);
     }
+
+    @RequestMapping(value = "/publication/searchByPubMedId/{pubMedId}",
+        method = RequestMethod.POST,
+        produces = MediaType.APPLICATION_JSON_VALUE)
+    @Timed
+    public ResponseEntity<Publication> getPublicationByPubMedId(@PathVariable Integer pubMedId) {
+        log.debug("REST request to get Publication : {}", pubMedId);
+        Publication publication = publicationService.findPublicationByPubMedId(pubMedId);
+        return Optional.ofNullable(publication)
+            .map(result -> new ResponseEntity<>(
+                result,
+                HttpStatus.OK))
+            .orElse(new ResponseEntity<>(HttpStatus.NOT_FOUND));
+    }
+
+
 
 }
