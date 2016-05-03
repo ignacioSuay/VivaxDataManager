@@ -67,29 +67,29 @@ public class SiteDataRepositoryImpl implements SiteDataRepositoryCustom{
 
         //filling SiteDataViewDTO list
         for (SiteData siteData : siteDataList) {
-            SiteDataViewDTO temp = new SiteDataViewDTO();
+            SiteDataViewDTO objectFiller = new SiteDataViewDTO();
             List<Integer> tempPubMedList = new ArrayList<Integer>();
             List<String> tempTreatmentList = new ArrayList<String>();
-            temp.setId(siteData.getId());
-            temp.setTypeStudy(siteData.getTypeStudy());
-            temp.setRef(siteData.getStudy().getRef());
-            temp.setLocation(siteData.getLocation());
-            temp.setCategory(siteData.getCategory().getName());
-            temp.setUpper95CI(siteData.getUpper95CI());
-            temp.setYearStart(siteData.getYearStart());
-            temp.setYearEnd(siteData.getYearEnd());
-            temp.setListPublications(siteData.getStudy().getPublicationss());
-            temp.setListTreatments(siteData.getTreatments());
+            objectFiller.setId(siteData.getId());
+            objectFiller.setTypeStudy(siteData.getTypeStudy());
+            objectFiller.setRef(siteData.getStudy().getRef());
+            objectFiller.setLocation(siteData.getLocation());
+            objectFiller.setCategory(siteData.getCategory().getName());
+            objectFiller.setUpper95CI(siteData.getUpper95CI());
+            objectFiller.setYearStart(siteData.getYearStart());
+            objectFiller.setYearEnd(siteData.getYearEnd());
+            objectFiller.setListPublications(siteData.getStudy().getPublicationss());
+            objectFiller.setListTreatments(siteData.getTreatments());
             siteData.getStudy().getPublicationss().stream().forEach(sg ->{
                 tempPubMedList.add(sg.getPubMedId());
             });
-            temp.setListPubMedIds(tempPubMedList);
+            objectFiller.setListPubMedIds(tempPubMedList);
             siteData.getTreatments().stream().forEach(sh ->{
                 tempTreatmentList.add(sh.getTreatmentName());
             });
-            temp.setListTreatmentArmCodes(tempTreatmentList);
+            objectFiller.setListTreatmentArmCodes(tempTreatmentList);
 
-            siteDataViewDTOList.add(temp);
+            siteDataViewDTOList.add(objectFiller);
         };
         return siteDataViewDTOList;
 	}

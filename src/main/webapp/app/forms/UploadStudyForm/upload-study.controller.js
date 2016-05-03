@@ -7,7 +7,7 @@
 
     UploadStudyController.$inject = ['$scope'];
     function UploadStudyController ($scope, $state) {
-        alert("ueee");
+       
     }
 
 })();

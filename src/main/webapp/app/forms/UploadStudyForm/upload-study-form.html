@@ -1,1 +1,16 @@
-<div>hola</div>
+<div class="container">
+    <h1>Study Upload Form</h1>
+    <div class="form-group row">
+        <label class="col-md-2 form-control-label">Search Study by ref:</label>
+        <div class="col-md-4">
+            <div class="input-group">
+                <input class="form-control ng-pristine ng-valid ng-empty ng-touched" type="text" ww-enter="searchStudyByRef()" ng-model="StudyRef" placeholder="Search" aria-invalid="false">
+                <span id="basic-addon2" class="input-group-addon btn btn-primary" ng-click="searchStudyByRef()" role="button" tabindex="0">Search</span>
+            </div>
+
+        </div>
+        <div class="col-md-2">
+            <button class="btn btn-primary" ng-click="uploadNewData()">Upload new data</button>
+        </div>
+    </div>
+</div>
