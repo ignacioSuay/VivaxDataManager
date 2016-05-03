@@ -15,7 +15,7 @@
                 url: '/studyUpload',
                 data: {
                     authorities: ['ROLE_USER'],
-                    pageTitle: 'Study Upload Data'
+                    pageTitle: 'Publication Upload Data'
                 },
                 views: {
                     'content@': {

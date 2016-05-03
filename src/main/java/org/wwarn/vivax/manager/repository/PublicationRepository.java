@@ -9,6 +9,7 @@ import java.util.List;
 /**
  * Spring Data JPA repository for the Publication entity.
  */
-public interface PublicationRepository extends JpaRepository<Publication,Long> {
+public interface PublicationRepository extends JpaRepository<Publication,Long>, PublicationRepositoryCustom{
+
 
 }

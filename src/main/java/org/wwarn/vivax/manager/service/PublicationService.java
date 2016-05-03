@@ -25,16 +25,16 @@ import static org.elasticsearch.index.query.QueryBuilders.*;
 public class PublicationService {
 
     private final Logger log = LoggerFactory.getLogger(PublicationService.class);
-    
+
     @Inject
     private PublicationRepository publicationRepository;
-    
+
     @Inject
     private PublicationSearchRepository publicationSearchRepository;
-    
+
     /**
      * Save a publication.
-     * 
+     *
      * @param publication the entity to save
      * @return the persisted entity
      */
@@ -47,14 +47,14 @@ public class PublicationService {
 
     /**
      *  Get all the publications.
-     *  
+     *
      *  @param pageable the pagination information
      *  @return the list of entities
      */
-    @Transactional(readOnly = true) 
+    @Transactional(readOnly = true)
     public Page<Publication> findAll(Pageable pageable) {
         log.debug("Request to get all Publications");
-        Page<Publication> result = publicationRepository.findAll(pageable); 
+        Page<Publication> result = publicationRepository.findAll(pageable);
         return result;
     }
 
@@ -64,7 +64,7 @@ public class PublicationService {
      *  @param id the id of the entity
      *  @return the entity
      */
-    @Transactional(readOnly = true) 
+    @Transactional(readOnly = true)
     public Publication findOne(Long id) {
         log.debug("Request to get Publication : {}", id);
         Publication publication = publicationRepository.findOne(id);
@@ -73,7 +73,7 @@ public class PublicationService {
 
     /**
      *  Delete the  publication by id.
-     *  
+     *
      *  @param id the id of the entity
      */
     public void delete(Long id) {
@@ -92,5 +92,12 @@ public class PublicationService {
     public Page<Publication> search(String query, Pageable pageable) {
         log.debug("Request to search for a page of Publications for query {}", query);
         return publicationSearchRepository.search(queryStringQuery(query), pageable);
+    }
+
+    @Transactional(readOnly = true)
+    public Publication findPublicationByPubMedId(Integer pubMedId) {
+        log.debug("Request to get Publication : {}", pubMedId);
+        Publication publication = publicationRepository.findPublicationByPubMedId(pubMedId);
+        return publication;
     }
 }
