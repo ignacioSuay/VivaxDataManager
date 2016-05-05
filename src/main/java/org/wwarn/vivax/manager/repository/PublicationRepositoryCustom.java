@@ -9,5 +9,5 @@ import java.util.List;
  */
 public interface PublicationRepositoryCustom {
 
-    public Publication findPublicationByPubMedId(Integer pubMedId);
+    public Publication retrievePublicationByPubMedId(Integer pubMedId);
 }

@@ -92,7 +92,7 @@ public class PublicationServiceSmallTest {
     public void findPublicationByPubMedId() throws Exception {
     	System.out.println("REST request");
     	 Publication pub = new Publication();
-    	 pub = publicationRepository.findPublicationByPubMedId(PUB_MED_ID);
+    	 pub = publicationRepository.retrievePublicationByPubMedId(PUB_MED_ID);
 
     	 assertThat(pub!=null);
     }

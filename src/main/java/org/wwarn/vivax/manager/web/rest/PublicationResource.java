@@ -157,18 +157,14 @@ public class PublicationResource {
         return new ResponseEntity<>(page.getContent(), headers, HttpStatus.OK);
     }
 
-    @RequestMapping(value = "/publication/searchByPubMedId/{pubMedId}",
+    @RequestMapping(value = "/studyUpload/retrievePublicationBypubMedId",
         method = RequestMethod.POST,
         produces = MediaType.APPLICATION_JSON_VALUE)
     @Timed
-    public ResponseEntity<Publication> getPublicationByPubMedId(@PathVariable Integer pubMedId) {
+    public Publication retrievePublicationByPubMedId(@RequestBody Integer pubMedId) {
         log.debug("REST request to get Publication : {}", pubMedId);
-        Publication publication = publicationService.findPublicationByPubMedId(pubMedId);
-        return Optional.ofNullable(publication)
-            .map(result -> new ResponseEntity<>(
-                result,
-                HttpStatus.OK))
-            .orElse(new ResponseEntity<>(HttpStatus.NOT_FOUND));
+        Publication publication = publicationService.retrievePublicationByPubMedId(pubMedId);
+        return publication;
     }
 
 
