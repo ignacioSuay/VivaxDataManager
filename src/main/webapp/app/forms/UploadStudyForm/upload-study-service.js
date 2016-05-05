@@ -7,7 +7,7 @@
         .module('vivaxDataManagerApp')
         .factory('PublicationService', function($resource) {
                 alert('here i am');
-                return $resource('api/studyUpload/retrievePublicationBypubMedId/:pubMedId', {
+                return $resource('api/studyUpload/retrievePublicationByPubMedId/:pubMedId', {
                     'query': { method: 'POST', isArray: false},
                     'post': {
                         method: 'POST',
@@ -20,3 +20,4 @@
                 });
             }
         )})();
+

@@ -156,17 +156,4 @@ public class PublicationResource {
         HttpHeaders headers = PaginationUtil.generateSearchPaginationHttpHeaders(query, page, "/api/_search/publications");
         return new ResponseEntity<>(page.getContent(), headers, HttpStatus.OK);
     }
-
-    @RequestMapping(value = "/studyUpload/retrievePublicationBypubMedId",
-        method = RequestMethod.POST,
-        produces = MediaType.APPLICATION_JSON_VALUE)
-    @Timed
-    public Publication retrievePublicationByPubMedId(@RequestBody Integer pubMedId) {
-        log.debug("REST request to get Publication : {}", pubMedId);
-        Publication publication = publicationService.retrievePublicationByPubMedId(pubMedId);
-        return publication;
-    }
-
-
-
 }
