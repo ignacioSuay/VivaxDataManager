@@ -15,8 +15,7 @@
 
         $scope.retrievePublicationByPubMedId = function () {
 
-            Form.load($scope.pubMedId, function (result) {
-
+            Form.load($scope.pubMedId).then(function (result) {
                 $scope.publi = result;
                 console.log($scope.publi);
             });
