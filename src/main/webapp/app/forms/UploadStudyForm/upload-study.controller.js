@@ -9,7 +9,7 @@
     console.log('In publication controller');
 
     function UploadStudyController ($scope, $state, $http, Form) {
-        console.log('In method');
+
         $scope.publi;
         $scope.pubMedId;
 
@@ -17,10 +17,8 @@
 
             Form.load($scope.pubMedId).then(function (result) {
                 $scope.publi = result;
-                console.log($scope.publi);
             });
         };
-
     }
 
 })();

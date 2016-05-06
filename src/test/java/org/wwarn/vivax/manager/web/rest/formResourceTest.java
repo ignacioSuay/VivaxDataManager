@@ -41,7 +41,7 @@ public class formResourceTest {
     private final Logger log = LoggerFactory.getLogger(org.wwarn.vivax.manager.web.rest.PublicationServiceSmallTest.class);
 
 
-        private static final Integer PUB_MED_ID = 8882190;
+        private static final Integer PUB_MED_ID = 15486831;
 
         @Inject
         private PublicationRepository publicationRepository;
@@ -81,15 +81,12 @@ public class formResourceTest {
 
         @Test
         @Transactional
-        public void findPublicationByPubMedId() throws Exception {
+        public void retPublicationByPubMedId() throws Exception {
             System.out.println("REST request");
             Publication pub = new Publication();
             pub = publicationRepository.retrievePublicationByPubMedId(PUB_MED_ID);
-
             assertThat(pub!=null);
         }
-
-
     }
 
 

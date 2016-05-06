@@ -6,6 +6,7 @@ import org.slf4j.LoggerFactory;
 import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.*;
 import org.wwarn.vivax.manager.domain.Publication;
+import org.wwarn.vivax.manager.repository.PublicationRepository;
 import org.wwarn.vivax.manager.service.PublicationService;
 
 import javax.inject.Inject;
@@ -19,10 +20,8 @@ public class FormResource {
 
     private final Logger log = LoggerFactory.getLogger(PublicationResource.class);
 
-    private FormResource formResource;
-
     @Inject
-    private PublicationService publicationService;
+    private PublicationRepository publicationRepository;
 
     @RequestMapping(value = "/studyUpload/retrievePublicationByPubMedId/{pubMedId}",
         method = RequestMethod.GET,
@@ -30,7 +29,7 @@ public class FormResource {
     @Timed
     public Publication retrievePublicationByPubMedId(@PathVariable Integer pubMedId) {
         log.debug("REST request to get Publication : {}", pubMedId);
-        //Publication publication = formResource.retrievePublicationByPubMedId(pubMedId);
-        return new  Publication();
+        Publication publication = publicationRepository.retrievePublicationByPubMedId(pubMedId);
+        return publication;
     }
 }
