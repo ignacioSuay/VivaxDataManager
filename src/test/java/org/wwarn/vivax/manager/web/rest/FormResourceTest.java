@@ -19,38 +19,30 @@ import org.springframework.test.web.servlet.setup.MockMvcBuilders;
 import org.springframework.transaction.annotation.Transactional;
 import org.wwarn.vivax.manager.VivaxDataManagerApp;
 import org.wwarn.vivax.manager.domain.Publication;
-import org.wwarn.vivax.manager.domain.SiteData;
-import org.wwarn.vivax.manager.domain.util.Filter;
 import org.wwarn.vivax.manager.repository.PublicationRepository;
-import org.wwarn.vivax.manager.repository.SiteDataRepository;
 import org.wwarn.vivax.manager.repository.search.PublicationSearchRepository;
-import org.wwarn.vivax.manager.repository.search.SiteDataSearchRepository;
 import org.wwarn.vivax.manager.service.PublicationService;
-import org.wwarn.vivax.manager.service.SiteDataService;
 import org.wwarn.vivax.manager.web.rest.dto.FormResourceDTO;
-import org.wwarn.vivax.manager.web.rest.dto.SiteDataViewDTO;
 
 import javax.annotation.PostConstruct;
 import javax.inject.Inject;
-import java.util.ArrayList;
-import java.util.List;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
 /**
- * Created by steven on 03/05/16.
+ * Created by steven on 05/05/16.
  */
 @ActiveProfiles("dev")
 @RunWith(SpringJUnit4ClassRunner.class)
 @SpringApplicationConfiguration(classes = VivaxDataManagerApp.class)
 @WebAppConfiguration
 @IntegrationTest
-public class PublicationServiceSmallTest {
+public class FormResourceTest {
 
-    private final Logger log = LoggerFactory.getLogger(PublicationServiceSmallTest.class);
+    private final Logger log = LoggerFactory.getLogger(org.wwarn.vivax.manager.web.rest.PublicationServiceSmallTest.class);
 
 
-    private static final Integer PUB_MED_ID = 8882190;
+    private static final Integer PUB_MED_ID = 15486831;
 
     @Inject
     private PublicationRepository publicationRepository;
@@ -85,15 +77,16 @@ public class PublicationServiceSmallTest {
     public void initTest() {
         publicationSearchRepository.deleteAll();
         publication = new Publication();
-
     }
 
     @Test
     @Transactional
-    public void findPublicationByPubMedId() throws Exception {
-    	System.out.println("REST request");
+    public void retPublicationByPubMedId() throws Exception {
+        log.debug("REST request to get Publication : {}", PUB_MED_ID);
         FormResourceDTO formResourceDTO = new FormResourceDTO();
         formResourceDTO = publicationRepository.retrievePublicationByPubMedId(PUB_MED_ID);
         assertThat(formResourceDTO!=null);
     }
 }
+
+

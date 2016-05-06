@@ -5,17 +5,19 @@
     'use strict';
     angular
         .module('vivaxDataManagerApp')
-        .factory('Publication', function($resource) {
-            return $resource('api/publication/searchByPubMedId/:pubMedId', {
-                'query': { method: 'POST', isArray: true},
-                'post': {
-                    method: 'POST',
-                    transformResponse: function (data) {
-                        data = angular.fromJson(data);
-                        return data;
-                    }
-                },
-                'update': { method:'PUT' }
-            });
-        }
-)})();
+        .factory('PublicationService', function($resource) {
+                alert('here i am');
+                return $resource('api/studyUpload/retrievePublicationByPubMedId/:pubMedId', {
+                    'query': { method: 'POST', isArray: false},
+                    'post': {
+                        method: 'POST',
+                        transformResponse: function (data) {
+                            data = angular.fromJson(data);
+                            return data;
+                        }
+                    },
+                    'update': { method:'PUT' }
+                });
+            }
+        )})();
+

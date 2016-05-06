@@ -94,10 +94,10 @@ public class PublicationService {
         return publicationSearchRepository.search(queryStringQuery(query), pageable);
     }
 
-    @Transactional(readOnly = true)
-    public Publication findPublicationByPubMedId(Integer pubMedId) {
+    /*@Transactional(readOnly = true)
+    public Publication retrievePublicationByPubMedId(Integer pubMedId) {
         log.debug("Request to get Publication : {}", pubMedId);
-        Publication publication = publicationRepository.findPublicationByPubMedId(pubMedId);
+        Publication publication = publicationRepository.retrievePublicationByPubMedId(pubMedId);
         return publication;
-    }
+    }*/
 }
