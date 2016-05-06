@@ -9,7 +9,73 @@
             </div>
         </div>
         <div class="col-md-2">
-            <button class="btn btn-primary" ng-click="uploadNewData()">Upload new data</button>
+            <a class="btn btn-success" ng-click="newPublication()">Create new Publication</a>
         </div>
     </div>
+    <div ng-show="myHidingValue" class>
+        <h3>Publication Details</h3>
+        <div class="form-group-row" ng-model="publi">
+            <label class="col-md-2 form-control-label"> <!--for="field_samplesTotal"-->PubMedId:</label>
+            <div class="col-md-10">
+                <input type="number" class="form-control ng-pristine ng-valid ng-not-empty ng-touched" name="pubMedIdForm" id="existingPublicationPubMedId" ng-model="publi.data.publication.pubMedId" readonly aria-invalid="false">
+            </div>
+        </div>
+        </br></br>
+        <div class="form-group-row" ng-model="publi">
+            <label class="col-md-2 form-control-label"> <!--for="field_samplesTotal"-->Title:</label>
+            <div class="col-md-10">
+                <input type="text" class="form-control ng-pristine ng-valid ng-not-empty ng-touched" name="pubTitleForm" id="existingPublicationTitle" ng-model="publi.data.publication.title" aria-invalid="false">
+            </div>
+        </div>
+        </br></br>
+        <div class="form-group-row" ng-model="publi">
+            <label class="col-md-2 form-control-label"> <!--for="field_samplesTotal"-->Authors:</label>
+            <div class="col-md-10">
+                <input type="text" class="form-control ng-pristine ng-valid ng-not-empty ng-touched" name="pubAuthorsForm" id="existingPublicationAuthors" ng-model="publi.data.publication.authors" aria-invalid="false">
+            </div>
+        </div>
+        </br></br>
+        <div class="form-group-row" ng-model="publi">
+            <label class="col-md-2 form-control-label"> <!--for="field_samplesTotal"-->Journal:</label>
+            <div class="col-md-10">
+                <input type="text" class="form-control ng-pristine ng-valid ng-not-empty ng-touched" name="pubJournalForm" id="existingPublicationJournal" ng-model="publi.data.publication.journal" aria-invalid="false">
+            </div>
+        </div>
+        </br></br>
+        <div class="form-group-row" ng-model="publi">
+            <label class="col-md-2 form-control-label"> <!--for="field_samplesTotal"-->Year Publish:</label>
+            <div class="col-md-10">
+                <input type="number" class="form-control ng-pristine ng-valid ng-not-empty ng-touched" name="pubYearPublishForm" id="existingPublicationYear" ng-model="publi.data.publication.yearPublish" aria-invalid="false">
+            </div>
+        </div>
+
+
+
+        <h3>Study Details</h3>
+        <div class="form-group-row" ng-model="study">
+            <label class="col-md-2 form-control-label"> <!--for="field_samplesTotal"-->Study Ref:</label>
+            <div class="col-md-10">
+                <input type="text" class="form-control ng-pristine ng-valid ng-not-empty ng-touched" name="pubMedIdForm" id="existingPublicationStudyRef" ng-model="study.studyRef" readonly aria-invalid="false">
+            </div>
+        </div>
+    </div>
+
 </div>
+
+
+<!--<table class="jh-table table table-striped">
+            <thead>
+            <tr jh-sort="vm.predicate" ascending="vm.reverse" callback="vm.transition()">
+                <th></th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr ng-model="publi">
+                <td><a ui-sref="siteDataView.detail">{{siteData.id}}</a></td><tr>
+                <td>{{publi.data.publication}}</td>
+                <td>{{publi.data.studies}}</td>
+                <td>{{publi.data.siteDatas}}</td>
+                <td>{{publi.data.treatments}}</td>
+            </tr>
+            </tbody>
+        </table>-->
