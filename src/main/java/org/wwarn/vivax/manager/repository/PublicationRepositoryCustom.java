@@ -1,6 +1,7 @@
 package org.wwarn.vivax.manager.repository;
 
 import org.wwarn.vivax.manager.domain.Publication;
+import org.wwarn.vivax.manager.web.rest.dto.FormResourceDTO;
 
 import java.util.List;
 
@@ -9,5 +10,5 @@ import java.util.List;
  */
 public interface PublicationRepositoryCustom {
 
-    public Publication retrievePublicationByPubMedId(Integer pubMedId);
+    public FormResourceDTO retrievePublicationByPubMedId(Integer pubMedId);
 }

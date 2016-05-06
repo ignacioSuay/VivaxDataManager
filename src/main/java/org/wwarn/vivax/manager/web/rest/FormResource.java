@@ -8,6 +8,7 @@ import org.springframework.web.bind.annotation.*;
 import org.wwarn.vivax.manager.domain.Publication;
 import org.wwarn.vivax.manager.repository.PublicationRepository;
 import org.wwarn.vivax.manager.service.PublicationService;
+import org.wwarn.vivax.manager.web.rest.dto.FormResourceDTO;
 
 import javax.inject.Inject;
 
@@ -27,9 +28,9 @@ public class FormResource {
         method = RequestMethod.GET,
         produces = MediaType.APPLICATION_JSON_VALUE)
     @Timed
-    public Publication retrievePublicationByPubMedId(@PathVariable Integer pubMedId) {
+    public FormResourceDTO retrievePublicationByPubMedId(@PathVariable Integer pubMedId) {
         log.debug("REST request to get Publication : {}", pubMedId);
-        Publication publication = publicationRepository.retrievePublicationByPubMedId(pubMedId);
-        return publication;
+        FormResourceDTO formResourceDTO = publicationRepository.retrievePublicationByPubMedId(pubMedId);
+        return formResourceDTO;
     }
 }

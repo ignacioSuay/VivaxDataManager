@@ -27,6 +27,7 @@ import org.wwarn.vivax.manager.repository.search.PublicationSearchRepository;
 import org.wwarn.vivax.manager.repository.search.SiteDataSearchRepository;
 import org.wwarn.vivax.manager.service.PublicationService;
 import org.wwarn.vivax.manager.service.SiteDataService;
+import org.wwarn.vivax.manager.web.rest.dto.FormResourceDTO;
 import org.wwarn.vivax.manager.web.rest.dto.SiteDataViewDTO;
 
 import javax.annotation.PostConstruct;
@@ -91,68 +92,8 @@ public class PublicationServiceSmallTest {
     @Transactional
     public void findPublicationByPubMedId() throws Exception {
     	System.out.println("REST request");
-    	 Publication pub = new Publication();
-    	 pub = publicationRepository.retrievePublicationByPubMedId(PUB_MED_ID);
-
-    	 assertThat(pub!=null);
+        FormResourceDTO formResourceDTO = new FormResourceDTO();
+        formResourceDTO = publicationRepository.retrievePublicationByPubMedId(PUB_MED_ID);
+        assertThat(formResourceDTO!=null);
     }
-
-   /*@Test
-    @Transactional
-    public void getAllSiteDataAndRelatedClasses() throws Exception {
-    	System.out.println("REST request to search Categories for query {}");
-    	 List<SiteData>listSiteData = siteDataRepository.showAllSiteDataAndRelatedClasses();
-    	 assertThat(listSiteData!=null);
-    }
-    */
-   /* @Test
-    @Transactional
-    public void getAllSiteDataByCountry(String country) throws Exception {
-    	System.out.println("REST request to search SiteDataByCountries");
-    	 Set<SiteData>setData = siteDataRepository.findAllSiteDatasByCountry(country);
-    	 setData.stream().forEach(sd->{
-    		 System.out.println("Site Data id: "+sd.getId());
-    		 System.out.print(" Location: "+country);
-    	 });
-    }*/
-
-  /* @Test
-    @Transactional
-    public void getAllSiteDataFiltered() throws Exception {
-    	System.out.println("REST request to search SiteDataByCountries");
-    	List<SiteData>listSiteData = siteDataRepository.searchSiteDataByFilter(listFilters);
-    	SiteData testSiteData = listSiteData.get(0);
-    	assertThat(testSiteData.getLocation().getCountry()).isEqualTo(COUNTRY);
-    	assertThat(testSiteData.getCategory().getName()).isEqualTo(CATEGORY);
-    	assertThat(testSiteData.getStudy().getRef()).isEqualTo(STUDY_REF);
-    	assertEquals(Long.valueOf(9), testSiteData.getId());
-    }*/
-
-   /* @Test
-    @Transactional
-    public void getAllSiteDataFilteredResource() throws Exception {
-
-	    siteDataService.save(siteData);
-
-	    restSiteDataMockMvc.perform(get("/siteData/" + listFilters));
-
-        	log.debug("REST request to get all SiteData filtered");
-    		List<SiteData> listSiteData = siteDataRepository.searchSiteDataByFilter(listFilters);
-    		SiteData testSiteData = listSiteData.get(0);
-    		assertThat(testSiteData.getLocation().getCountry()).isEqualTo(COUNTRY);
-        	assertThat(testSiteData.getCategory().getName()).isEqualTo(CATEGORY);
-        	assertThat(testSiteData.getStudy().getRef()).isEqualTo(STUDY_REF);
-
-    	        //return siteData;
-        }*/
-
-    /*@Test
-    @Transactional
-    public void getAllSiteDataInDTO() throws Exception {
-        System.out.println("REST request to create collection SiteDataViewDTO");
-        List<SiteDataViewDTO>setDataViewDTO = siteDataRepository.searchSiteDataByFilter(listFilters);
-        setDataViewDTO.stream().forEach(sd->{
-            System.out.println(sd.toString());
-        });
-    }*/
 }

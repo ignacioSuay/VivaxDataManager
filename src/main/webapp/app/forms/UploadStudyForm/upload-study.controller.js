@@ -17,6 +17,7 @@
 
             Form.load($scope.pubMedId).then(function (result) {
                 $scope.publi = result;
+                console.log($scope.publi);
             });
         };
     }
