@@ -22,41 +22,56 @@
         </div>
         </br></br>
         <div class="form-group-row" ng-model="publi">
-            <label class="col-md-2 form-control-label"> <!--for="field_samplesTotal"-->Title:</label>
+            <label class="col-md-2 form-control-label">Title:</label>
             <div class="col-md-10">
                 <input type="text" class="form-control ng-pristine ng-valid ng-not-empty ng-touched" name="pubTitleForm" id="existingPublicationTitle" ng-model="publi.data.publication.title" aria-invalid="false">
             </div>
         </div>
         </br></br>
         <div class="form-group-row" ng-model="publi">
-            <label class="col-md-2 form-control-label"> <!--for="field_samplesTotal"-->Authors:</label>
+            <label class="col-md-2 form-control-label">Authors:</label>
             <div class="col-md-10">
                 <input type="text" class="form-control ng-pristine ng-valid ng-not-empty ng-touched" name="pubAuthorsForm" id="existingPublicationAuthors" ng-model="publi.data.publication.authors" aria-invalid="false">
             </div>
         </div>
         </br></br>
         <div class="form-group-row" ng-model="publi">
-            <label class="col-md-2 form-control-label"> <!--for="field_samplesTotal"-->Journal:</label>
+            <label class="col-md-2 form-control-label">Journal:</label>
             <div class="col-md-10">
                 <input type="text" class="form-control ng-pristine ng-valid ng-not-empty ng-touched" name="pubJournalForm" id="existingPublicationJournal" ng-model="publi.data.publication.journal" aria-invalid="false">
             </div>
         </div>
         </br></br>
         <div class="form-group-row" ng-model="publi">
-            <label class="col-md-2 form-control-label"> <!--for="field_samplesTotal"-->Year Publish:</label>
+            <label class="col-md-2 form-control-label">Year Publish:</label>
             <div class="col-md-10">
                 <input type="number" class="form-control ng-pristine ng-valid ng-not-empty ng-touched" name="pubYearPublishForm" id="existingPublicationYear" ng-model="publi.data.publication.yearPublish" aria-invalid="false">
             </div>
         </div>
-
-
-
+        </br></br>
         <h3>Study Details</h3>
-        <div class="form-group-row" ng-model="study">
-            <label class="col-md-2 form-control-label"> <!--for="field_samplesTotal"-->Study Ref:</label>
-            <div class="col-md-10">
-                <input type="text" class="form-control ng-pristine ng-valid ng-not-empty ng-touched" name="pubMedIdForm" id="existingPublicationStudyRef" ng-model="study.studyRef" readonly aria-invalid="false">
+        <div ng-repeat="study in studies">
+            <div class="form-group-row" ng-model="study">
+                <label class="col-md-2 form-control-label">Study Ref:</label>
+                <div class="col-md-10">
+                    <input type="text" class="form-control ng-pristine ng-valid ng-not-empty ng-touched" name="StudyRefForm" id="existingPublicationStudyRef" ng-model="study.ref" readonly aria-invalid="false">
+                </div>
             </div>
+            </br></br>
+            <div class="form-group-row" ng-model="study">
+                <label class="col-md-2 form-control-label">Study Type:</label>
+                <div class="col-md-10">
+                    <input type="text" class="form-control ng-pristine ng-valid ng-not-empty ng-touched" name="StudytypeForm" id="existingPublicationStudyType" ng-model="study.studyType" aria-invalid="false">
+                </div>
+            </div>
+            </br></br>
+            <div class="form-group-row" ng-model="study">
+                <label class="col-md-2 form-control-label">Publications:</label>
+                <div class="col-md-10">
+                    <input type="text" class="form-control ng-pristine ng-valid ng-not-empty ng-touched" name="StudyPublicationsForm" id="existingPublicationStudyPublications" ng-model="study.publicationss" aria-invalid="false">
+                </div>
+            </div>
+            </br></br>
         </div>
     </div>
 

@@ -13,13 +13,20 @@
         $scope.publi;
         $scope.pubMedId;
         $scope.publications = [];
+        $scope.studies = [];
+        $scope.siteDatas = [];
+        $scope.treatments = [];
 
         $scope.retrievePublicationByPubMedId = function () {
             Form.load($scope.pubMedId).then(function (result) {
                 $scope.publi = result;
                 $scope.myHidingValue=true;
-                $scope.studies=$scope.publi;
-                console.log('@@@@@@@@@@@@@@@@ this is the '+$scope.studies);
+                $scope.studies=$scope.publi.data.studies;
+                $scope.siteDatas=$scope.publi.data.siteDatas;
+                $scope.treatments=$scope.publi.data.treatments;
+                //console.log($scope.treatments[0][1]/*.treatment[0].id*/);
+                //console.log($scope.siteDatas[0][2]);
+                //console.log($scope.studies);
                 //console.log($scope.publi);
             });
         };
@@ -38,11 +45,7 @@
                     }
                 }
             }).result.then(function (result) {
-                // $scope.publications.push(result);
-                console.log('@@@@@@@@@@@@@@@@ this is the ');
                 $scope.publi = result;
-                $scope.studies=publi.studies;
-                console.log('@@@@@@@@@@@@@@@@ this is the '+$scope.studies);
             }, function () {
             })
         };
