@@ -26,7 +26,7 @@
                 $scope.treatments=$scope.publi.data.treatments;
                 //console.log($scope.treatments[0][1]/*.treatment[0].id*/);
                 //console.log($scope.siteDatas[0][2]);
-                //console.log($scope.studies);
+                console.log($scope.studies);
                 //console.log($scope.publi);
             });
         };
