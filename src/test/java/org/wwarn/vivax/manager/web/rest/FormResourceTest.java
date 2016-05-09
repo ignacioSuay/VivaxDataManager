@@ -27,6 +27,7 @@ import org.wwarn.vivax.manager.web.rest.dto.FormResourceDTO;
 import javax.annotation.PostConstruct;
 import javax.inject.Inject;
 
+import static junit.framework.TestCase.assertNotNull;
 import static org.assertj.core.api.Assertions.assertThat;
 
 /**
@@ -48,9 +49,6 @@ public class FormResourceTest {
     private PublicationRepository publicationRepository;
 
     @Inject
-    private PublicationService publicationService;
-
-    @Inject
     private PublicationSearchRepository publicationSearchRepository;
 
     @Inject
@@ -67,7 +65,6 @@ public class FormResourceTest {
     public void setup() {
         MockitoAnnotations.initMocks(this);
         PublicationResource publicationResource = new PublicationResource();
-        ReflectionTestUtils.setField(publicationResource, "publicationService", publicationService);
         this.restPublicationMockMvc = MockMvcBuilders.standaloneSetup(publicationResource)
             .setCustomArgumentResolvers(pageableArgumentResolver)
             .setMessageConverters(jacksonMessageConverter).build();
@@ -85,7 +82,7 @@ public class FormResourceTest {
         log.debug("REST request to get Publication : {}", PUB_MED_ID);
         FormResourceDTO formResourceDTO = new FormResourceDTO();
         formResourceDTO = publicationRepository.retrievePublicationByPubMedId(PUB_MED_ID);
-        assertThat(formResourceDTO!=null);
+        assertNotNull(formResourceDTO);
     }
 }
 

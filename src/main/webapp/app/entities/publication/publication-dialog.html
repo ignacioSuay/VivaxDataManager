@@ -46,7 +46,7 @@
         <div class="form-group">
             <label class="control-label" translate="vivaxDataManagerApp.publication.year_publish" for="field_year_publish">Year_publish</label>
             <input type="number" class="form-control" name="year_publish" id="field_year_publish"
-                    ng-model="vm.publication.year_publish"
+            <div ng-show="selectedDrugClass.id != 0" aria-hidden="true" class="ng-hide">             ng-model="vm.publication.year_publish"
                      />
         </div>
 

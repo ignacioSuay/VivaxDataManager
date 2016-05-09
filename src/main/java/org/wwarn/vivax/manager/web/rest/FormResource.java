@@ -19,7 +19,7 @@ import javax.inject.Inject;
 @RequestMapping("/api")
 public class FormResource {
 
-    private final Logger log = LoggerFactory.getLogger(PublicationResource.class);
+    private final Logger log = LoggerFactory.getLogger(FormResource.class);
 
     @Inject
     private PublicationRepository publicationRepository;
