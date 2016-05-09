@@ -17,35 +17,35 @@
         <div class="form-group-row" ng-model="publi">
             <label class="col-md-2 form-control-label"> <!--for="field_samplesTotal"-->PubMedId:</label>
             <div class="col-md-10">
-                <input type="number" class="form-control ng-pristine ng-valid ng-not-empty ng-touched" name="pubMedIdForm" id="existingPublicationPubMedId" ng-model="publi.data.publication.pubMedId" readonly aria-invalid="false">
+                <input type="number" class="form-control ng-pristine ng-valid ng-not-empty ng-touched" name="pubMedIdForm" id="existingPublicationPubMedId" ng-model="publi.publication.pubMedId" readonly aria-invalid="false">
             </div>
         </div>
         </br></br>
         <div class="form-group-row" ng-model="publi">
             <label class="col-md-2 form-control-label">Title:</label>
             <div class="col-md-10">
-                <input type="text" class="form-control ng-pristine ng-valid ng-not-empty ng-touched" name="pubTitleForm" id="existingPublicationTitle" ng-model="publi.data.publication.title" aria-invalid="false">
+                <input type="text" class="form-control ng-pristine ng-valid ng-not-empty ng-touched" name="pubTitleForm" id="existingPublicationTitle" ng-model="publi.publication.title" aria-invalid="false">
             </div>
         </div>
         </br></br>
         <div class="form-group-row" ng-model="publi">
             <label class="col-md-2 form-control-label">Authors:</label>
             <div class="col-md-10">
-                <input type="text" class="form-control ng-pristine ng-valid ng-not-empty ng-touched" name="pubAuthorsForm" id="existingPublicationAuthors" ng-model="publi.data.publication.authors" aria-invalid="false">
+                <input type="text" class="form-control ng-pristine ng-valid ng-not-empty ng-touched" name="pubAuthorsForm" id="existingPublicationAuthors" ng-model="publi.publication.authors" aria-invalid="false">
             </div>
         </div>
         </br></br>
         <div class="form-group-row" ng-model="publi">
             <label class="col-md-2 form-control-label">Journal:</label>
             <div class="col-md-10">
-                <input type="text" class="form-control ng-pristine ng-valid ng-not-empty ng-touched" name="pubJournalForm" id="existingPublicationJournal" ng-model="publi.data.publication.journal" aria-invalid="false">
+                <input type="text" class="form-control ng-pristine ng-valid ng-not-empty ng-touched" name="pubJournalForm" id="existingPublicationJournal" ng-model="publi.publication.journal" aria-invalid="false">
             </div>
         </div>
         </br></br>
         <div class="form-group-row" ng-model="publi">
             <label class="col-md-2 form-control-label">Year Publish:</label>
             <div class="col-md-10">
-                <input type="number" class="form-control ng-pristine ng-valid ng-not-empty ng-touched" name="pubYearPublishForm" id="existingPublicationYear" ng-model="publi.data.publication.yearPublish" aria-invalid="false">
+                <input type="number" class="form-control ng-pristine ng-valid ng-not-empty ng-touched" name="pubYearPublishForm" id="existingPublicationYear" ng-model="publi.publication.yearPublish" aria-invalid="false">
             </div>
         </div>
         </br></br>
@@ -63,10 +63,54 @@
                     <input type="text" class="form-control ng-pristine ng-valid ng-not-empty ng-touched" name="StudytypeForm" id="existingPublicationStudyType" ng-model="study.studyType" aria-invalid="false">
                 </div>
             </div>
-            <div class="form-group-row" ng-model="study">
+            <div ng-repeat="pub in publicationsHTML">
+                <div class="form-group-row" ng-model="pub">
+                    <label class="col-md-2 form-control-label">Publications:</label>
+                    <div class="col-md-10">
+                        <input type="text" class="form-control ng-pristine ng-valid ng-not-empty ng-touched" name="StudyPublicationsForm" id="existingPublicationStudyPublications" ng-model="pub.pubMedId" aria-invalid="false">
+                    </div>
+                </div>
+            </div>
+        </div>
+        <h3>Site Data Details</h3>
+        <div ng-repeat="siteData in siteDatas">
+            <div class="form-group-row" ng-model="siteData">
+                <label class="col-md-2 form-control-label">Study Ref:</label>
+                <div class="col-md-10">
+                    <input type="text" class="form-control ng-pristine ng-valid ng-not-empty ng-touched" name="StudyRefForm" id="existingPublicationSiteDataId" ng-model="siteData.id" readonly aria-invalid="false">
+                </div>
+            </div>
+            <div class="form-group-row" ng-model="siteData">
+                <label class="col-md-2 form-control-label">Study Type:</label>
+                <div class="col-md-10">
+                    <input type="text" class="form-control ng-pristine ng-valid ng-not-empty ng-touched" name="StudytypeForm" id="existingPublicationSiteData" ng-model="siteData.category.name" aria-invalid="false">
+                </div>
+            </div>
+            <div class="form-group-row" ng-model="siteData">
                 <label class="col-md-2 form-control-label">Publications:</label>
                 <div class="col-md-10">
-                    <input type="text" class="form-control ng-pristine ng-valid ng-not-empty ng-touched" name="StudyPublicationsForm" id="existingPublicationStudyPublications" ng-model="study.publicationss" aria-invalid="false">
+                    <input type="text" class="form-control ng-pristine ng-valid ng-not-empty ng-touched" name="StudyPublicationsForm" id="existingPublicationSiteDa" ng-model="siteData.location.country" aria-invalid="false">
+                </div>
+            </div>
+        </div>
+        <h3>Treatment Details</h3>
+        <div ng-repeat="treatment in treatments">
+            <div class="form-group-row" ng-model="treatment">
+                <label class="col-md-2 form-control-label">Study Ref:</label>
+                <div class="col-md-10">
+                    <input type="text" class="form-control ng-pristine ng-valid ng-not-empty ng-touched" name="StudyRefForm" id="existingPublicationTreatmentId" ng-model="treatment.id" readonly aria-invalid="false">
+                </div>
+            </div>
+            <div class="form-group-row" ng-model="treatment">
+                <label class="col-md-2 form-control-label">Study Type:</label>
+                <div class="col-md-10">
+                    <input type="text" class="form-control ng-pristine ng-valid ng-not-empty ng-touched" name="StudytypeForm" id="existingPublicationTreatmentArmCode" ng-model="treatment.treatmentName" aria-invalid="false">
+                </div>
+            </div>
+            <div class="form-group-row" ng-model="treatment">
+                <label class="col-md-2 form-control-label">Publications:</label>
+                <div class="col-md-10">
+                    <input type="text" class="form-control ng-pristine ng-valid ng-not-empty ng-touched" name="StudyPublicationsForm" id="existingPublicationTreatmentName" ng-model="treatment.treatmentArmCode" aria-invalid="false">
                 </div>
             </div>
         </div>

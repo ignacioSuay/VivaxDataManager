@@ -2,16 +2,14 @@
 <form name="editForm" role="form" novalidate ng-submit="vm.save()">
 
     <div class="modal-header">
-        <button type="button" class="close" data-dismiss="modal" aria-hidden="true"
-                ng-click="vm.clear()">&times;</button>
+        <button type="button" class="close" data-dismiss="modal" aria-hidden="true" ng-click="vm.clear()">&times;</button>
         <h4 class="modal-title" id="myPublicationLabel">Create or edit a Publication</h4>
     </div>
     <div class="modal-body">
         <jhi-alert-error></jhi-alert-error>
         <div class="form-group">
             <label for="id">ID</label>
-            <input type="text" class="form-control" id="id" name="id"
-                    ng-model="vm.publication.id" readonly />
+            <input type="text" class="form-control" id="id" name="id" ng-model="vm.publication.id" readonly />
         </div>
         <div class="form-group">
             <label class="control-label" for="field_authors">Authors</label>
@@ -21,33 +19,23 @@
         </div>
         <div class="form-group">
             <label class="control-label" translate="vivaxDataManagerApp.publication.first_author" for="field_first_author">First_author</label>
-            <input type="text" class="form-control" name="first_author" id="field_first_author"
-                    ng-model="vm.publication.first_author"
-                     />
+            <input type="text" class="form-control" name="first_author" id="field_first_author" ng-model="vm.publication.first_author"/>
         </div>
         <div class="form-group">
             <label class="control-label" for="field_journal">Journal</label>
-            <input type="text" class="form-control" name="journal" id="field_journal"
-                    ng-model="vm.publication.journal"
-                     />
+            <input type="text" class="form-control" name="journal" id="field_journal" ng-model="vm.publication.journal"/>
         </div>
         <div class="form-group">
             <label class="control-label" for="field_pubMedId">PubMedId</label>
-            <input type="number" class="form-control" name="pubMedId" id="field_pubMedId"
-                    ng-model="vm.publication.pubMedId"
-                     />
+            <input type="number" class="form-control" name="pubMedId" id="field_pubMedId" ng-model="vm.publication.pubMedId"/>
         </div>
         <div class="form-group">
             <label class="control-label" for="field_title">Title</label>
-            <input type="text" class="form-control" name="title" id="field_title"
-                    ng-model="vm.publication.title"
-                     />
+            <input type="text" class="form-control" name="title" id="field_title" ng-model="vm.publication.title"/>
         </div>
         <div class="form-group">
             <label class="control-label" translate="vivaxDataManagerApp.publication.year_publish" for="field_year_publish">Year_publish</label>
-            <input type="number" class="form-control" name="year_publish" id="field_year_publish"
-            <div ng-show="selectedDrugClass.id != 0" aria-hidden="true" class="ng-hide">             ng-model="vm.publication.year_publish"
-                     />
+            <input type="number" class="form-control" name="year_publish" id="field_year_publish" ng-model="vm.publication.year_publish"/>
         </div>
 
     </div>
