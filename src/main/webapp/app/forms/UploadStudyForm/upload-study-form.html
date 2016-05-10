@@ -17,35 +17,35 @@
         <div class="form-group-row" ng-model="publi">
             <label class="col-md-2 form-control-label"> <!--for="field_samplesTotal"-->PubMedId:</label>
             <div class="col-md-10">
-                <input type="number" class="form-control ng-pristine ng-valid ng-not-empty ng-touched" name="pubMedIdForm" id="existingPublicationPubMedId" ng-model="publi.data.publication.pubMedId" readonly aria-invalid="false">
+                <input type="number" class="form-control ng-pristine ng-valid ng-not-empty ng-touched" name="pubMedIdForm" id="existingPublicationPubMedId" ng-model="publi.publication.pubMedId" readonly aria-invalid="false">
             </div>
         </div>
         </br></br>
         <div class="form-group-row" ng-model="publi">
             <label class="col-md-2 form-control-label">Title:</label>
             <div class="col-md-10">
-                <input type="text" class="form-control ng-pristine ng-valid ng-not-empty ng-touched" name="pubTitleForm" id="existingPublicationTitle" ng-model="publi.data.publication.title" aria-invalid="false">
+                <input type="text" class="form-control ng-pristine ng-valid ng-not-empty ng-touched" name="pubTitleForm" id="existingPublicationTitle" ng-model="publi.publication.title" aria-invalid="false">
             </div>
         </div>
         </br></br>
         <div class="form-group-row" ng-model="publi">
             <label class="col-md-2 form-control-label">Authors:</label>
             <div class="col-md-10">
-                <input type="text" class="form-control ng-pristine ng-valid ng-not-empty ng-touched" name="pubAuthorsForm" id="existingPublicationAuthors" ng-model="publi.data.publication.authors" aria-invalid="false">
+                <input type="text" class="form-control ng-pristine ng-valid ng-not-empty ng-touched" name="pubAuthorsForm" id="existingPublicationAuthors" ng-model="publi.publication.authors" aria-invalid="false">
             </div>
         </div>
         </br></br>
         <div class="form-group-row" ng-model="publi">
             <label class="col-md-2 form-control-label">Journal:</label>
             <div class="col-md-10">
-                <input type="text" class="form-control ng-pristine ng-valid ng-not-empty ng-touched" name="pubJournalForm" id="existingPublicationJournal" ng-model="publi.data.publication.journal" aria-invalid="false">
+                <input type="text" class="form-control ng-pristine ng-valid ng-not-empty ng-touched" name="pubJournalForm" id="existingPublicationJournal" ng-model="publi.publication.journal" aria-invalid="false">
             </div>
         </div>
         </br></br>
         <div class="form-group-row" ng-model="publi">
             <label class="col-md-2 form-control-label">Year Publish:</label>
             <div class="col-md-10">
-                <input type="number" class="form-control ng-pristine ng-valid ng-not-empty ng-touched" name="pubYearPublishForm" id="existingPublicationYear" ng-model="publi.data.publication.yearPublish" aria-invalid="false">
+                <input type="number" class="form-control ng-pristine ng-valid ng-not-empty ng-touched" name="pubYearPublishForm" id="existingPublicationYear" ng-model="publi.publication.yearPublish" aria-invalid="false">
             </div>
         </div>
         </br></br>
@@ -58,7 +58,9 @@
                 </a>
             </div>
         </div>
-        <div ng-repeat="study in studies">
+        </br></br>
+        <div class="well" ng-repeat="study in studies">
+            <h4>Study {{index+1}}:</h4>
             </br></br>
             <div class="form-group-row" ng-model="study">
                 <label class="col-md-2 form-control-label">Study Ref:</label>
@@ -80,6 +82,7 @@
                     <input type="text" class="form-control ng-pristine ng-valid ng-not-empty ng-touched" name="StudyPublicationsForm" id="existingPublicationStudyPublications" ng-model="study.publicationss" aria-invalid="false">
                 </div>
             </div>
+            </br></br>
         </div>
         <h3>SiteData details</h3>
         <div class="form-group-row">
@@ -90,9 +93,10 @@
                 </a>
             </div>
         </div>
-        <div ng-repeat="siteData in siteDatas">
-            </br></br>
-            <div class="form-group-row" ng-model="siteData">
+        </br></br>
+        <div class="well" ng-repeat="siteData in siteDatas">
+            <h4>siteData {{$index+1}}:</h4>
+           <div class="form-group-row" ng-model="siteData">
                 <label class="col-md-2 form-control-label">Category:</label>
                 <div class="col-md-10">
                     <input type="text" class="form-control ng-pristine ng-valid ng-not-empty ng-touched" name="SiteDataCategoryForm" id="existingPublicationSDCategory" ng-model="siteData.category.name" aria-invalid="false">
@@ -112,6 +116,7 @@
                     <input type="text" class="form-control ng-pristine ng-valid ng-not-empty ng-touched" name="SiteDataLocationForm" id="existingPublicationSDLocation" ng-model="siteData.location.location" aria-invalid="false">
                 </div>
             </div>
+            </br></br>
             <div class="form-group-row" ng-model="siteData">
                 <label class="col-md-2 form-control-label">upper95CI:</label>
                 <div class="col-md-10">
@@ -119,7 +124,7 @@
                 </div>
             </div>
             </br></br>
-        </div>
+       </div>
         <h3>Treatment details</h3>
         <div class="form-group-row">
             <label class="col-md-2 form-control-label">Insert new Treatment:</label>
@@ -129,8 +134,9 @@
                 </a>
             </div>
         </div>
-        <div ng-repeat="treatment in treatments">
-            </br></br>
+        </br></br>
+        <div class="well" ng-repeat="treatment in treatments">
+            <h4>Treatment {{$index+1}}:</h4>
             <div class="form-group-row" ng-model="treatment">
                 <label class="col-md-2 form-control-label">Id:</label>
                 <div class="col-md-10">
