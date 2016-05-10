@@ -12,6 +12,7 @@
             <a class="btn btn-success" ng-click="newPublication()">Create new Publication</a>
         </div>
     </div>
+    <hr>
     <div ng-show="myHidingValue" class>
         <h3>Publication Details</h3>
         <div class="form-group-row" ng-model="publi">
@@ -49,11 +50,12 @@
             </div>
         </div>
         </br></br>
+        <hr>
         <h3>Study Details</h3>
         <div class="form-group-row">
             <label class="col-md-2 form-control-label">Insert new Study:</label>
             <div class="col-md-2">
-                <a class="btn btn-success" ng-click="newPublication()">
+                <a class="btn btn-success" ng-click="newStudy()">
                     <span class="glyphicon glyphicon-plus"/>
                 </a>
             </div>
@@ -61,7 +63,6 @@
         </br></br>
         <div class="well" ng-repeat="study in studies">
             <h4>Study {{index+1}}:</h4>
-            </br></br>
             <div class="form-group-row" ng-model="study">
                 <label class="col-md-2 form-control-label">Study Ref:</label>
                 <div class="col-md-10">
@@ -84,11 +85,12 @@
             </div>
             </br></br>
         </div>
+        <hr>
         <h3>SiteData details</h3>
         <div class="form-group-row">
             <label class="col-md-2 form-control-label">Insert new SiteData:</label>
             <div class="col-md-2">
-                <a class="btn btn-success" ng-click="newPublication()">
+                <a class="btn btn-success" ng-click="newSiteData()">
                     <span class="glyphicon glyphicon-plus"/>
                 </a>
             </div>
@@ -125,11 +127,12 @@
             </div>
             </br></br>
        </div>
+        <hr>
         <h3>Treatment details</h3>
         <div class="form-group-row">
             <label class="col-md-2 form-control-label">Insert new Treatment:</label>
             <div class="col-md-2">
-                <a class="btn btn-success" ng-click="newPublication()">
+                <a class="btn btn-success" ng-click="newTreatment()">
                     <span class="glyphicon glyphicon-plus"/>
                 </a>
             </div>

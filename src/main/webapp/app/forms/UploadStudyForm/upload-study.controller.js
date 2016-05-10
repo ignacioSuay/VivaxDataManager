@@ -66,6 +66,63 @@
             }, function () {
             })
         };
+
+        $scope.newStudy = function () {
+            $scope.myHidingValue=true;
+            $uibModal.open({
+                templateUrl: 'app/entities/study/study-dialog.html',
+                controller: 'StudyDialogController',
+                size: 'lg',
+                controllerAs: 'vm',
+                backdrop: 'static',
+                resolve: {
+                    entity: function () {
+                        return {};
+                    }
+                }
+            }).result.then(function (result) {
+                $scope.publi = result;
+            }, function () {
+            })
+        };
+
+        $scope.newSiteData = function () {
+            $scope.myHidingValue=true;
+            $uibModal.open({
+                templateUrl: 'app/entities/site-data/site-data-dialog.html',
+                controller: 'SiteDataDialogController',
+                size: 'lg',
+                controllerAs: 'vm',
+                backdrop: 'static',
+                resolve: {
+                    entity: function () {
+                        return {};
+                    }
+                }
+            }).result.then(function (result) {
+                $scope.publi = result;
+            }, function () {
+            })
+        };
+
+        $scope.newTreatment = function () {
+            $scope.myHidingValue=true;
+            $uibModal.open({
+                templateUrl: 'app/entities/treatment/treatment-dialog.html',
+                controller: 'TreatmentController2',
+                size: 'lg',
+                controllerAs: 'vm',
+                backdrop: 'static',
+                resolve: {
+                    entity: function () {
+                        return {};
+                    }
+                }
+            }).result.then(function (result) {
+                $scope.publi = result;
+            }, function () {
+            })
+        };
     }
 
 })();
