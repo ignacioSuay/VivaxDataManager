@@ -14,7 +14,7 @@
         $scope.pubMedId;
         $scope.studies = [];
         $scope.siteDatas = [];
-        $scope.treatments = [];
+        //$scope.treatments = [];
 
         $scope.retrievePublicationByPubMedId = function () {
             Form.load($scope.pubMedId).then(function (result) {
@@ -26,13 +26,15 @@
                         $scope.siteDatas.push($scope.publi.siteDatas[0][i]);
                     }
                 }
-                for (var i=0; i<=$scope.publi.treatments[0].length; i++){
-                    if($scope.publi.treatments[0][i]!=undefined) {
-                        $scope.treatments.push($scope.publi.treatments[0][i]);
-                    }
-                }
             });
+        };
 
+        $scope.save2 = function () {
+            //$uibModal.close();
+
+            //$scope.siteData.treatments.push($scope.treatment);
+            console.log('this is the treatments list '+treatment);
+            return $scope.treatment;
         };
 
         $scope.newPublication = function () {
@@ -49,7 +51,7 @@
                     }
                 }
             }).result.then(function (result) {
-                $scope.publi = result;
+
             }, function () {
             })
         };
@@ -95,8 +97,8 @@
         $scope.newTreatment = function () {
             $scope.myHidingValue=true;
             $uibModal.open({
-                templateUrl: 'app/entities/treatment/treatment-dialog.html',
-                controller: 'TreatmentDialogController',
+                templateUrl: 'app/forms/UploadStudyForm/treatment-dialog-form.html',
+                controller: 'UploadStudyController',
                 size: 'lg',
                 controllerAs: 'vm',
                 backdrop: 'static',
@@ -106,7 +108,7 @@
                     }
                 }
             }).result.then(function (result) {
-                $scope.publi = result;
+
             }, function () {
 
             })
@@ -125,5 +127,10 @@
  for (var i=0; i<=$scope.publications[0].length; i++){
  if($scope.publications[0][i]!=undefined) {
  $scope.publicationsHTML.push($scope.publications[0][i]);
+ }
+ }
+ for (var i=0; i<=$scope.publi.treatments[0].length; i++){
+ if($scope.publi.treatments[0][i]!=undefined) {
+ $scope.treatments.push($scope.publi.treatments[0][i]);
  }
  }*/

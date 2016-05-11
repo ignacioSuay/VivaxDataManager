@@ -24,6 +24,7 @@
         };
 
         var onSaveError = function () {
+            alert('You must first erase any study that includes this publication');
             vm.isSaving = false;
         };
 
@@ -39,5 +40,6 @@
         vm.clear = function() {
             $uibModalInstance.dismiss('cancel');
         };
+
     }
 })();

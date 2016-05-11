@@ -36,6 +36,12 @@
             }
         };
 
+        $scope.save2 = function () {
+            $uibModalInstance.close();
+            console.log('this is the treatment '+vm.treatment.treatmentName)
+            return vm.treatment;
+        };
+
         vm.clear = function() {
             $uibModalInstance.dismiss('cancel');
         };
