@@ -62,7 +62,7 @@
         </div>
         </br></br>
         <div class="well" ng-repeat="study in studies">
-            <h4>Study {{index+1}}:</h4>
+            <h4>Study {{$index+1}}:</h4>
             <div class="form-group-row" ng-model="study">
                 <label class="col-md-2 form-control-label">Study Ref:</label>
                 <div class="col-md-10">
@@ -77,13 +77,14 @@
                 </div>
             </div>
             </br></br>
-            <div class="form-group-row" ng-model="study">
+            <div class="form-group-row">
                 <label class="col-md-2 form-control-label">Publications:</label>
                 <div class="col-md-10">
-                    <input type="text" class="form-control ng-pristine ng-valid ng-not-empty ng-touched" name="StudyPublicationsForm" id="existingPublicationStudyPublications" ng-model="study.publicationss" aria-invalid="false">
-                </div>
+                    <input type="text" ng-repeat="publication in study.publicationss" class="form-control ng-pristine ng-valid ng-not-empty ng-touched" name="StudyPublicationsForm" id="existingPublicationStudyPublications" ng-model="publication.title" aria-invalid="false">
+                 </div>
+                </br></br>
             </div>
-            </br></br>
+             </br></br>
         </div>
         <hr>
         <h3>SiteData details</h3>
