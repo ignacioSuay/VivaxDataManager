@@ -109,7 +109,7 @@
             $scope.myHidingValue=true;
             $uibModal.open({
                 templateUrl: 'app/entities/treatment/treatment-dialog.html',
-                controller: 'TreatmentController2',
+                controller: 'TreatmentDialogController',
                 size: 'lg',
                 controllerAs: 'vm',
                 backdrop: 'static',
@@ -121,6 +121,7 @@
             }).result.then(function (result) {
                 $scope.publi = result;
             }, function () {
+
             })
         };
     }
