@@ -5,9 +5,9 @@
         .module('vivaxDataManagerApp')
         .controller('TreatmentDialogController', TreatmentDialogController);
 
-    TreatmentDialogController.$inject = ['$scope', '$stateParams', '$uibModalInstance', 'entity', 'Treatment', 'SiteData'];
+    TreatmentDialogController.$inject = ['$scope', '$stateParams', '$uibModalInstance', 'entity', 'Treatment', 'SiteData', 'ShareDataService'];
 
-    function TreatmentDialogController ($scope, $stateParams, $uibModalInstance, entity, Treatment, SiteData) {
+    function TreatmentDialogController ($scope, $stateParams, $uibModalInstance, entity, Treatment, SiteData, ShareDataService) {
         var vm = this;
         vm.treatment = entity;
         vm.sitedatas = SiteData.query();
@@ -36,10 +36,10 @@
             }
         };
 
-        $scope.save2 = function () {
-            $uibModalInstance.close();
-            console.log('this is the treatment '+vm.treatment.treatmentName)
-            return vm.treatment;
+        $scope.save2 = function (treatment) {
+            ShareDataService.addList(treatment);
+            console.log('in here now');
+            return $scope.treatment;
         };
 
         vm.clear = function() {

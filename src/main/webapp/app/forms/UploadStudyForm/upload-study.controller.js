@@ -5,16 +5,16 @@
         .module('vivaxDataManagerApp')
         .controller('UploadStudyController', UploadStudyController);
 
-    UploadStudyController.$inject = ['$scope', '$state', '$http', 'Form', '$uibModal'];
+    UploadStudyController.$inject = ['$scope', '$state', '$http', 'Form', '$uibModal', 'ShareDataService'];
     console.log('In publication controller');
 
-    function UploadStudyController ($scope, $state, $http, Form, $uibModal) {
+    function UploadStudyController ($scope, $state, $http, Form, $uibModal, ShareDataService) {
 
         $scope.publi;
         $scope.pubMedId;
         $scope.studies = [];
         $scope.siteDatas = [];
-        //$scope.treatments = [];
+        $scope.treatments = [];
 
         $scope.retrievePublicationByPubMedId = function () {
             Form.load($scope.pubMedId).then(function (result) {
@@ -27,14 +27,6 @@
                     }
                 }
             });
-        };
-
-        $scope.save2 = function () {
-            //$uibModal.close();
-
-            //$scope.siteData.treatments.push($scope.treatment);
-            console.log('this is the treatments list '+treatment);
-            return $scope.treatment;
         };
 
         $scope.newPublication = function () {
@@ -51,7 +43,7 @@
                     }
                 }
             }).result.then(function (result) {
-
+                console.log(treatment);
             }, function () {
             })
         };
@@ -94,8 +86,19 @@
             })
         };
 
-        $scope.newTreatment = function () {
+        $scope.newTreatment = function (treatmentsList) {
             $scope.myHidingValue=true;
+
+            if(treatmentsList.length>0 && ShareDataService.getList().length===0){
+                console.log(ShareDataService.getList().length);
+                for (var i=0; i<=treatmentsList.length; i++){
+                    if(treatmentsList[i]!=undefined) {
+                        ShareDataService.addList(treatmentsList[i]);
+                    }
+                }
+            }
+            console.log(ShareDataService.getList());
+
             $uibModal.open({
                 templateUrl: 'app/entities/treatment/treatment-dialog.html',
                 controller: 'TreatmentDialogController',
