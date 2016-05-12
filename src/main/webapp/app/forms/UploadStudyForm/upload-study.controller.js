@@ -97,8 +97,8 @@
         $scope.newTreatment = function () {
             $scope.myHidingValue=true;
             $uibModal.open({
-                templateUrl: 'app/forms/UploadStudyForm/treatment-dialog-form.html',
-                controller: 'UploadStudyController',
+                templateUrl: 'app/entities/treatment/treatment-dialog.html',
+                controller: 'TreatmentDialogController',
                 size: 'lg',
                 controllerAs: 'vm',
                 backdrop: 'static',
