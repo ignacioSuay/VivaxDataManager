@@ -86,14 +86,26 @@
             })
         };
 
-        $scope.newTreatment = function (treatmentsList) {
-            $scope.myHidingValue=true;
+        function create2DArray(rows,columns) {
+            var x = new Array(rows);
+            for (var i = 0; i < rows; i++) {
+                x[i] = new Array(columns);
+            }
+            return x;
+        }
 
+        $scope.newTreatment = function (treatmentsList, index) {
+            $scope.myHidingValue=true;
+            var length = $scope.publi.siteDatas[0].length;
+            if(ShareDataService.myList===undefined) {
+                ShareDataService.setList(create2DArray(1, length));
+                console.log(index);
+            }
             if(treatmentsList.length>0 && ShareDataService.getList().length===0){
                 console.log(ShareDataService.getList().length);
                 for (var i=0; i<=treatmentsList.length; i++){
                     if(treatmentsList[i]!=undefined) {
-                        ShareDataService.addList(treatmentsList[i]);
+                        ShareDataService.addList(treatmentsList[i], index);
                     }
                 }
             }

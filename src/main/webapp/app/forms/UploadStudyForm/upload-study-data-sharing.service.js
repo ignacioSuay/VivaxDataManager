@@ -7,10 +7,10 @@
 angular.module('vivaxDataManagerApp')
     .factory('ShareDataService', function () {
 
-        var myList = [];
+        var myList;
 
-        var addList = function(newObj) {
-            myList.push(newObj);
+        var addList = function(newObj, index) {
+            myList[0][index].push(newObj);
             console.log(myList);
         }
 
@@ -18,8 +18,13 @@ angular.module('vivaxDataManagerApp')
             return myList;
         }
 
+        var setList = function(newList){
+            myList=newList;
+        }
+
         return {
             addList: addList,
-            getList: getList
+            getList: getList,
+            setList: setList
         };
     });
