@@ -7,24 +7,30 @@
 angular.module('vivaxDataManagerApp')
     .factory('ShareDataService', function () {
 
-        var myList;
+        var siteData;
+        var flag;
 
-        var addList = function(newObj, index) {
-            myList[0][index].push(newObj);
-            console.log(myList);
+        //TODO change names of variable and methods to make the service universal
+        var getSiteData= function(){
+            return siteData;
         }
 
-        var getList = function(){
-            return myList;
+        var setSiteData = function(paramSiteData){
+            siteData=paramSiteData;
         }
 
-        var setList = function(newList){
-            myList=newList;
+        var getFlag = function(){
+            return flag;
+        }
+
+        var setFlag = function(paramFlag){
+            flag=paramFlag;
         }
 
         return {
-            addList: addList,
-            getList: getList,
-            setList: setList
+            getSiteData: getSiteData,
+            setSiteData: setSiteData,
+            getFlag : getFlag,
+            setFlag : setFlag
         };
     });

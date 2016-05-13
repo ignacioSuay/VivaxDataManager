@@ -137,8 +137,13 @@
             <div class="form-group-row">
                 <label class="col-md-2 form-control-label">Insert new Treatment:</label>
                 <div class="col-md-2">
-                    <a class="btn btn-success" ng-click="newTreatment(siteData.treatments, $index)">
+                    <a class="btn btn-success" ng-click="newTreatment(siteData)">
                         <span class="glyphicon glyphicon-plus"/>
+                    </a>
+                </div>
+                <div ng-show="hidingSaveChangesButton" class="col-md-2">
+                    <a class="btn btn-danger" ng-click="updateSiteData()">
+                        Save Changes to Treatments List
                     </a>
                 </div>
             </div>

@@ -5,10 +5,10 @@
         .module('vivaxDataManagerApp')
         .controller('UploadStudyController', UploadStudyController);
 
-    UploadStudyController.$inject = ['$scope', '$state', '$http', 'Form', '$uibModal', 'ShareDataService'];
+    UploadStudyController.$inject = ['$scope', '$state', '$http', 'Form', '$uibModal', 'ShareDataService', 'SiteData'];
     console.log('In publication controller');
 
-    function UploadStudyController ($scope, $state, $http, Form, $uibModal, ShareDataService) {
+    function UploadStudyController ($scope, $state, $http, Form, $uibModal, ShareDataService, SiteData) {
 
         $scope.publi;
         $scope.pubMedId;
@@ -85,31 +85,18 @@
             }, function () {
             })
         };
+        
+        //TODO make this code reusable for all Classes
+        $scope.updateSiteData = function (){
+            var siteData = ShareDataService.getSiteData();
+            SiteData.update(siteData);
+        };
 
-        function create2DArray(rows,columns) {
-            var x = new Array(rows);
-            for (var i = 0; i < rows; i++) {
-                x[i] = new Array(columns);
-            }
-            return x;
-        }
-
-        $scope.newTreatment = function (treatmentsList, index) {
+        $scope.newTreatment = function (siteDataObject) {
             $scope.myHidingValue=true;
-            var length = $scope.publi.siteDatas[0].length;
-            if(ShareDataService.myList===undefined) {
-                ShareDataService.setList(create2DArray(1, length));
-                console.log(index);
-            }
-            if(treatmentsList.length>0 && ShareDataService.getList().length===0){
-                console.log(ShareDataService.getList().length);
-                for (var i=0; i<=treatmentsList.length; i++){
-                    if(treatmentsList[i]!=undefined) {
-                        ShareDataService.addList(treatmentsList[i], index);
-                    }
-                }
-            }
-            console.log(ShareDataService.getList());
+            $scope.hidingSaveChangesButton=true;
+            ShareDataService.setSiteData(siteDataObject);
+            ShareDataService.setFlag(0);
 
             $uibModal.open({
                 templateUrl: 'app/entities/treatment/treatment-dialog.html',
@@ -148,4 +135,12 @@
  if($scope.publi.treatments[0][i]!=undefined) {
  $scope.treatments.push($scope.publi.treatments[0][i]);
  }
+ }
+
+ function create2DArray(rows,columns) {
+ var x = new Array(rows);
+ for (var i = 0; i < rows; i++) {
+ x[i] = new Array(columns);
+ }
+ return x;
  }*/

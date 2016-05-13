@@ -23,22 +23,34 @@
             vm.isSaving = false;
         };
 
+        var onSaveSuccess2 = function (result) {
+            console.log(result);
+            var siteData = ShareDataService.getSiteData();
+            var tre = {id: result.id, treatmentName: result.treatmentName, treatmentArmCode : result.treatmentArmCode, version : result.version};
+            siteData.treatments.push(tre);
+            ShareDataService.setSiteData(siteData);
+            $scope.$emit('vivaxDataManagerApp:treatmentUpdate', result);
+            $uibModalInstance.close(result);
+            vm.isSaving = false;
+        };
+
         var onSaveError = function () {
             vm.isSaving = false;
         };
 
-        vm.save = function () {
-            vm.isSaving = true;
-            if (vm.treatment.id !== null) {
-                Treatment.update(vm.treatment, onSaveSuccess, onSaveError);
-            } else {
-                Treatment.save(vm.treatment, onSaveSuccess, onSaveError);
-            }
-        };
-
         $scope.save2 = function (treatment) {
-            ShareDataService.addList(treatment);
-            console.log('in here now');
+            vm.isSaving = true;
+            var flag = ShareDataService.getFlag();
+            if (treatment.id !== null && treatment.id!==undefined) {
+                Treatment.update(treatment, onSaveSuccess, onSaveError);
+            }
+            else if (flag === 0){
+                var siteData = ShareDataService.getSiteData();
+                Treatment.save(treatment, onSaveSuccess2, onSaveError);
+            }
+            else {
+                Treatment.save(treatment, onSaveSuccess, onSaveError);
+            }
             return $scope.treatment;
         };
 
