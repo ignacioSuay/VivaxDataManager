@@ -45,7 +45,6 @@
                 Treatment.update(treatment, onSaveSuccess, onSaveError);
             }
             else if (flag === 0){
-                var siteData = ShareDataService.getSiteData();
                 Treatment.save(treatment, onSaveSuccess2, onSaveError);
             }
             else {

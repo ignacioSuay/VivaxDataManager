@@ -25,16 +25,16 @@ import static org.elasticsearch.index.query.QueryBuilders.*;
 public class SiteDataService {
 
     private final Logger log = LoggerFactory.getLogger(SiteDataService.class);
-    
+
     @Inject
     private SiteDataRepository siteDataRepository;
-    
+
     @Inject
     private SiteDataSearchRepository siteDataSearchRepository;
-    
+
     /**
      * Save a siteData.
-     * 
+     *
      * @param siteData the entity to save
      * @return the persisted entity
      */
@@ -47,14 +47,14 @@ public class SiteDataService {
 
     /**
      *  Get all the siteData.
-     *  
+     *
      *  @param pageable the pagination information
      *  @return the list of entities
      */
-    @Transactional(readOnly = true) 
+    @Transactional(readOnly = true)
     public Page<SiteData> findAll(Pageable pageable) {
         log.debug("Request to get all SiteData");
-        Page<SiteData> result = siteDataRepository.findAll(pageable); 
+        Page<SiteData> result = siteDataRepository.findAll(pageable);
         return result;
     }
 
@@ -64,7 +64,7 @@ public class SiteDataService {
      *  @param id the id of the entity
      *  @return the entity
      */
-    @Transactional(readOnly = true) 
+    @Transactional(readOnly = true)
     public SiteData findOne(Long id) {
         log.debug("Request to get SiteData : {}", id);
         SiteData siteData = siteDataRepository.findOneWithEagerRelationships(id);
@@ -73,7 +73,7 @@ public class SiteDataService {
 
     /**
      *  Delete the  siteData by id.
-     *  
+     *
      *  @param id the id of the entity
      */
     public void delete(Long id) {

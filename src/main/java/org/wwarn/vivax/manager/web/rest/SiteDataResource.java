@@ -1,6 +1,7 @@
 package org.wwarn.vivax.manager.web.rest;
 
 import com.codahale.metrics.annotation.Timed;
+import org.springframework.data.jpa.repository.Modifying;
 import org.wwarn.vivax.manager.domain.SiteData;
 import org.wwarn.vivax.manager.domain.util.Filter;
 import org.wwarn.vivax.manager.repository.SiteDataRepository;
@@ -56,7 +57,7 @@ public class SiteDataResource {
         produces = MediaType.APPLICATION_JSON_VALUE)
     @Timed
     public ResponseEntity<SiteData> createSiteData(@RequestBody SiteData siteData) throws URISyntaxException {
-        log.debug("REST request to save SiteData : {}", siteData);
+        log.debug("REST request to save SiteData : {} ", siteData);
         if (siteData.getId() != null) {
             return ResponseEntity.badRequest().headers(HeaderUtil.createFailureAlert("siteData", "idexists", "A new siteData cannot already have an ID")).body(null);
         }
@@ -204,5 +205,16 @@ public class SiteDataResource {
     		List<SiteDataViewDTO> siteData = siteDataRepository.searchSiteDataByFilter(listFilters);
                 return siteData;
         }
+
+    @RequestMapping(value = "/siteData/updateSiteData",
+        method = RequestMethod.PUT,
+        produces = MediaType.APPLICATION_JSON_VALUE)
+    @Timed
+    @Modifying
+    public SiteData updateSiteDataTreatmentList(@RequestBody SiteData siteData) {
+        log.debug("request update siteData");
+        siteDataRepository.updateSiteData(siteData);
+        return siteData;
+    }
 
 }

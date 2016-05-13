@@ -60,11 +60,11 @@ public class SiteData implements Serializable {
 
     @Column(name = "year_start")
     private Integer yearStart;
-    
+
     @ManyToOne
     @JoinColumn(name="category_id")
     private Category category;
- 
+
     @ManyToOne
     @JoinColumn(name="location_id")
     private Location location;
@@ -79,7 +79,7 @@ public class SiteData implements Serializable {
                joinColumns = @JoinColumn(name="vivaxSiteDataList_id", referencedColumnName="id"),
                inverseJoinColumns = @JoinColumn(name="treatments_id", referencedColumnName="id"))
     private Set<Treatment> treatments = new HashSet<>();
-    
+
     @Version
     Integer version;
 
@@ -210,7 +210,7 @@ public class SiteData implements Serializable {
     public void setTreatments(Set<Treatment> treatments) {
         this.treatments = treatments;
     }
-    
+
     public Integer getVersion(){
     	return version;
     }

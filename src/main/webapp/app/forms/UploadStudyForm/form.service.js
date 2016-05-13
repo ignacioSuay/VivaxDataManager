@@ -9,4 +9,19 @@
                     return $http.get("/api/studyUpload/retrievePublicationByPubMedId/"+pubMedId);
                 }
             }
-    });
+    })
+        .factory('UpdateTreatmentList', function($resource) {
+                return $resource('api/siteData/updateSiteData', {}, {
+                    'query': { method: 'POST', isArray: true},
+                    'post': {
+                        method: 'POST',
+                        transformResponse: function (data) {
+                            data = angular.fromJson(data);
+                            return data;
+                        }
+                    },
+                    'update': { method:'PUT' }
+                });
+            }
+
+        );

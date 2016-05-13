@@ -1,6 +1,7 @@
 package org.wwarn.vivax.manager.repository;
 
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
@@ -15,6 +16,7 @@ import javax.persistence.criteria.Join;
 import javax.persistence.criteria.JoinType;
 import javax.persistence.criteria.Predicate;
 import javax.persistence.criteria.Root;
+import javax.transaction.Transactional;
 
 import org.hibernate.Hibernate;
 import org.wwarn.vivax.manager.domain.Category;
@@ -94,7 +96,27 @@ public class SiteDataRepositoryImpl implements SiteDataRepositoryCustom{
         return siteDataViewDTOList;
 	}
 
-	private TypedQuery<SiteData> buildQuery(List<Filter> listFilters){
+    @Override
+    @Transactional
+    public void updateSiteData(SiteData siteData) {
+
+        //Set<Treatment>listTreatments=siteData.getTreatments();
+
+        List<Treatment>listTreatments = new ArrayList<Treatment>();
+        Treatment trea = new Treatment();
+        trea.setId((long)178);
+        trea.setTreatmentArmCode("xcv");
+        trea.setTreatmentName("xcv");
+        listTreatments.add(trea);
+        System.out.println("@@@@@@@@@@@@@@@@@@@ " +listTreatments);
+        em.createQuery(
+            "update SiteData set treatments = "+listTreatments+" where id = 33")
+            /*.setParameter("treats", listTreatments)*/
+            /*.setParameter("id", siteData.getId())*/
+            .executeUpdate();
+     }
+
+    private TypedQuery<SiteData> buildQuery(List<Filter> listFilters){
 		CriteriaBuilder cb = em.getCriteriaBuilder();
         CriteriaQuery<SiteData> cq = cb.createQuery(SiteData.class);
         Root<SiteData> siteData = cq.from(SiteData.class);

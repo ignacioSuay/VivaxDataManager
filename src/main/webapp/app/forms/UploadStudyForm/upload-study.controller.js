@@ -5,10 +5,10 @@
         .module('vivaxDataManagerApp')
         .controller('UploadStudyController', UploadStudyController);
 
-    UploadStudyController.$inject = ['$scope', '$state', '$http', 'Form', '$uibModal', 'ShareDataService', 'SiteData'];
+    UploadStudyController.$inject = ['$scope', '$state', '$http', 'Form', 'UpdateTreatmentList', '$uibModal', 'ShareDataService', 'SiteData'];
     console.log('In publication controller');
 
-    function UploadStudyController ($scope, $state, $http, Form, $uibModal, ShareDataService, SiteData) {
+    function UploadStudyController ($scope, $state, $http, Form, UpdateTreatmentList, $uibModal, ShareDataService, SiteData) {
 
         $scope.publi;
         $scope.pubMedId;
@@ -89,7 +89,7 @@
         //TODO make this code reusable for all Classes
         $scope.updateSiteData = function (){
             var siteData = ShareDataService.getSiteData();
-            SiteData.update(siteData);
+            UpdateTreatmentList.update(siteData);
         };
 
         $scope.newTreatment = function (siteDataObject) {

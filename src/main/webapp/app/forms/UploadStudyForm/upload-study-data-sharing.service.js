@@ -1,8 +1,6 @@
 /**
  * Created by steven on 12/05/16.
  */
-
-
 'use strict';
 angular.module('vivaxDataManagerApp')
     .factory('ShareDataService', function () {
