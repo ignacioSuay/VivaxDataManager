@@ -60,26 +60,26 @@ public class SiteData implements Serializable {
 
     @Column(name = "year_start")
     private Integer yearStart;
-    
-    @ManyToOne
+
+    @ManyToOne(cascade=CascadeType.MERGE)
     @JoinColumn(name="category_id")
     private Category category;
- 
-    @ManyToOne
+
+    @ManyToOne(cascade=CascadeType.MERGE)
     @JoinColumn(name="location_id")
     private Location location;
 
-    @ManyToOne
+    @ManyToOne(cascade=CascadeType.MERGE)
     @JoinColumn(name="study_id")
     private Study study;
 
-    @ManyToMany(fetch = FetchType.EAGER)
+    @ManyToMany(cascade=CascadeType.MERGE, fetch = FetchType.EAGER)
     @Cache(usage = CacheConcurrencyStrategy.NONSTRICT_READ_WRITE)
     @JoinTable(name = "SiteData_Treatment",
                joinColumns = @JoinColumn(name="vivaxSiteDataList_id", referencedColumnName="id"),
                inverseJoinColumns = @JoinColumn(name="treatments_id", referencedColumnName="id"))
     private Set<Treatment> treatments = new HashSet<>();
-    
+
     @Version
     Integer version;
 
@@ -210,7 +210,7 @@ public class SiteData implements Serializable {
     public void setTreatments(Set<Treatment> treatments) {
         this.treatments = treatments;
     }
-    
+
     public Integer getVersion(){
     	return version;
     }

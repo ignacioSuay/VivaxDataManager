@@ -29,8 +29,10 @@ public class PublicationRepositoryImpl implements PublicationRepositoryCustom{
 
         final String QUERY= " SELECT p FROM Publication p" +
             " LEFT JOIN FETCH p.studies stu" +
-            " LEFT JOIN FETCH stu.publications pub LEFT JOIN FETCH stu.siteDatas site" +
-            " LEFT JOIN FETCH site.treatments tre where p.pubMedId = "+pubMedId;
+            " LEFT JOIN FETCH stu.publications pub" +
+            " LEFT JOIN FETCH stu.siteDatas site" +
+            " LEFT JOIN FETCH site.treatments tre" +
+            " where p.pubMedId = "+pubMedId;
 
         Query q1 = em.createQuery(QUERY);
 

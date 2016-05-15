@@ -19,6 +19,7 @@
             {text: "Upper95CI", type:"text"},
             {text: "PubMedId", type:"text"},
             {text: "Treatments", type:"text"}];
+        
         $scope.filters = [{}];
         $scope.siteDataViewDTOS = [];
 

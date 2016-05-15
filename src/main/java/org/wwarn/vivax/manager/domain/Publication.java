@@ -45,11 +45,11 @@ public class Publication implements Serializable {
 
     @Column(name = "year_publish")
     private Integer yearPublish;
-    
+
     @Version
     Integer version;
 
-    @ManyToMany(mappedBy = "publications")
+    @ManyToMany(mappedBy = "publications", cascade=CascadeType.MERGE)
     @JsonIgnore
     @Cache(usage = CacheConcurrencyStrategy.NONSTRICT_READ_WRITE)
     private Set<Study> studies = new HashSet<>();
@@ -117,7 +117,7 @@ public class Publication implements Serializable {
     public void setStudies(Set<Study> studys) {
         this.studies = studys;
     }
-    
+
     public Integer getVersion(){
     	return version;
     }

@@ -38,7 +38,7 @@ public class Treatment implements Serializable {
     @JsonIgnore
     @Cache(usage = CacheConcurrencyStrategy.NONSTRICT_READ_WRITE)
     private Set<SiteData> siteDatas = new HashSet<>();
-    
+
     @Version
     Integer version;
 
@@ -73,7 +73,7 @@ public class Treatment implements Serializable {
     public void setSiteDatas(Set<SiteData> siteDatas) {
         this.siteDatas = siteDatas;
     }
-    
+
     public Integer getVersion(){
     	return version;
     }
