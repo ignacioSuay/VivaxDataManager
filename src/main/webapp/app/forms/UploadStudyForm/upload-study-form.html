@@ -48,10 +48,9 @@
         <hr>
         <h3>Study Details</h3>
         <div class="form-group row">
-            <label class="col-md-2 form-control-label">Insert new Study:</label>
             <div class="col-md-2">
-                <a class="btn btn-success" ng-click="newStudy(study)">
-                    <span class="glyphicon glyphicon-plus"/>
+                <a class="btn btn-success" ng-click="newStudy()">
+                    Add Study
                 </a>
             </div>
         </div>
@@ -74,16 +73,14 @@
                 <div class="col-md-10">
                     <input type="text" ng-repeat="publication in study.publicationss" class="form-control ng-pristine ng-valid ng-not-empty ng-touched" name="StudyPublicationsForm" id="existingPublicationStudyPublications" ng-model="publication.title" aria-invalid="false">
                  </div>
-
             </div>
         </div>
         <hr>
         <h3>SiteData details</h3>
         <div class="form-group row">
-            <label class="col-md-2 form-control-label">Insert new SiteData:</label>
             <div class="col-md-2">
                 <a class="btn btn-success" ng-click="newSiteData()">
-                    <span class="glyphicon glyphicon-plus"/>
+                    Add SiteData
                 </a>
             </div>
         </div>
@@ -119,16 +116,9 @@
                     <input type="text" class="form-control ng-pristine ng-valid ng-not-empty ng-touched" name="SiteDataUpper95Form" id="existingPublicationSDUpper95" ng-model="siteData.upper95CI" aria-invalid="false">
                 </div>
             </div>
+            <hr>
             <h4>Treatments for siteData {{$index+1}}</h4>
-            <div class="form-group row">
-                <label class="col-md-2 form-control-label">Insert new Treatment:</label>
-                <div class="col-md-2">
-                    <a class="btn btn-success" ng-click="newTreatment(siteData)">
-                        <span class="glyphicon glyphicon-plus"/>
-                    </a>
-                </div>
-            </div>
-            <div class="well" ng-repeat="treatment in siteData.treatments">
+            <!--<div class="well" ng-repeat="treatment in siteData.treatments">
                 <h4>Treatment {{$index+1}}:</h4>
                 <div class="form-group row" ng-model="treatment">
                     <label class="col-md-2 form-control-label">Id:</label>
@@ -148,8 +138,42 @@
                         <input type="text" class="form-control ng-pristine ng-valid ng-not-empty ng-touched" name="TreatmentArmCodeForm" id="existingPublicationTreatArmCode" ng-model="treatment.treatmentArmCode" aria-invalid="false">
                     </div>
                 </div>
+            </div>-->
+            <div class="table-responsive">
+                <table class="jh-table table table-striped">
+                    <thead>
+                    <tr jh-sort="vm.predicate" ascending="vm.reverse" callback="vm.transition()">
+                        <th jh-sort-by="id"><span>Treatment Id</span> <span class="glyphicon glyphicon-sort"></span></th>
+                        <th jh-sort-by="studyRef"><span>Treatment Name</span> <span class="glyphicon glyphicon-sort"></span></th>
+                        <th jh-sort-by="country"><span>Treatment Arm Code</span> <span class="glyphicon glyphicon-sort"></span></th>
+                        <th></th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <tr ng-repeat="treatment in siteData.treatments track by treatment.id">
+                        <!--<td><a ui-sref="siteDataView.detail">{{siteData.id}}</a></td><tr>-->
+                        <td>{{treatment.id}}</td>
+                        <td>{{treatment.treatmentName}}</td>
+                        <td>{{treatment.treatmentArmCode}}</td>
+                    </tr>
+                    </tbody>
+                </table>
+            </div>
+            <div class="form-group row">
+                <div class="col-md-2">
+                    <a class="btn btn-success" ng-click="newTreatment(siteData)">
+                        Add Treatment
+                    </a>
+                </div>
             </div>
        </div>
+        <div class="form-group row">
+            <div class="col-md-2">
+                <a class="btn btn-success" ng-click="newTreatment(siteData)">
+                    Save Publication
+                </a>
+            </div>
+        </div>
     </div>
 </div>
 
