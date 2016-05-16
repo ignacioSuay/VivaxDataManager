@@ -61,19 +61,19 @@ public class SiteData implements Serializable {
     @Column(name = "year_start")
     private Integer yearStart;
 
-    @ManyToOne(cascade=CascadeType.MERGE)
+    @ManyToOne
     @JoinColumn(name="category_id")
     private Category category;
 
-    @ManyToOne(cascade=CascadeType.MERGE)
+    @ManyToOne
     @JoinColumn(name="location_id")
     private Location location;
 
-    @ManyToOne(cascade=CascadeType.MERGE)
+    @ManyToOne
     @JoinColumn(name="study_id")
     private Study study;
 
-    @ManyToMany(cascade=CascadeType.MERGE, fetch = FetchType.EAGER)
+    @ManyToMany(fetch = FetchType.EAGER)
     @Cache(usage = CacheConcurrencyStrategy.NONSTRICT_READ_WRITE)
     @JoinTable(name = "SiteData_Treatment",
                joinColumns = @JoinColumn(name="vivaxSiteDataList_id", referencedColumnName="id"),

@@ -48,7 +48,7 @@
             })
         };
 
-        $scope.newStudy = function () {
+        $scope.newStudy = function (studyObject) {
             $scope.myHidingValue=true;
             $uibModal.open({
                 templateUrl: 'app/entities/study/study-dialog.html',
@@ -62,7 +62,8 @@
                     }
                 }
             }).result.then(function (result) {
-                $scope.publi = result;
+                $scope.studies.push(result);
+                console.log($scope.studies);
             }, function () {
             })
         };
@@ -85,7 +86,7 @@
             }, function () {
             })
         };
-        
+
         //TODO make this code reusable for all Classes
         $scope.updateSiteData = function (){
             var siteData = ShareDataService.getSiteData();
@@ -110,7 +111,9 @@
                     }
                 }
             }).result.then(function (result) {
-
+                $scope.treatments.push(result);
+                siteDataObject.treatments.push(result);
+                console.log(siteDataObject.treatments);
             }, function () {
 
             })

@@ -37,14 +37,14 @@ public class Study implements Serializable {
     @Column(name = "study_type")
     private String studyType;
 
-    @ManyToMany(cascade=CascadeType.MERGE)
+    @ManyToMany
     @Cache(usage = CacheConcurrencyStrategy.NONSTRICT_READ_WRITE)
     @JoinTable(name = "Pub_Study",
-               joinColumns = @JoinColumn(name="studies_id", referencedColumnName="id"),
-               inverseJoinColumns = @JoinColumn(name="publications_id", referencedColumnName="id"))
+        joinColumns = @JoinColumn(name="studies_id", referencedColumnName="id"),
+        inverseJoinColumns = @JoinColumn(name="publications_id", referencedColumnName="id"))
     private Set<Publication> publications = new HashSet<>();
 
-    @OneToMany(mappedBy = "study", cascade=CascadeType.MERGE)
+    @OneToMany(mappedBy = "study")
     @JsonIgnore
     @Cache(usage = CacheConcurrencyStrategy.NONSTRICT_READ_WRITE)
     private Set<SiteData> siteDatas = new HashSet<>();
