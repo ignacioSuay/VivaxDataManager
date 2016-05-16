@@ -3,6 +3,7 @@ package org.wwarn.vivax.manager.web.rest;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
+import org.mockito.Mockito;
 import org.mockito.MockitoAnnotations;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -19,6 +20,8 @@ import org.springframework.test.web.servlet.setup.MockMvcBuilders;
 import org.springframework.transaction.annotation.Transactional;
 import org.wwarn.vivax.manager.VivaxDataManagerApp;
 import org.wwarn.vivax.manager.domain.Publication;
+import org.wwarn.vivax.manager.domain.SiteData;
+import org.wwarn.vivax.manager.domain.Treatment;
 import org.wwarn.vivax.manager.repository.PublicationRepository;
 import org.wwarn.vivax.manager.repository.search.PublicationSearchRepository;
 import org.wwarn.vivax.manager.service.PublicationService;
@@ -26,9 +29,15 @@ import org.wwarn.vivax.manager.web.rest.dto.FormResourceDTO;
 
 import javax.annotation.PostConstruct;
 import javax.inject.Inject;
+import javax.persistence.EntityManager;
+import javax.persistence.PersistenceContext;
+
+import java.util.HashSet;
+import java.util.Set;
 
 import static junit.framework.TestCase.assertNotNull;
 import static org.assertj.core.api.Assertions.assertThat;
+import static org.mockito.Mockito.mock;
 
 /**
  * Created by steven on 05/05/16.
@@ -83,6 +92,25 @@ public class FormResourceTest {
         FormResourceDTO formResourceDTO = new FormResourceDTO();
         formResourceDTO = publicationRepository.retrievePublicationByPubMedId(PUB_MED_ID);
         assertNotNull(formResourceDTO);
+    }
+
+    @Test
+    @Transactional
+    public void updateSiteData(SiteData siteData) {
+        EntityManager em = Mockito.mock(EntityManager.class);
+        Set<Treatment> listTreatments = new HashSet<>();
+        Treatment trea = new Treatment();
+        trea.setId((long)178);
+        trea.setTreatmentName("x");
+        trea.setTreatmentArmCode("xcv");
+        listTreatments.add(trea);
+        System.out.println("@@@@@@@@@@@@@@@@@@@ " +listTreatments);
+        /*em.createQuery(
+            "update SiteData set treatments = '"+listTreatments+"' where id = 33")
+            *//*.setParameter("treats", listTreatments)*//*
+            *//*.setParameter("id", siteData.getId())*//*
+           .executeUpdate();*/
+        em.merge(siteData);
     }
 }
 

@@ -97,22 +97,9 @@ public class SiteDataRepositoryImpl implements SiteDataRepositoryCustom{
 	}
 
     @Override
-    @Transactional
     public void updateSiteData(SiteData siteData) {
-        Set<Treatment> listTreatments = new HashSet<>();
-        Treatment trea = new Treatment();
-        trea.setId((long)178);
-        trea.setTreatmentName("x");
-        trea.setTreatmentArmCode("xcv");
-        listTreatments.add(trea);
-        System.out.println("@@@@@@@@@@@@@@@@@@@ " +listTreatments);
-        /*em.createQuery(
-            "update SiteData set treatments = '"+listTreatments+"' where id = 33")
-            *//*.setParameter("treats", listTreatments)*//*
-            *//*.setParameter("id", siteData.getId())*//*
-           .executeUpdate();*/
-        em.merge(siteData);
-     }
+        //do nothing until test completed
+    }
 
     private TypedQuery<SiteData> buildQuery(List<Filter> listFilters){
 		CriteriaBuilder cb = em.getCriteriaBuilder();
