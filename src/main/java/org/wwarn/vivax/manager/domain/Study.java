@@ -37,6 +37,9 @@ public class Study implements Serializable {
     @Column(name = "study_type")
     private String studyType;
 
+    @Version
+    Integer version;
+
     @ManyToMany
     @Cache(usage = CacheConcurrencyStrategy.NONSTRICT_READ_WRITE)
     @JoinTable(name = "Pub_Study",
@@ -48,6 +51,8 @@ public class Study implements Serializable {
     @JsonIgnore
     @Cache(usage = CacheConcurrencyStrategy.NONSTRICT_READ_WRITE)
     private Set<SiteData> siteDatas = new HashSet<>();
+
+    public Integer getVersion() {return version;}
 
     public Long getId() {
         return id;
