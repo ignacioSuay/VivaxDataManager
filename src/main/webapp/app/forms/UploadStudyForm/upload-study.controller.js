@@ -5,10 +5,10 @@
         .module('vivaxDataManagerApp')
         .controller('UploadStudyController', UploadStudyController);
 
-    UploadStudyController.$inject = ['$scope', '$state', '$http', 'Form', 'UpdateTreatmentList', '$uibModal', 'ShareDataService', 'SiteData'];
+    UploadStudyController.$inject = ['$scope', '$state', '$http', 'Form', '$uibModal', 'SiteData', 'ShareDataService'];
     console.log('In publication controller');
 
-    function UploadStudyController ($scope, $state, $http, Form, UpdateTreatmentList, $uibModal, ShareDataService, SiteData) {
+    function UploadStudyController ($scope, $state, $http, Form, $uibModal, SiteData, ShareDataService) {
 
         $scope.publi;
         $scope.pubMedId;
@@ -31,6 +31,7 @@
 
         $scope.saveAll = function(){
             console.log($scope.publi);
+            Form.save($scope.publi);
         }
 
         $scope.newPublication = function () {
@@ -88,7 +89,27 @@
                     }
                 }
             }).result.then(function (result) {
-                $scope.publi.siteDatas.push(result);
+                $scope.publi.siteDatas[0].push(result);
+            }, function () {
+            })
+        };
+
+        $scope.deleteSiteData = function(siteData) {
+            ShareDataService.setSiteData(siteData);
+            ShareDataService.setFlag(true);
+            $uibModal.open({
+                templateUrl: 'app/entities/site-data/site-data-delete-dialog.html',
+                controller: 'SiteDataDeleteController',
+                size: 'lg',
+                controllerAs: 'vm',
+                backdrop: 'static',
+                resolve: {
+                    entity: function () {
+                        return {};
+                    }
+                }
+            }).result.then(function (result) {
+                alert('Ich bin god');
             }, function () {
             })
         };

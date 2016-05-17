@@ -84,10 +84,10 @@
                 </a>
             </div>
         </div>
-        <div class="well" ng-repeat="siteData in siteDatas">
+        <div class="well" ng-repeat="siteData in publi.siteDatas[0]">
             <h4>siteData {{$index+1}}:</h4>
            <div class="form-group row" ng-model="siteData">
-                <label class="col-md-2 form-control-label">Category:</label>
+               <label class="col-md-2 form-control-label">Category:</label>
                 <div class="col-md-10">
                     <input type="text" class="form-control ng-pristine ng-valid ng-not-empty ng-touched" name="SiteDataCategoryForm" id="existingPublicationSDCategory" ng-model="siteData.category.name" aria-invalid="false">
                 </div>
@@ -116,6 +116,13 @@
                     <input type="text" class="form-control ng-pristine ng-valid ng-not-empty ng-touched" name="SiteDataUpper95Form" id="existingPublicationSDUpper95" ng-model="siteData.upper95CI" aria-invalid="false">
                 </div>
             </div>
+            <div class="form-group row">
+                <button ng-click="deleteSiteData(siteData)"
+                        class="btn btn-danger btn-sm">
+                     Remove SiteData
+                </button>
+                </a>
+            </div>
             <hr>
             <h4>Treatments for siteData {{$index+1}}</h4>
             <div class="table-responsive">
@@ -133,6 +140,16 @@
                         <td>{{treatment.id}}</td>
                         <td>{{treatment.treatmentName}}</td>
                         <td>{{treatment.treatmentArmCode}}</td>
+                        <td class="text-right">
+                            <div class="btn-group flex-btn-group-container">
+                                <button type="submit"
+                                        ui-sref="treatment.delete({id:treatment.id})"
+                                        class="btn btn-danger btn-sm">
+                                    <span class="glyphicon glyphicon-remove-circle"></span>
+                                    <span class="hidden-xs hidden-sm"></span>
+                                </button>
+                            </div>
+                        </td>
                     </tr>
                     </tbody>
                 </table>

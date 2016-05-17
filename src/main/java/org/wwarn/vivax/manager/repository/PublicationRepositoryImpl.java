@@ -2,6 +2,7 @@ package org.wwarn.vivax.manager.repository;
 
 import org.wwarn.vivax.manager.domain.Publication;
 import org.wwarn.vivax.manager.domain.SiteData;
+import org.wwarn.vivax.manager.domain.Study;
 import org.wwarn.vivax.manager.domain.Treatment;
 import org.wwarn.vivax.manager.web.rest.dto.FormResourceDTO;
 
@@ -9,6 +10,7 @@ import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import javax.persistence.Query;
 import javax.persistence.TypedQuery;
+import javax.transaction.Transactional;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Set;
@@ -56,5 +58,26 @@ public class PublicationRepositoryImpl implements PublicationRepositoryCustom{
         formResourceDTO.setTreatments(propertyFillerTreatment);
 
         return formResourceDTO;
+    }
+
+    @Override
+    @Transactional
+    public FormResourceDTO updatePublicationAndAllCollections(FormResourceDTO formResourceDTO) {
+        System.out.println(formResourceDTO.getPublication().getPubMedId());
+        formResourceDTO.getSiteDatas().stream().forEach(sd ->{
+            sd.stream().forEach(sf ->{
+               SiteData siteData = em.find(SiteData.class, sf.getId());
+               if(siteData!=null && !siteData.getTreatments().equals(sf.getTreatments())){
+                   siteData.setTreatments(sf.getTreatments());
+                 }
+            });
+        });
+        formResourceDTO.getStudies().stream().forEach(sf ->{
+            Study study = em.find(Study.class, sf.getId());
+            if(study!=null && study.equals(study)) {
+                System.out.println("PERSISTING");
+            }
+        });
+        return null;
     }
 }

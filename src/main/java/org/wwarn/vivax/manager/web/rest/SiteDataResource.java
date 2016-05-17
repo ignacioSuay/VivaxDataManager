@@ -216,5 +216,4 @@ public class SiteDataResource {
         siteDataRepository.updateSiteData(siteData);
         return siteData;
     }
-
 }
