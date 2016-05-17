@@ -29,6 +29,10 @@
             });
         };
 
+        $scope.saveAll = function(){
+            console.log($scope.publi);
+        }
+
         $scope.newPublication = function () {
             $scope.myHidingValue=false;
             $uibModal.open({
@@ -43,12 +47,14 @@
                     }
                 }
             }).result.then(function (result) {
-                console.log(treatment);
+                $scope.retrievePublicationByPubMedId();
+                $scope.myHidingValue=true;
+                console.log('The pubMedId '+result.pubMedId);
             }, function () {
             })
         };
 
-        $scope.newStudy = function (studyObject) {
+        $scope.newStudy = function(index) {
             $scope.myHidingValue=true;
             $uibModal.open({
                 templateUrl: 'app/entities/study/study-dialog.html',
@@ -62,8 +68,8 @@
                     }
                 }
             }).result.then(function (result) {
-                $scope.studies.push(result);
-                console.log($scope.studies);
+                result.publicationss.push($scope.publi.publication);
+                $scope.publi.studies.push(result);
             }, function () {
             })
         };
@@ -82,23 +88,13 @@
                     }
                 }
             }).result.then(function (result) {
-                $scope.publi = result;
+                $scope.publi.siteDatas.push(result);
             }, function () {
             })
         };
 
-        //TODO make this code reusable for all Classes
-        $scope.updateSiteData = function (){
-            var siteData = ShareDataService.getSiteData();
-            UpdateTreatmentList.update(siteData);
-        };
-
-        $scope.newTreatment = function (siteDataObject) {
+        $scope.newTreatment = function (index) {
             $scope.myHidingValue=true;
-            $scope.hidingSaveChangesButton=true;
-            ShareDataService.setSiteData(siteDataObject);
-            ShareDataService.setFlag(0);
-
             $uibModal.open({
                 templateUrl: 'app/entities/treatment/treatment-dialog.html',
                 controller: 'TreatmentDialogController',
@@ -111,11 +107,8 @@
                     }
                 }
             }).result.then(function (result) {
-                $scope.treatments.push(result);
-                siteDataObject.treatments.push(result);
-                console.log(siteDataObject.treatments);
+                $scope.publi.siteDatas[0][index].treatments.push(result);
             }, function () {
-
             })
         };
     }
@@ -146,4 +139,11 @@
  x[i] = new Array(columns);
  }
  return x;
- }*/
+ }
+
+ TODO make this code reusable for all Classes
+$scope.updateSiteData = function (){
+    var siteData = ShareDataService.getSiteData();
+    UpdateTreatmentList.update(siteData);
+};
+*/

@@ -70,9 +70,7 @@ public class Study implements Serializable {
         this.numSites = numSites;
     }
 
-    public String getRef() {
-        return ref;
-    }
+    public String getRef() {return ref;}
 
     public void setRef(String ref) {
         this.ref = ref;
@@ -118,9 +116,7 @@ public class Study implements Serializable {
     }
 
     @Override
-    public int hashCode() {
-        return Objects.hashCode(id);
-    }
+    public int hashCode() {return Objects.hashCode(id);}
 
     @Override
     public String toString() {
