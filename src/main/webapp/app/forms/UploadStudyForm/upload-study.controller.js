@@ -5,10 +5,10 @@
         .module('vivaxDataManagerApp')
         .controller('UploadStudyController', UploadStudyController);
 
-    UploadStudyController.$inject = ['$scope', '$state', '$http', 'Form', 'UpdateTreatmentList', '$uibModal', 'ShareDataService', 'SiteData'];
+    UploadStudyController.$inject = ['$scope', '$state', '$http', 'Form', '$uibModal', 'SiteData', 'ShareDataService'];
     console.log('In publication controller');
 
-    function UploadStudyController ($scope, $state, $http, Form, UpdateTreatmentList, $uibModal, ShareDataService, SiteData) {
+    function UploadStudyController ($scope, $state, $http, Form, $uibModal, SiteData, ShareDataService) {
 
         $scope.publi;
         $scope.pubMedId;
@@ -29,6 +29,11 @@
             });
         };
 
+        $scope.saveAll = function(){
+            console.log($scope.publi);
+            Form.save($scope.publi);
+        }
+
         $scope.newPublication = function () {
             $scope.myHidingValue=false;
             $uibModal.open({
@@ -43,12 +48,14 @@
                     }
                 }
             }).result.then(function (result) {
-                console.log(treatment);
+                $scope.retrievePublicationByPubMedId();
+                $scope.myHidingValue=true;
+                console.log('The pubMedId '+result.pubMedId);
             }, function () {
             })
         };
 
-        $scope.newStudy = function () {
+        $scope.newStudy = function(index) {
             $scope.myHidingValue=true;
             $uibModal.open({
                 templateUrl: 'app/entities/study/study-dialog.html',
@@ -62,7 +69,8 @@
                     }
                 }
             }).result.then(function (result) {
-                $scope.publi = result;
+                result.publicationss.push($scope.publi.publication);
+                $scope.publi.studies.push(result);
             }, function () {
             })
         };
@@ -81,23 +89,33 @@
                     }
                 }
             }).result.then(function (result) {
-                $scope.publi = result;
+                $scope.publi.siteDatas[0].push(result);
             }, function () {
             })
         };
-        
-        //TODO make this code reusable for all Classes
-        $scope.updateSiteData = function (){
-            var siteData = ShareDataService.getSiteData();
-            UpdateTreatmentList.update(siteData);
+
+        $scope.deleteSiteData = function(siteData) {
+            ShareDataService.setSiteData(siteData);
+            ShareDataService.setFlag(true);
+            $uibModal.open({
+                templateUrl: 'app/entities/site-data/site-data-delete-dialog.html',
+                controller: 'SiteDataDeleteController',
+                size: 'lg',
+                controllerAs: 'vm',
+                backdrop: 'static',
+                resolve: {
+                    entity: function () {
+                        return {};
+                    }
+                }
+            }).result.then(function (result) {
+                alert('Ich bin god');
+            }, function () {
+            })
         };
 
-        $scope.newTreatment = function (siteDataObject) {
+        $scope.newTreatment = function (index) {
             $scope.myHidingValue=true;
-            $scope.hidingSaveChangesButton=true;
-            ShareDataService.setSiteData(siteDataObject);
-            ShareDataService.setFlag(0);
-
             $uibModal.open({
                 templateUrl: 'app/entities/treatment/treatment-dialog.html',
                 controller: 'TreatmentDialogController',
@@ -110,9 +128,8 @@
                     }
                 }
             }).result.then(function (result) {
-
+                $scope.publi.siteDatas[0][index].treatments.push(result);
             }, function () {
-
             })
         };
     }
@@ -143,4 +160,11 @@
  x[i] = new Array(columns);
  }
  return x;
- }*/
+ }
+
+ TODO make this code reusable for all Classes
+$scope.updateSiteData = function (){
+    var siteData = ShareDataService.getSiteData();
+    UpdateTreatmentList.update(siteData);
+};
+*/

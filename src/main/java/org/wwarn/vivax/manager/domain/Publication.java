@@ -49,7 +49,7 @@ public class Publication implements Serializable {
     @Version
     Integer version;
 
-    @ManyToMany(mappedBy = "publications", cascade=CascadeType.MERGE)
+    @ManyToMany(mappedBy = "publications")
     @JsonIgnore
     @Cache(usage = CacheConcurrencyStrategy.NONSTRICT_READ_WRITE)
     private Set<Study> studies = new HashSet<>();

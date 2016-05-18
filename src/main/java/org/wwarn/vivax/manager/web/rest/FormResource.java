@@ -33,4 +33,14 @@ public class FormResource {
         FormResourceDTO formResourceDTO = publicationRepository.retrievePublicationByPubMedId(pubMedId);
         return formResourceDTO;
     }
+
+    @RequestMapping(value = "/studyUpload/updatePublicationDTOAndAllEagerRelationships",
+        method = RequestMethod.POST,
+        produces = MediaType.APPLICATION_JSON_VALUE)
+    @Timed
+    public FormResourceDTO updatePublicationDTOAndAllEagerRelationships(@RequestBody FormResourceDTO formResourceDTO) {
+        log.debug("REST request to get Publication : {}", formResourceDTO);
+        FormResourceDTO formResDTO = publicationRepository.updatePublicationAndAllCollections(formResourceDTO);
+        return formResDTO;
+    }
 }

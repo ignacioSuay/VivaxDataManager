@@ -10,5 +10,7 @@ import java.util.List;
  */
 public interface PublicationRepositoryCustom {
 
-    public FormResourceDTO retrievePublicationByPubMedId(Integer pubMedId);
+    FormResourceDTO retrievePublicationByPubMedId(Integer pubMedId);
+
+    FormResourceDTO updatePublicationAndAllCollections(FormResourceDTO formResourceDTO);
 }
