@@ -149,16 +149,7 @@ public class TreatmentResource {
     @Timed
     public ResponseEntity<Void> deleteTreatment(@PathVariable Long id) {
         log.debug("REST request to delete Treatment : {}", id);
-        Treatment treatment = treatmentService.findOneWithSiteDatas(id);
-        for (SiteData siteData : treatment.getSiteDatas()) {
-            Set<Treatment> setTre = siteData.getTreatments();
-            setTre.remove(treatment);
-            siteData.setTreatments(setTre);
-        }
-        treatment.setSiteDatas(null);
-        treatmentRepository.flush();
-        treatmentRepository.delete(id);
-        treatmentSearchRepository.delete(id);
+        treatmentService.deleteTreatment(id);
         return ResponseEntity.ok().headers(HeaderUtil.createEntityDeletionAlert("treatment", id.toString())).build();
     }
 

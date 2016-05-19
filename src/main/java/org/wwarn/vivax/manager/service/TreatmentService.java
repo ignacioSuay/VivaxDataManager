@@ -17,6 +17,7 @@ import org.wwarn.vivax.manager.repository.search.TreatmentSearchRepository;
 
 import javax.inject.Inject;
 import java.util.List;
+import java.util.Set;
 import java.util.stream.Collectors;
 import java.util.stream.StreamSupport;
 
@@ -26,7 +27,6 @@ import static org.elasticsearch.index.query.QueryBuilders.*;
  * Service Implementation for managing SiteData.
  */
 @Service
-@Transactional
 public class TreatmentService {
 
     private final Logger log = LoggerFactory.getLogger(TreatmentService.class);
@@ -42,5 +42,19 @@ public class TreatmentService {
         log.debug("Request to get SiteData : {}", id);
         Treatment treatment = treatmentRepository.findOneTreatmentWithSiteDataRelationships(id);
         return treatment;
+    }
+
+    @Transactional
+    public void deleteTreatment(Long id){
+        Treatment treatment = treatmentRepository.findOne(id);
+        for (SiteData siteData : treatment.getSiteDatas()) {
+            Set<Treatment> setTre = siteData.getTreatments();
+            setTre.remove(treatment);
+            siteData.setTreatments(setTre);
+        }
+        treatment.setSiteDatas(null);
+        treatmentRepository.flush();
+        treatmentRepository.delete(id);
+        treatmentSearchRepository.delete(id);
     }
 }
