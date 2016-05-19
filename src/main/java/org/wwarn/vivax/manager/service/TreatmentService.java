@@ -24,7 +24,7 @@ import java.util.stream.StreamSupport;
 import static org.elasticsearch.index.query.QueryBuilders.*;
 
 /**
- * Service Implementation for managing SiteData.
+ * Service Implementation for managing Treatments.
  */
 @Service
 public class TreatmentService {
@@ -36,13 +36,6 @@ public class TreatmentService {
 
     @Inject
     private TreatmentSearchRepository treatmentSearchRepository;
-
-    @Transactional(readOnly = true)
-    public Treatment findOneWithSiteDatas(Long id) {
-        log.debug("Request to get SiteData : {}", id);
-        Treatment treatment = treatmentRepository.findOneTreatmentWithSiteDataRelationships(id);
-        return treatment;
-    }
 
     @Transactional
     public void deleteTreatment(Long id){

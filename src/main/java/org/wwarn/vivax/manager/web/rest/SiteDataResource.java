@@ -143,12 +143,7 @@ public class SiteDataResource {
     @Timed
     public ResponseEntity<Void> deleteSiteData(@PathVariable Long id) {
         log.debug("REST request to delete SiteData : {}", id);
-        SiteData siteData = siteDataService.findOne(id);
-        for (Treatment treatment : siteData.getTreatments()) {
-            treatment.getSiteDatas().remove(siteData);
-        }
-        siteData.setTreatments(null);
-        siteDataService.delete(id);
+        siteDataService.deleteSiteData(id);
         return ResponseEntity.ok().headers(HeaderUtil.createEntityDeletionAlert("siteData", id.toString())).build();
     }
 

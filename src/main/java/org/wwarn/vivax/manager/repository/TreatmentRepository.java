@@ -14,7 +14,5 @@ import java.util.List;
  */
 public interface TreatmentRepository extends JpaRepository<Treatment,Long> {
 
-    @Query("select tre from Treatment tre left join fetch tre.siteDatas where tre.id = :id")
-    Treatment findOneTreatmentWithSiteDataRelationships(@Param("id") Long id);
 
 }

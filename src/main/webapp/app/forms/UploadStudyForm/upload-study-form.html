@@ -74,6 +74,12 @@
                     <input type="text" ng-repeat="publication in study.publicationss" class="form-control ng-pristine ng-valid ng-not-empty ng-touched" name="StudyPublicationsForm" id="existingPublicationStudyPublications" ng-model="publication.title" aria-invalid="false">
                </div>
             </div>
+            <div class="form-group row">
+                <button ng-click="deleteStudy(study, $index)"
+                        class="btn btn-danger btn-sm">
+                    Remove Study
+                </button>
+            </div>
         </div>
         <hr>
         <h3>SiteData details</h3>

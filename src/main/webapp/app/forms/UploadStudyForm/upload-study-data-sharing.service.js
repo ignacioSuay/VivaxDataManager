@@ -7,6 +7,7 @@ angular.module('vivaxDataManagerApp')
 
         var object;
         var flag;
+        var publi;
 
         //TODO change names of variable and methods to make the service universal
         var getObject= function(){
@@ -15,6 +16,14 @@ angular.module('vivaxDataManagerApp')
 
         var setObject = function(paramObject){
             object=paramObject;
+        }
+
+        var getPubli= function(){
+            return publi;
+        }
+
+        var setPubli = function(paramPubli){
+            publi=paramPubli;
         }
 
         var getFlag = function(){
@@ -28,6 +37,8 @@ angular.module('vivaxDataManagerApp')
         return {
             getObject: getObject,
             setObject: setObject,
+            getPubli: getPubli,
+            setPubli: setPubli,
             getFlag : getFlag,
             setFlag : setFlag
         };
