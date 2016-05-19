@@ -6,7 +6,6 @@
         .controller('UploadStudyController', UploadStudyController);
 
     UploadStudyController.$inject = ['$scope', '$state', '$http', 'Form', '$uibModal', 'SiteData', 'ShareDataService'];
-    console.log('In publication controller');
 
     function UploadStudyController ($scope, $state, $http, Form, $uibModal, SiteData, ShareDataService) {
 
@@ -75,6 +74,28 @@
             })
         };
 
+        $scope.deleteStudy = function(study) {
+            ShareDataService.setFlag(true);
+            ShareDataService.setPubli($scope.publi);
+            ShareDataService.setObject(study);
+            $uibModal.open({
+                templateUrl: 'app/entities/study/study-delete-dialog.html',
+                controller: 'StudyDeleteController',
+                size: 'lg',
+                controllerAs: 'vm',
+                backdrop: 'static',
+                resolve: {
+                    entity: function () {
+                        return {};
+                    }
+                }
+            }).result.then(function (result) {
+                $scope.publi=ShareDataService.getPubli();
+                ShareDataService.setFlag(false);
+            }, function () {
+            })
+        };
+
         $scope.newSiteData = function () {
             $scope.myHidingValue=true;
             $uibModal.open({
@@ -95,8 +116,9 @@
         };
 
         $scope.deleteSiteData = function(siteData) {
-            ShareDataService.setSiteData(siteData);
             ShareDataService.setFlag(true);
+            ShareDataService.setPubli($scope.publi);
+            ShareDataService.setObject(siteData);
             $uibModal.open({
                 templateUrl: 'app/entities/site-data/site-data-delete-dialog.html',
                 controller: 'SiteDataDeleteController',
@@ -109,7 +131,8 @@
                     }
                 }
             }).result.then(function (result) {
-                alert('Ich bin god');
+                $scope.publi=ShareDataService.getPubli();
+                ShareDataService.setFlag(false);
             }, function () {
             })
         };
@@ -132,8 +155,29 @@
             }, function () {
             })
         };
-    }
 
+        $scope.deleteTreatment = function(treatment) {
+            ShareDataService.setFlag(true);
+            ShareDataService.setObject(treatment);
+            ShareDataService.setPubli($scope.publi);
+            $uibModal.open({
+                templateUrl: 'app/entities/treatment/treatment-delete-dialog.html',
+                controller: 'TreatmentDeleteController',
+                size: 'lg',
+                controllerAs: 'vm',
+                backdrop: 'static',
+                resolve: {
+                    entity: function () {
+                        return {};
+                    }
+                }
+            }).result.then(function (result) {
+                $scope.publi=ShareDataService.getPubli();
+                ShareDataService.setFlag(false);
+            }, function () {
+            })
+        };
+    }
 })();
 
 //MAYBE INNECESSARY CODE, YET TO DETERMINE

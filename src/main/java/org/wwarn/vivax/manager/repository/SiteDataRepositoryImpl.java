@@ -26,6 +26,7 @@ import org.wwarn.vivax.manager.domain.SiteData;
 import org.wwarn.vivax.manager.domain.Study;
 import org.wwarn.vivax.manager.domain.Treatment;
 import org.wwarn.vivax.manager.domain.util.Filter;
+import org.wwarn.vivax.manager.web.rest.TreatmentResource;
 import org.wwarn.vivax.manager.web.rest.dto.SiteDataViewDTO;
 
 public class SiteDataRepositoryImpl implements SiteDataRepositoryCustom{
@@ -38,7 +39,6 @@ public class SiteDataRepositoryImpl implements SiteDataRepositoryCustom{
 	@Override
 	public List <SiteDataViewDTO> searchSiteDataByFilter(List<Filter> listFilters) {
 		TypedQuery<SiteData> query = buildQuery(listFilters);
-
         Hibernate.initialize(s.getPublicationss());
 		int count=0;
 		for (Filter filter: listFilters){

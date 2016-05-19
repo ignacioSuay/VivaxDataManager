@@ -252,4 +252,9 @@ public class SiteData implements Serializable {
             ", yearStart='" + yearStart + "'" +
             '}';
     }
+
+    public void removeFromTreatments(Treatment treatment) {
+        this.getTreatments().remove(treatment);
+        treatment.getSiteDatas().remove(this);
+    }
 }

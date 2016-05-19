@@ -11,7 +11,7 @@ import org.wwarn.vivax.manager.domain.Location;
 import org.wwarn.vivax.manager.domain.Publication;
 
 public class SiteDataViewDTO implements Serializable{
-	
+
 	private long id;
 	private String typeStudy;
 	private String upper95CI;
@@ -192,16 +192,13 @@ public class SiteDataViewDTO implements Serializable{
         return true;
     }
 
-   
-
     @Override
     public String toString() {
         return "SiteDataViewDTO{" + "id=" + id + ", typeStudy=" + typeStudy + ", upper95CI=" + upper95CI + ", yearStart=" + yearStart + ", yearEnd=" + yearEnd + ", category=" + category + ", ref=" + ref + ", location=" + location + ", listTreatments=" + listTreatments + ", listPublications=" + listPublications + ", listTreatmentArmCodes=" + listTreatmentArmCodes + ", listPubMedIds=" + listPubMedIds + '}';
     }
-    
-    
 
-	
+
+
+
 }
 
-	
