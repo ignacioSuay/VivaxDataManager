@@ -3,6 +3,7 @@ package org.wwarn.vivax.manager.web.rest;
 import com.codahale.metrics.annotation.Timed;
 import org.springframework.data.jpa.repository.Modifying;
 import org.wwarn.vivax.manager.domain.SiteData;
+import org.wwarn.vivax.manager.domain.Treatment;
 import org.wwarn.vivax.manager.domain.util.Filter;
 import org.wwarn.vivax.manager.repository.SiteDataRepository;
 import org.wwarn.vivax.manager.service.SiteDataService;
@@ -142,6 +143,11 @@ public class SiteDataResource {
     @Timed
     public ResponseEntity<Void> deleteSiteData(@PathVariable Long id) {
         log.debug("REST request to delete SiteData : {}", id);
+        SiteData siteData = siteDataService.findOne(id);
+        for (Treatment treatment : siteData.getTreatments()) {
+            treatment.getSiteDatas().remove(siteData);
+        }
+        siteData.setTreatments(null);
         siteDataService.delete(id);
         return ResponseEntity.ok().headers(HeaderUtil.createEntityDeletionAlert("siteData", id.toString())).build();
     }

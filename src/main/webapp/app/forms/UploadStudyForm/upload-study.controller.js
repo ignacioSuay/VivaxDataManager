@@ -6,7 +6,6 @@
         .controller('UploadStudyController', UploadStudyController);
 
     UploadStudyController.$inject = ['$scope', '$state', '$http', 'Form', '$uibModal', 'SiteData', 'ShareDataService'];
-    console.log('In publication controller');
 
     function UploadStudyController ($scope, $state, $http, Form, $uibModal, SiteData, ShareDataService) {
 
@@ -94,8 +93,8 @@
             })
         };
 
-        $scope.deleteSiteData = function(siteData) {
-            ShareDataService.setSiteData(siteData);
+        $scope.deleteSiteData = function(siteData, index) {
+            ShareDataService.setObject(siteData);
             ShareDataService.setFlag(true);
             $uibModal.open({
                 templateUrl: 'app/entities/site-data/site-data-delete-dialog.html',
@@ -109,7 +108,8 @@
                     }
                 }
             }).result.then(function (result) {
-                alert('Ich bin god');
+                ShareDataService.setFlag(false);
+                $scope.publi.siteDatas[0].splice(index);
             }, function () {
             })
         };
@@ -132,8 +132,36 @@
             }, function () {
             })
         };
-    }
 
+        $scope.deleteTreatment = function(treatment, siteData, index) {
+            ShareDataService.setObject(treatment);
+            ShareDataService.setFlag(true);
+            $uibModal.open({
+                templateUrl: 'app/entities/treatment/treatment-delete-dialog.html',
+                controller: 'TreatmentDeleteController',
+                size: 'lg',
+                controllerAs: 'vm',
+                backdrop: 'static',
+                resolve: {
+                    entity: function () {
+                        return {};
+                    }
+                }
+            }).result.then(function (result) {
+                ShareDataService.setFlag(false);
+                for (var i=0; i<=$scope.publi.siteDatas[0].length; i++){
+                    console.log($scope.publi.siteDatas[0][i].treatments);
+                    for (var j=0; j<=$scope.publi.siteDatas[0][i].treatments.length; j++){
+                        if($scope.publi.siteDatas[0][i].treatments[j].id === treatment.id) {
+                            $scope.publi.siteDatas[0][i].treatments.splice(j);
+                        }
+                    }
+                }
+                console.log(siteData.treatments);
+            }, function () {
+            })
+        };
+    }
 })();
 
 //MAYBE INNECESSARY CODE, YET TO DETERMINE

@@ -5,16 +5,16 @@
 angular.module('vivaxDataManagerApp')
     .factory('ShareDataService', function () {
 
-        var siteData;
+        var object;
         var flag;
 
         //TODO change names of variable and methods to make the service universal
-        var getSiteData= function(){
-            return siteData;
+        var getObject= function(){
+            return object;
         }
 
-        var setSiteData = function(paramSiteData){
-            siteData=paramSiteData;
+        var setObject = function(paramObject){
+            object=paramObject;
         }
 
         var getFlag = function(){
@@ -26,8 +26,8 @@ angular.module('vivaxDataManagerApp')
         }
 
         return {
-            getSiteData: getSiteData,
-            setSiteData: setSiteData,
+            getObject: getObject,
+            setObject: setObject,
             getFlag : getFlag,
             setFlag : setFlag
         };

@@ -6,7 +6,7 @@
         .controller('SiteDataViewController', SiteDataViewController);
 
     SiteDataViewController.$inject = ['$scope', '$state', 'SiteDataViewDTO', 'SiteDataSearch'];
-    console.log('in controller function')
+    
     function SiteDataViewController ($scope, $state, SiteDataViewDTO, SiteDataSearch) {
 
         $scope.names = [
@@ -19,7 +19,7 @@
             {text: "Upper95CI", type:"text"},
             {text: "PubMedId", type:"text"},
             {text: "Treatments", type:"text"}];
-        
+
         $scope.filters = [{}];
         $scope.siteDataViewDTOS = [];
 

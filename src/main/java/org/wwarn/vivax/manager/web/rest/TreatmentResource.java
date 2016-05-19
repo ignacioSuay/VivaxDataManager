@@ -1,9 +1,12 @@
 package org.wwarn.vivax.manager.web.rest;
 
 import com.codahale.metrics.annotation.Timed;
+import org.hibernate.Hibernate;
+import org.wwarn.vivax.manager.domain.SiteData;
 import org.wwarn.vivax.manager.domain.Treatment;
 import org.wwarn.vivax.manager.repository.TreatmentRepository;
 import org.wwarn.vivax.manager.repository.search.TreatmentSearchRepository;
+import org.wwarn.vivax.manager.service.TreatmentService;
 import org.wwarn.vivax.manager.web.rest.util.HeaderUtil;
 import org.wwarn.vivax.manager.web.rest.util.PaginationUtil;
 import org.slf4j.Logger;
@@ -17,10 +20,12 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import javax.inject.Inject;
+import javax.persistence.PersistenceContext;
 import java.net.URI;
 import java.net.URISyntaxException;
 import java.util.List;
 import java.util.Optional;
+import java.util.Set;
 import java.util.stream.Collectors;
 import java.util.stream.StreamSupport;
 
@@ -34,13 +39,17 @@ import static org.elasticsearch.index.query.QueryBuilders.*;
 public class TreatmentResource {
 
     private final Logger log = LoggerFactory.getLogger(TreatmentResource.class);
-        
+
     @Inject
     private TreatmentRepository treatmentRepository;
-    
+
     @Inject
     private TreatmentSearchRepository treatmentSearchRepository;
-    
+
+    @Inject
+    private TreatmentService treatmentService;
+
+
     /**
      * POST  /treatments : Create a new treatment.
      *
@@ -103,7 +112,7 @@ public class TreatmentResource {
     public ResponseEntity<List<Treatment>> getAllTreatments(Pageable pageable)
         throws URISyntaxException {
         log.debug("REST request to get a page of Treatments");
-        Page<Treatment> page = treatmentRepository.findAll(pageable); 
+        Page<Treatment> page = treatmentRepository.findAll(pageable);
         HttpHeaders headers = PaginationUtil.generatePaginationHttpHeaders(page, "/api/treatments");
         return new ResponseEntity<>(page.getContent(), headers, HttpStatus.OK);
     }
@@ -140,6 +149,14 @@ public class TreatmentResource {
     @Timed
     public ResponseEntity<Void> deleteTreatment(@PathVariable Long id) {
         log.debug("REST request to delete Treatment : {}", id);
+        Treatment treatment = treatmentService.findOneWithSiteDatas(id);
+        for (SiteData siteData : treatment.getSiteDatas()) {
+            Set<Treatment> setTre = siteData.getTreatments();
+            setTre.remove(treatment);
+            siteData.setTreatments(setTre);
+        }
+        treatment.setSiteDatas(null);
+        treatmentRepository.flush();
         treatmentRepository.delete(id);
         treatmentSearchRepository.delete(id);
         return ResponseEntity.ok().headers(HeaderUtil.createEntityDeletionAlert("treatment", id.toString())).build();

@@ -117,11 +117,10 @@
                 </div>
             </div>
             <div class="form-group row">
-                <button ng-click="deleteSiteData(siteData)"
+                <button ng-click="deleteSiteData(siteData, $index)"
                         class="btn btn-danger btn-sm">
                      Remove SiteData
                 </button>
-                </a>
             </div>
             <hr>
             <h4>Treatments for siteData {{$index+1}}</h4>
@@ -141,14 +140,11 @@
                         <td>{{treatment.treatmentName}}</td>
                         <td>{{treatment.treatmentArmCode}}</td>
                         <td class="text-right">
-                            <div class="btn-group flex-btn-group-container">
-                                <button type="submit"
-                                        ui-sref="treatment.delete({id:treatment.id})"
-                                        class="btn btn-danger btn-sm">
-                                    <span class="glyphicon glyphicon-remove-circle"></span>
-                                    <span class="hidden-xs hidden-sm"></span>
-                                </button>
-                            </div>
+                            <button ng-click="deleteTreatment(treatment, siteData, $index)"
+                                class="btn btn-danger btn-sm">
+                                <span class="glyphicon glyphicon-remove-circle"></span>
+                                <span class="hidden-xs hidden-sm"></span>
+                            </button>
                         </td>
                     </tr>
                     </tbody>
