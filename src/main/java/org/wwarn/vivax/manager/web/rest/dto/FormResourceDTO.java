@@ -17,15 +17,17 @@ public class FormResourceDTO {
     private Set<Study> studies;
     private List<Set<Treatment>> treatments;
     private List<Set<SiteData>> siteDatas;
+    private List<StudyDTO> studyDTOList;
 
     public FormResourceDTO() {
     }
 
-    public FormResourceDTO(Publication publication, Set<Study> studies, List<Set<Treatment>> treatments, List<Set<SiteData>> siteDatas) {
+    public FormResourceDTO(Publication publication, Set<Study> studies, List<Set<Treatment>> treatments, List<Set<SiteData>> siteDatas, List<StudyDTO> studyDTOList) {
         this.publication = publication;
         this.studies = studies;
         this.treatments = treatments;
         this.siteDatas = siteDatas;
+        this.studyDTOList = studyDTOList;
     }
 
     public Publication getPublication() {
@@ -60,6 +62,14 @@ public class FormResourceDTO {
         this.siteDatas = siteDatas;
     }
 
+    public List<StudyDTO> getStudyDTOList() {
+        return studyDTOList;
+    }
+
+    public void setStudyDTOList(List<StudyDTO> studyDTOList) {
+        this.studyDTOList = studyDTOList;
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
@@ -70,7 +80,8 @@ public class FormResourceDTO {
         if (publication != null ? !publication.equals(that.publication) : that.publication != null) return false;
         if (studies != null ? !studies.equals(that.studies) : that.studies != null) return false;
         if (treatments != null ? !treatments.equals(that.treatments) : that.treatments != null) return false;
-        return siteDatas != null ? siteDatas.equals(that.siteDatas) : that.siteDatas == null;
+        if (siteDatas != null ? !siteDatas.equals(that.siteDatas) : that.siteDatas != null) return false;
+        return studyDTOList != null ? studyDTOList.equals(that.studyDTOList) : that.studyDTOList == null;
 
     }
 
@@ -80,6 +91,7 @@ public class FormResourceDTO {
         result = 31 * result + (studies != null ? studies.hashCode() : 0);
         result = 31 * result + (treatments != null ? treatments.hashCode() : 0);
         result = 31 * result + (siteDatas != null ? siteDatas.hashCode() : 0);
+        result = 31 * result + (studyDTOList != null ? studyDTOList.hashCode() : 0);
         return result;
     }
 
@@ -90,6 +102,7 @@ public class FormResourceDTO {
             ", studies=" + studies +
             ", treatments=" + treatments +
             ", siteDatas=" + siteDatas +
+            ", studyDTOList=" + studyDTOList +
             '}';
     }
 }

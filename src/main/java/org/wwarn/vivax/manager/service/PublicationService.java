@@ -1,7 +1,11 @@
 package org.wwarn.vivax.manager.service;
 
 import org.wwarn.vivax.manager.domain.Publication;
+import org.wwarn.vivax.manager.domain.SiteData;
+import org.wwarn.vivax.manager.domain.Treatment;
 import org.wwarn.vivax.manager.repository.PublicationRepository;
+import org.wwarn.vivax.manager.repository.SiteDataRepository;
+import org.wwarn.vivax.manager.repository.StudyRepository;
 import org.wwarn.vivax.manager.repository.search.PublicationSearchRepository;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -9,9 +13,13 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.stereotype.Service;
+import org.wwarn.vivax.manager.repository.search.SiteDataSearchRepository;
+import org.wwarn.vivax.manager.repository.search.StudySearchRepository;
+import org.wwarn.vivax.manager.web.rest.dto.FormResourceDTO;
 
 import javax.inject.Inject;
 import java.util.List;
+import java.util.Set;
 import java.util.stream.Collectors;
 import java.util.stream.StreamSupport;
 
@@ -25,6 +33,18 @@ import static org.elasticsearch.index.query.QueryBuilders.*;
 public class PublicationService {
 
     private final Logger log = LoggerFactory.getLogger(PublicationService.class);
+
+    @Inject
+    private StudyRepository studyRepository;
+
+    @Inject
+    private StudySearchRepository studySearchRepository;
+
+    @Inject
+    private SiteDataRepository siteDataRepository;
+
+    @Inject
+    private SiteDataSearchRepository siteDataSearchRepository;
 
     @Inject
     private PublicationRepository publicationRepository;
@@ -94,10 +114,38 @@ public class PublicationService {
         return publicationSearchRepository.search(queryStringQuery(query), pageable);
     }
 
-    /*@Transactional(readOnly = true)
-    public Publication retrievePublicationByPubMedId(Integer pubMedId) {
-        log.debug("Request to get Publication : {}", pubMedId);
-        Publication publication = publicationRepository.retrievePublicationByPubMedId(pubMedId);
-        return publication;
+    @Transactional
+    public FormResourceDTO updatePublicationAndAllCollections(FormResourceDTO formResourceDTO) {
+        formResourceDTO.getSiteDatas().stream().forEach(sd ->{
+            sd.stream().forEach(sf ->{
+               if(sf!=null){
+                   siteDataRepository.flush();
+                   siteDataRepository.save(sf);
+                   siteDataSearchRepository.save(sf);
+                 }
+            });
+        });
+        /*formResourceDTO.getStudies().stream().forEach(sf ->{
+            if(sf!=null) {
+                studyRepository.flush();
+                studyRepository.save(sf);
+                studySearchRepository.save(sf);
+            }
+        });*/
+
+        return formResourceDTO;
+    }
+
+    /*public void deleteTreatment(Long id){
+        Treatment treatment = treatmentRepository.findOne(id);
+        for (SiteData siteData : treatment.getSiteDatas()) {
+            Set<Treatment> setTre = siteData.getTreatments();
+            setTre.remove(treatment);
+            siteData.setTreatments(setTre);
+        }
+        treatment.setSiteDatas(null);
+        treatmentRepository.flush();
+        treatmentRepository.delete(id);
+        treatmentSearchRepository.delete(id);
     }*/
 }

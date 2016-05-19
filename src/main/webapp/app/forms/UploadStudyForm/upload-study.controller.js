@@ -17,9 +17,11 @@
 
         $scope.retrievePublicationByPubMedId = function () {
             Form.load($scope.pubMedId).then(function (result) {
+                console.log(result);
                 $scope.publi = result.data;
                 $scope.myHidingValue=true;
                 $scope.studies=$scope.publi.studies;
+                console.log($scope.publi);
                 for (var i=0; i<=$scope.publi.siteDatas[0].length; i++){
                     if($scope.publi.siteDatas[0][i]!=undefined) {
                         $scope.siteDatas.push($scope.publi.siteDatas[0][i]);
@@ -29,8 +31,8 @@
         };
 
         $scope.saveAll = function(){
-            console.log($scope.publi);
-            Form.save($scope.publi);
+            //console.log($scope.publi);
+            console.log(Form.save($scope.publi));
         }
 
         $scope.newPublication = function () {
@@ -180,35 +182,3 @@
     }
 })();
 
-//MAYBE INNECESSARY CODE, YET TO DETERMINE
-
-/*for (var i=0; i<=$scope.publi.studies.length; i++){
- if($scope.studies[i]!=undefined) {
- $scope.publications.push($scope.studies[i].publicationss);
- }
- }
- for (var i=0; i<=$scope.publications[0].length; i++){
- if($scope.publications[0][i]!=undefined) {
- $scope.publicationsHTML.push($scope.publications[0][i]);
- }
- }
- for (var i=0; i<=$scope.publi.treatments[0].length; i++){
- if($scope.publi.treatments[0][i]!=undefined) {
- $scope.treatments.push($scope.publi.treatments[0][i]);
- }
- }
-
- function create2DArray(rows,columns) {
- var x = new Array(rows);
- for (var i = 0; i < rows; i++) {
- x[i] = new Array(columns);
- }
- return x;
- }
-
- TODO make this code reusable for all Classes
-$scope.updateSiteData = function (){
-    var siteData = ShareDataService.getSiteData();
-    UpdateTreatmentList.update(siteData);
-};
-*/

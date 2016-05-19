@@ -24,6 +24,9 @@ public class FormResource {
     @Inject
     private PublicationRepository publicationRepository;
 
+    @Inject
+    private PublicationService publicationService;
+
     @RequestMapping(value = "/studyUpload/retrievePublicationByPubMedId/{pubMedId}",
         method = RequestMethod.GET,
         produces = MediaType.APPLICATION_JSON_VALUE)
@@ -40,7 +43,7 @@ public class FormResource {
     @Timed
     public FormResourceDTO updatePublicationDTOAndAllEagerRelationships(@RequestBody FormResourceDTO formResourceDTO) {
         log.debug("REST request to get Publication : {}", formResourceDTO);
-        FormResourceDTO formResDTO = publicationRepository.updatePublicationAndAllCollections(formResourceDTO);
+        FormResourceDTO formResDTO = publicationService.updatePublicationAndAllCollections(formResourceDTO);
         return formResDTO;
     }
 }

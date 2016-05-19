@@ -5,6 +5,7 @@ import org.wwarn.vivax.manager.domain.SiteData;
 import org.wwarn.vivax.manager.domain.Study;
 import org.wwarn.vivax.manager.domain.Treatment;
 import org.wwarn.vivax.manager.web.rest.dto.FormResourceDTO;
+import org.wwarn.vivax.manager.web.rest.dto.StudyDTO;
 
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
@@ -25,7 +26,6 @@ public class PublicationRepositoryImpl implements PublicationRepositoryCustom{
     @PersistenceContext
     private EntityManager em;
 
-
     @Override
     public FormResourceDTO retrievePublicationByPubMedId(Integer pubMedId) {
 
@@ -42,14 +42,27 @@ public class PublicationRepositoryImpl implements PublicationRepositoryCustom{
 
         List<Set<SiteData>> propertyFillerSiteData = new ArrayList<Set<SiteData>>();
         List<Set<Treatment>> propertyFillerTreatment = new ArrayList<Set<Treatment>>();
-
+        List<StudyDTO>studyDTOList = new ArrayList<StudyDTO>();
         FormResourceDTO formResourceDTO = new FormResourceDTO();
+
         formResourceDTO.setPublication(publication);
         formResourceDTO.setStudies(publication.getStudies());
+
+        formResourceDTO.getStudies().stream().forEach(sg ->{
+            StudyDTO studyDTO = new StudyDTO();
+            studyDTO.setStudies(sg);
+            studyDTO.setSiteDatas(sg.getSiteDatas());
+            System.out.println("@@@@@@@@@@@@@@: "+sg.getSiteDatas());
+            studyDTOList.add(studyDTO);
+        });
+        formResourceDTO.setStudyDTOList(studyDTOList);
+
+
         formResourceDTO.getStudies().stream().forEach(sg ->{
             propertyFillerSiteData.add(sg.getSiteDatas());
         });
         formResourceDTO.setSiteDatas(propertyFillerSiteData);
+
         formResourceDTO.getSiteDatas().stream().forEach(sd ->{
             sd.stream().forEach(sf ->{
                 propertyFillerTreatment.add(sf.getTreatments());
@@ -60,24 +73,22 @@ public class PublicationRepositoryImpl implements PublicationRepositoryCustom{
         return formResourceDTO;
     }
 
-    @Override
+    /*@Override
     @Transactional
     public FormResourceDTO updatePublicationAndAllCollections(FormResourceDTO formResourceDTO) {
-        System.out.println(formResourceDTO.getPublication().getPubMedId());
         formResourceDTO.getSiteDatas().stream().forEach(sd ->{
             sd.stream().forEach(sf ->{
-               SiteData siteData = em.find(SiteData.class, sf.getId());
-               if(siteData!=null && !siteData.getTreatments().equals(sf.getTreatments())){
-                   siteData.setTreatments(sf.getTreatments());
+               if(sf!=null){
+                  em.merge(sf);
                  }
             });
         });
         formResourceDTO.getStudies().stream().forEach(sf ->{
-            Study study = em.find(Study.class, sf.getId());
-            if(study!=null && study.equals(study)) {
-                System.out.println("PERSISTING");
+            System.out.println("@@@@@@@@@@@@ "+sf.toString());
+            if(sf!=null) {
+                em.merge(sf);
             }
         });
-        return null;
-    }
+        return formResourceDTO;
+    }*/
 }
