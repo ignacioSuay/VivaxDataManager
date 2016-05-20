@@ -65,10 +65,11 @@
                     }
                 }
             }).result.then(function (result) {
-                $scope.publi.studyDTOList.push(ShareDataService.getObject());
-                //console.log(ShareDataService.getObject());
-                /*result.publicationss.push($scope.publi.publication);
-                studyDTO.push(result);*/
+                $scope.publi.studyDTOList.push(result);
+                var position = $scope.publi.studyDTOList.length-1;
+                $scope.publi.studyDTOList[position].studies=result;
+                $scope.publi.studyDTOList[position].studies.publicationss.push($scope.publi.publication);
+                $scope.publi.studyDTOList[position].siteDatas = [];
                 ShareDataService.setFlag(false);
             }, function () {
             })
