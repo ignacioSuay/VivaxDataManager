@@ -13,6 +13,7 @@ import javax.persistence.Query;
 import javax.persistence.TypedQuery;
 import javax.transaction.Transactional;
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
@@ -40,35 +41,20 @@ public class PublicationRepositoryImpl implements PublicationRepositoryCustom{
 
         publication = (Publication)q1.getSingleResult();
 
-        List<Set<SiteData>> propertyFillerSiteData = new ArrayList<Set<SiteData>>();
-        List<Set<Treatment>> propertyFillerTreatment = new ArrayList<Set<Treatment>>();
-        List<StudyDTO>studyDTOList = new ArrayList<StudyDTO>();
+        List <StudyDTO>studyDTOList = new ArrayList<>();
+        Set<Study>studyList;
         FormResourceDTO formResourceDTO = new FormResourceDTO();
 
         formResourceDTO.setPublication(publication);
-        formResourceDTO.setStudies(publication.getStudies());
+        studyList = publication.getStudies();
 
-        formResourceDTO.getStudies().stream().forEach(sg ->{
+        studyList.stream().forEach(sg ->{
             StudyDTO studyDTO = new StudyDTO();
             studyDTO.setStudies(sg);
             studyDTO.setSiteDatas(sg.getSiteDatas());
-            System.out.println("@@@@@@@@@@@@@@: "+sg.getSiteDatas());
             studyDTOList.add(studyDTO);
         });
         formResourceDTO.setStudyDTOList(studyDTOList);
-
-
-        formResourceDTO.getStudies().stream().forEach(sg ->{
-            propertyFillerSiteData.add(sg.getSiteDatas());
-        });
-        formResourceDTO.setSiteDatas(propertyFillerSiteData);
-
-        formResourceDTO.getSiteDatas().stream().forEach(sd ->{
-            sd.stream().forEach(sf ->{
-                propertyFillerTreatment.add(sf.getTreatments());
-            });
-        });
-        formResourceDTO.setTreatments(propertyFillerTreatment);
 
         return formResourceDTO;
     }

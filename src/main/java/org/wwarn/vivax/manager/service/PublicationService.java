@@ -116,16 +116,14 @@ public class PublicationService {
 
     @Transactional
     public FormResourceDTO updatePublicationAndAllCollections(FormResourceDTO formResourceDTO) {
-        formResourceDTO.getSiteDatas().stream().forEach(sd ->{
-            sd.stream().forEach(sf ->{
-               if(sf!=null){
-                   siteDataRepository.flush();
-                   siteDataRepository.save(sf);
-                   siteDataSearchRepository.save(sf);
-                 }
-            });
+        formResourceDTO.getStudyDTOList().stream().forEach(sd ->{
+            if(sd!=null){
+               siteDataRepository.flush();
+               siteDataRepository.save(sd.getSiteDatas());
+               siteDataSearchRepository.save(sd.getSiteDatas());
+             }
         });
-        /*formResourceDTO.getStudies().stream().forEach(sf ->{
+           /*formResourceDTO.getStudies().stream().forEach(sf ->{
             if(sf!=null) {
                 studyRepository.flush();
                 studyRepository.save(sf);

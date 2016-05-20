@@ -3,6 +3,7 @@ package org.wwarn.vivax.manager.web.rest;
 import com.codahale.metrics.annotation.Timed;
 import org.wwarn.vivax.manager.domain.Study;
 import org.wwarn.vivax.manager.service.StudyService;
+import org.wwarn.vivax.manager.web.rest.dto.StudyDTO;
 import org.wwarn.vivax.manager.web.rest.util.HeaderUtil;
 import org.wwarn.vivax.manager.web.rest.util.PaginationUtil;
 import org.slf4j.Logger;
@@ -33,10 +34,10 @@ import static org.elasticsearch.index.query.QueryBuilders.*;
 public class StudyResource {
 
     private final Logger log = LoggerFactory.getLogger(StudyResource.class);
-        
+
     @Inject
     private StudyService studyService;
-    
+
     /**
      * POST  /studies : Create a new study.
      *
@@ -56,6 +57,28 @@ public class StudyResource {
         Study result = studyService.save(study);
         return ResponseEntity.created(new URI("/api/studies/" + result.getId()))
             .headers(HeaderUtil.createEntityCreationAlert("study", result.getId().toString()))
+            .body(result);
+    }
+
+    /**
+     * POST  /studies : Create a new study returning the DTO model
+     *
+     * @param study the study to create
+     * @return DTO model
+     * * @throws URISyntaxException if the Location URI syntax is incorrect
+     */
+    @RequestMapping(value = "/studies/createStudyDTO",
+        method = RequestMethod.POST,
+        produces = MediaType.APPLICATION_JSON_VALUE)
+    @Timed
+    public ResponseEntity<StudyDTO> createStudyDTO(@RequestBody Study study) throws URISyntaxException {
+        log.debug("REST request to save Study returning DTO: {}", study);
+        if (study.getId() != null) {
+            return ResponseEntity.badRequest().headers(HeaderUtil.createFailureAlert("study", "idexists", "A new study cannot already have an ID")).body(null);
+        }
+        StudyDTO result = studyService.saveReturnDTO(study);
+        return ResponseEntity.ok()
+            .headers(HeaderUtil.createEntityUpdateAlert("study", study.getId().toString()))
             .body(result);
     }
 
@@ -97,7 +120,7 @@ public class StudyResource {
     public ResponseEntity<List<Study>> getAllStudies(Pageable pageable)
         throws URISyntaxException {
         log.debug("REST request to get a page of Studies");
-        Page<Study> page = studyService.findAll(pageable); 
+        Page<Study> page = studyService.findAll(pageable);
         HttpHeaders headers = PaginationUtil.generatePaginationHttpHeaders(page, "/api/studies");
         return new ResponseEntity<>(page.getContent(), headers, HttpStatus.OK);
     }

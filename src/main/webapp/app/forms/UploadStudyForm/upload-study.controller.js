@@ -17,16 +17,9 @@
 
         $scope.retrievePublicationByPubMedId = function () {
             Form.load($scope.pubMedId).then(function (result) {
-                console.log(result);
                 $scope.publi = result.data;
                 $scope.myHidingValue=true;
-                $scope.studies=$scope.publi.studies;
-                console.log($scope.publi);
-                for (var i=0; i<=$scope.publi.siteDatas[0].length; i++){
-                    if($scope.publi.siteDatas[0][i]!=undefined) {
-                        $scope.siteDatas.push($scope.publi.siteDatas[0][i]);
-                    }
-                }
+                $scope.studies=$scope.publi.studyDTOList;
             });
         };
 
@@ -56,7 +49,9 @@
             })
         };
 
-        $scope.newStudy = function(index) {
+        $scope.newStudy = function(studyDTOList) {
+            ShareDataService.setFlag(true);
+            ShareDataService.setObject(studyDTOList);
             $scope.myHidingValue=true;
             $uibModal.open({
                 templateUrl: 'app/entities/study/study-dialog.html',
@@ -70,16 +65,19 @@
                     }
                 }
             }).result.then(function (result) {
-                result.publicationss.push($scope.publi.publication);
-                $scope.publi.studies.push(result);
+                $scope.publi.studyDTOList.push(ShareDataService.getObject());
+                //console.log(ShareDataService.getObject());
+                /*result.publicationss.push($scope.publi.publication);
+                studyDTO.push(result);*/
+                ShareDataService.setFlag(false);
             }, function () {
             })
         };
 
-        $scope.deleteStudy = function(study) {
+        $scope.deleteStudy = function(studyDTO) {
             ShareDataService.setFlag(true);
             ShareDataService.setPubli($scope.publi);
-            ShareDataService.setObject(study);
+            ShareDataService.setObject(studyDTO);
             $uibModal.open({
                 templateUrl: 'app/entities/study/study-delete-dialog.html',
                 controller: 'StudyDeleteController',
@@ -98,7 +96,7 @@
             })
         };
 
-        $scope.newSiteData = function () {
+        $scope.newSiteData = function (studyDTO) {
             $scope.myHidingValue=true;
             $uibModal.open({
                 templateUrl: 'app/entities/site-data/site-data-dialog.html',
@@ -112,7 +110,7 @@
                     }
                 }
             }).result.then(function (result) {
-                $scope.publi.siteDatas[0].push(result);
+                studyDTO.siteDatas.push(result);
             }, function () {
             })
         };
@@ -139,7 +137,7 @@
             })
         };
 
-        $scope.newTreatment = function (index) {
+        $scope.newTreatment = function (index, siteData) {
             $scope.myHidingValue=true;
             $uibModal.open({
                 templateUrl: 'app/entities/treatment/treatment-dialog.html',
@@ -153,7 +151,7 @@
                     }
                 }
             }).result.then(function (result) {
-                $scope.publi.siteDatas[0][index].treatments.push(result);
+                siteData.treatments.push(result);
             }, function () {
             })
         };
