@@ -5,9 +5,10 @@
         .module('vivaxDataManagerApp')
         .controller('TreatmentDialogController', TreatmentDialogController);
 
-    TreatmentDialogController.$inject = ['$scope', '$stateParams', '$uibModalInstance', 'entity', 'Treatment', 'SiteData'];
+    TreatmentDialogController.$inject = ['$scope', '$stateParams', '$uibModalInstance', 'entity', 'Treatment', 'SiteData', 'ShareDataService'];
 
-    function TreatmentDialogController ($scope, $stateParams, $uibModalInstance, entity, Treatment, SiteData) {
+    function TreatmentDialogController ($scope, $stateParams, $uibModalInstance, entity, Treatment, SiteData, ShareDataService) {
+
         var vm = this;
         vm.treatment = entity;
         vm.sitedatas = SiteData.query();
@@ -27,14 +28,30 @@
             vm.isSaving = false;
         };
 
-        vm.save = function () {
-            vm.isSaving = true;
-            if (vm.treatment.id !== null) {
-                Treatment.update(vm.treatment, onSaveSuccess, onSaveError);
-            } else {
-                Treatment.save(vm.treatment, onSaveSuccess, onSaveError);
-            }
-        };
+        if(!ShareDataService.getFlag()){
+            vm.save = function () {
+                vm.isSaving = true;
+                if (vm.treatment.id !== null) {
+                    Treatment.update(vm.treatment, onSaveSuccess, onSaveError);
+                } else {
+                    Treatment.save(vm.treatment, onSaveSuccess, onSaveError);
+                }
+            };
+        }
+        else{
+            vm.save = function () {
+                var siteData = ShareDataService.getObject();
+                siteData.treatments.push(vm.treatment);
+                ShareDataService.setObject(siteData);
+                vm.isSaving = true;
+                if (vm.treatment.id !== undefined) {
+                    console.log(vm.treatment.id);
+                    Treatment.update(vm.treatment, onSaveSuccess, onSaveError);
+                } else {
+                    Treatment.save(vm.treatment, onSaveSuccess, onSaveError);
+                }
+            };
+        }
 
         vm.clear = function() {
             $uibModalInstance.dismiss('cancel');

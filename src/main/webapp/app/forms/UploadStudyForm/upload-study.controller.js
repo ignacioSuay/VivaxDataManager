@@ -139,6 +139,8 @@
         };
 
         $scope.newTreatment = function (index, siteData) {
+            ShareDataService.setFlag(true);
+            ShareDataService.setObject(siteData);
             $scope.myHidingValue=true;
             $uibModal.open({
                 templateUrl: 'app/entities/treatment/treatment-dialog.html',
@@ -152,7 +154,9 @@
                     }
                 }
             }).result.then(function (result) {
-                siteData.treatments.push(result);
+                siteData = ShareDataService.getObject();
+                /*siteData.treatments.push(result);*/
+                ShareDataService.setFlag(false);
             }, function () {
             })
         };
