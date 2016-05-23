@@ -12,5 +12,5 @@ public interface PublicationRepositoryCustom {
 
     FormResourceDTO retrievePublicationByPubMedId(Integer pubMedId);
 
-    FormResourceDTO updatePublicationAndAllCollections(FormResourceDTO formResourceDTO);
+    /*FormResourceDTO updatePublicationAndAllCollections(FormResourceDTO formResourceDTO);*/
 }

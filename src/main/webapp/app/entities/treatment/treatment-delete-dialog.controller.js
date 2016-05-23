@@ -26,13 +26,18 @@
             var treatment = ShareDataService.getObject();
             var publi = ShareDataService.getPubli();
             vm.confirmDelete = function (id) {
-                for (var i=0; i<=publi.siteDatas[0].length; i++) {
-                    if (publi.siteDatas[0][i] !== undefined) {
-                        var tLength = publi.siteDatas[0][i].treatments.length;
-                        for (var j = 0; j <= tLength; j++) {
-                            if(publi.siteDatas[0][i].treatments[j] !== undefined) {
-                                if (publi.siteDatas[0][i].treatments[j].id === treatment.id) {
-                                    publi.siteDatas[0][i].treatments.splice(j, 1);
+                for (var i=0; i<=publi.studyDTOList.length; i++) {
+                    if (publi.studyDTOList[i] !== undefined) {
+                        var sLength = publi.studyDTOList[i].siteDatas.length;
+                        for (var j = 0; j <= sLength; j++) {
+                            if(publi.studyDTOList[i].siteDatas[j] !== undefined) {
+                                var tLength = publi.studyDTOList[i].siteDatas[j].treatments.length;
+                                for (var k = 0; k <= tLength; k++) {
+                                    if (publi.studyDTOList[i].siteDatas[j].treatments[k] !== undefined){
+                                        if (publi.studyDTOList[i].siteDatas[j].treatments[k].id === treatment.id) {
+                                            publi.studyDTOList[i].siteDatas[j].treatments.splice(k, 1);
+                                        }
+                                    }
                                 }
                             }
                         }
@@ -43,7 +48,6 @@
                 },
                     function () {
                         $uibModalInstance.close(true);
-                       
                     });
             };
         }

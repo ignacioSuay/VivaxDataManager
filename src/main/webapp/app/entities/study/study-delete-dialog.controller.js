@@ -18,30 +18,32 @@
 
         if (!flag) {
             vm.confirmDelete = function (id) {
-                Treatment.delete({id: id},
+                Study.delete({id: id},
                     function () {
                         $uibModalInstance.close(true);
                     });
-            };
-        }
+                };
+            }
 
         else {
-            var study = ShareDataService.getObject();
+            var studyDTO = ShareDataService.getObject();
             var publi = ShareDataService.getPubli();
             vm.confirmDelete = function (id) {
-                for (var i=0; i<=publi.studies.length; i++) {
-                    if (publi.studies[i] !== undefined) {
-                        publi.studies.splice(i, 1);
+                for (var i=0; i<=publi.studyDTOList.length; i++) {
+                    if (publi.studyDTOList[i] !== undefined) {
+                        publi.studyDTOList.splice(studyDTO, 1);
                     }
                 }
                 ShareDataService.setPubli(publi);
+                var study = studyDTO.studies;
+                var siteDatas = studyDTO.siteDatas;
+                study.siteDatas = siteDatas;
                 Study.delete({id: study.id
                     },
                     function () {
                         $uibModalInstance.close(true);
-
                     });
-            };
+                };
+            }
         }
-    }
 })();

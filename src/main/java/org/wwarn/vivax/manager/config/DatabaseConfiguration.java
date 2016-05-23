@@ -3,6 +3,7 @@ package org.wwarn.vivax.manager.config;
 
 import com.codahale.metrics.MetricRegistry;
 import com.fasterxml.jackson.datatype.hibernate4.Hibernate4Module;
+import com.zaxxer.hikari.HikariConfig;
 import com.zaxxer.hikari.HikariDataSource;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -44,7 +45,7 @@ public class DatabaseConfiguration {
     @Bean(destroyMethod = "close")
     @ConditionalOnExpression("#{!environment.acceptsProfiles('" + Constants.SPRING_PROFILE_CLOUD + "') && !environment.acceptsProfiles('" + Constants.SPRING_PROFILE_HEROKU + "')}")
     @ConfigurationProperties(prefix = "spring.datasource.hikari")
-    public DataSource dataSource(DataSourceProperties dataSourceProperties) {
+    public DataSource dataSource2(DataSourceProperties dataSourceProperties) {
         log.debug("Configuring Datasource");
         if (dataSourceProperties.getUrl() == null) {
             log.error("Your database connection pool configuration is incorrect! The application" +
@@ -65,6 +66,10 @@ public class DatabaseConfiguration {
         if (metricRegistry != null) {
             hikariDataSource.setMetricRegistry(metricRegistry);
         }
+
+        HikariConfig config = new HikariConfig();
+        config.setPoolName("vivaxDatasource");
+
         return hikariDataSource;
     }
 

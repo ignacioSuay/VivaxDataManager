@@ -20,6 +20,7 @@
 
         var onSaveSuccess = function (result) {
             $scope.$emit('vivaxDataManagerApp:studyUpdate', result);
+            console.log(result);
             $uibModalInstance.close(result);
             vm.isSaving = false;
         };

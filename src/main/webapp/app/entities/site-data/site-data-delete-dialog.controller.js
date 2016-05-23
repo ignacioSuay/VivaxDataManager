@@ -16,7 +16,6 @@
         };
         if (!flag) {
             vm.confirmDelete = function (id) {
-                console.log('In main menu delete button');
                 SiteData.delete({id: id},
                     function () {
                         $uibModalInstance.close(true);
@@ -27,11 +26,9 @@
             var siteData = ShareDataService.getObject();
             var publi = ShareDataService.getPubli();
             vm.confirmDelete = function (id) {
-                for (var i=0; i<=publi.siteDatas[0].length; i++) {
-                    if (publi.siteDatas[0][i] !== undefined) {
-                        if (publi.siteDatas[0][i].id === siteData.id) {
-                            publi.siteDatas[0].splice(i, 1);
-                        }
+                for (var i=0; i<=publi.studyDTOList.length; i++) {
+                    if (publi.studyDTOList[i] !== undefined) {
+                        publi.studyDTOList[i].siteDatas.splice(siteData, 1);
                     }
                 }
                 ShareDataService.setPubli(publi);
