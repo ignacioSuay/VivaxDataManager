@@ -127,17 +127,4 @@ public class PublicationService {
         });
         return formResourceDTO;
     }
-
-    /*public void deleteTreatment(Long id){
-        Treatment treatment = treatmentRepository.findOne(id);
-        for (SiteData siteData : treatment.getSiteDatas()) {
-            Set<Treatment> setTre = siteData.getTreatments();
-            setTre.remove(treatment);
-            siteData.setTreatments(setTre);
-        }
-        treatment.setSiteDatas(null);
-        treatmentRepository.flush();
-        treatmentRepository.delete(id);
-        treatmentSearchRepository.delete(id);
-    }*/
 }

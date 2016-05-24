@@ -38,6 +38,8 @@
                     }
                 }
             }).result.then(function (result) {
+                $scope.pubMedId = result.pubMedId;
+                console.log(result);
                 $scope.retrievePublicationByPubMedId();
                 $scope.myHidingValue=true;
                 console.log('The pubMedId '+result.pubMedId);
