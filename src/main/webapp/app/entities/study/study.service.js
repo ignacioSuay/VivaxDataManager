@@ -6,7 +6,6 @@
         .factory('StudyDTO', function ($http) {
             return {
                 save: function(study){
-                    console.log('In save function' +study);
                     return $http.post("api/studies/createStudyDTO/",study);
                 }
             }

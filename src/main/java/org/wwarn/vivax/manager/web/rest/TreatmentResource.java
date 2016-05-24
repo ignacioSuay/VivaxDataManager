@@ -61,12 +61,12 @@ public class TreatmentResource {
         method = RequestMethod.POST,
         produces = MediaType.APPLICATION_JSON_VALUE)
     @Timed
-    public ResponseEntity<Treatment> createTreatment(@RequestBody Treatment treatment) throws URISyntaxException {
+    public ResponseEntity<Treatment> createTreatment(@RequestBody Treatment treatment, Long siteDataId) throws URISyntaxException {
         log.debug("REST request to save Treatment : {}", treatment);
         if (treatment.getId() != null) {
             return ResponseEntity.badRequest().headers(HeaderUtil.createFailureAlert("treatment", "idexists", "A new treatment cannot already have an ID")).body(null);
         }
-        Treatment result = treatmentRepository.save(treatment);
+        Treatment result = treatmentService.saveTreatment(treatment, siteDataId);
         treatmentSearchRepository.save(result);
         return ResponseEntity.created(new URI("/api/treatments/" + result.getId()))
             .headers(HeaderUtil.createEntityCreationAlert("treatment", result.getId().toString()))
@@ -86,10 +86,10 @@ public class TreatmentResource {
         method = RequestMethod.PUT,
         produces = MediaType.APPLICATION_JSON_VALUE)
     @Timed
-    public ResponseEntity<Treatment> updateTreatment(@RequestBody Treatment treatment) throws URISyntaxException {
+    public ResponseEntity<Treatment> updateTreatment(@RequestBody Treatment treatment, Long siteDataId) throws URISyntaxException {
         log.debug("REST request to update Treatment : {}", treatment);
         if (treatment.getId() == null) {
-            return createTreatment(treatment);
+            return createTreatment(treatment, siteDataId);
         }
         Treatment result = treatmentRepository.save(treatment);
         treatmentSearchRepository.save(result);

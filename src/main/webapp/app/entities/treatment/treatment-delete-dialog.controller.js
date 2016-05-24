@@ -44,14 +44,12 @@
                     }
                 }
                 ShareDataService.setPubli(publi);
-                Treatment.delete({id: treatment.id
-                },
-                    function () {
+                //Treatment.delete({id: treatment.id
+                //},
+                    /*function () {
                         $uibModalInstance.close(true);
-                    });
+                    };*/
             };
         }
     }
 })();
-
-

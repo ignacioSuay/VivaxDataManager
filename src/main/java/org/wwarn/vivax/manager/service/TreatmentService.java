@@ -32,6 +32,12 @@ public class TreatmentService {
     private final Logger log = LoggerFactory.getLogger(TreatmentService.class);
 
     @Inject
+    private SiteDataRepository siteDataRepository;
+
+    @Inject
+    private SiteDataSearchRepository siteDataSearchRepository;
+
+    @Inject
     private TreatmentRepository treatmentRepository;
 
     @Inject
@@ -49,5 +55,21 @@ public class TreatmentService {
         treatmentRepository.flush();
         treatmentRepository.delete(id);
         treatmentSearchRepository.delete(id);
+    }
+
+    @Transactional
+    public Treatment saveTreatment(Treatment treatment, Long siteDataId){
+
+        if (siteDataId != null){
+            SiteData siteData = siteDataRepository.findOne(siteDataId);
+            treatment.getSiteDatas().add(siteData);
+            siteData.getTreatments().add(treatment);
+        }
+
+        treatmentRepository.flush();
+        treatmentRepository.save(treatment);
+        treatmentSearchRepository.save(treatment);
+
+        return treatment;
     }
 }

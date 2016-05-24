@@ -19,12 +19,11 @@
             Form.load($scope.pubMedId).then(function (result) {
                 $scope.publi = result.data;
                 $scope.myHidingValue=true;
-                $scope.studies=$scope.publi.studyDTOList;
             });
         };
 
         $scope.saveAll = function(){
-            //console.log($scope.publi);
+            console.log($scope.publi);
             console.log(Form.save($scope.publi));
         }
 
@@ -65,11 +64,7 @@
                     }
                 }
             }).result.then(function (result) {
-                $scope.publi.studyDTOList.push(result);
-                var position = $scope.publi.studyDTOList.length-1;
-                $scope.publi.studyDTOList[position].studies=result;
-                $scope.publi.studyDTOList[position].studies.publicationss.push($scope.publi.publication);
-                $scope.publi.studyDTOList[position].siteDatas = [];
+                $scope.publi.studyDTOList.push(result.data);
                 ShareDataService.setFlag(false);
             }, function () {
             })
@@ -98,6 +93,9 @@
         };
 
         $scope.newSiteData = function (studyDTO) {
+            ShareDataService.setFlag(true);
+            ShareDataService.setPubli($scope.publi);
+            ShareDataService.setObject(null);
             $scope.myHidingValue=true;
             $uibModal.open({
                 templateUrl: 'app/entities/site-data/site-data-dialog.html',
@@ -111,7 +109,9 @@
                     }
                 }
             }).result.then(function (result) {
-                studyDTO.siteDatas.push(result);
+                studyDTO.siteDatas.push(ShareDataService.getObject());
+                ShareDataService.setFlag(false);
+                console.log($scope.publi.studyDTOList);
             }, function () {
             })
         };
@@ -184,4 +184,3 @@
         };
     }
 })();
-
