@@ -11,9 +11,6 @@
 
         $scope.publi;
         $scope.pubMedId;
-        $scope.studies = [];
-        $scope.siteDatas = [];
-        $scope.treatments = [];
 
         $scope.retrievePublicationByPubMedId = function () {
             Form.load($scope.pubMedId).then(function (result) {
@@ -64,6 +61,7 @@
                     }
                 }
             }).result.then(function (result) {
+                result.data.studyDetails.publicationss.push($scope.publi.publication);
                 $scope.publi.studyDTOList.push(result.data);
                 ShareDataService.setFlag(false);
             }, function () {
@@ -155,7 +153,6 @@
                 }
             }).result.then(function (result) {
                 siteData = ShareDataService.getObject();
-                /*siteData.treatments.push(result);*/
                 ShareDataService.setFlag(false);
             }, function () {
             })

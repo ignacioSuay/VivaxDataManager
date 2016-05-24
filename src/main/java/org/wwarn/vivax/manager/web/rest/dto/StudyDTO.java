@@ -1,11 +1,8 @@
 package org.wwarn.vivax.manager.web.rest.dto;
 
-import org.wwarn.vivax.manager.domain.Publication;
 import org.wwarn.vivax.manager.domain.SiteData;
 import org.wwarn.vivax.manager.domain.Study;
-import org.wwarn.vivax.manager.domain.Treatment;
 
-import java.util.List;
 import java.util.Set;
 
 /**
@@ -13,15 +10,15 @@ import java.util.Set;
  */
 public class StudyDTO {
 
-    private Study studies;
+    private Study studyDetails;
     private Set<SiteData> siteDatas;
 
-    public Study getStudies() {
-        return studies;
+    public Study getStudyDetails() {
+        return studyDetails;
     }
 
-    public void setStudies(Study studies) {
-        this.studies = studies;
+    public void setStudyDetails(Study studyDetails) {
+        this.studyDetails = studyDetails;
     }
 
     public Set<SiteData> getSiteDatas() {
@@ -35,8 +32,8 @@ public class StudyDTO {
     public StudyDTO() {
     }
 
-    public StudyDTO(Study studies, Set<SiteData> siteDatas) {
-        this.studies = studies;
+    public StudyDTO(Study studyDetails, Set<SiteData> siteDatas) {
+        this.studyDetails = studyDetails;
         this.siteDatas = siteDatas;
     }
 
@@ -47,14 +44,14 @@ public class StudyDTO {
 
         StudyDTO studyDTO = (StudyDTO) o;
 
-        if (studies != null ? !studies.equals(studyDTO.studies) : studyDTO.studies != null) return false;
+        if (studyDetails != null ? !studyDetails.equals(studyDTO.studyDetails) : studyDTO.studyDetails != null) return false;
         return siteDatas != null ? siteDatas.equals(studyDTO.siteDatas) : studyDTO.siteDatas == null;
 
     }
 
     @Override
     public int hashCode() {
-        int result = studies != null ? studies.hashCode() : 0;
+        int result = studyDetails != null ? studyDetails.hashCode() : 0;
         result = 31 * result + (siteDatas != null ? siteDatas.hashCode() : 0);
         return result;
     }

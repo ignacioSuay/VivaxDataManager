@@ -1,19 +1,14 @@
 package org.wwarn.vivax.manager.repository;
 
 import org.wwarn.vivax.manager.domain.Publication;
-import org.wwarn.vivax.manager.domain.SiteData;
 import org.wwarn.vivax.manager.domain.Study;
-import org.wwarn.vivax.manager.domain.Treatment;
 import org.wwarn.vivax.manager.web.rest.dto.FormResourceDTO;
 import org.wwarn.vivax.manager.web.rest.dto.StudyDTO;
 
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import javax.persistence.Query;
-import javax.persistence.TypedQuery;
-import javax.transaction.Transactional;
 import java.util.ArrayList;
-import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
@@ -50,7 +45,7 @@ public class PublicationRepositoryImpl implements PublicationRepositoryCustom{
 
         studyList.stream().forEach(sg ->{
             StudyDTO studyDTO = new StudyDTO();
-            studyDTO.setStudies(sg);
+            studyDTO.setStudyDetails(sg);
             studyDTO.setSiteDatas(sg.getSiteDatas());
             studyDTOList.add(studyDTO);
         });
@@ -69,7 +64,7 @@ public class PublicationRepositoryImpl implements PublicationRepositoryCustom{
                  }
             });
         });
-        formResourceDTO.getStudies().stream().forEach(sf ->{
+        formResourceDTO.getStudyDetails().stream().forEach(sf ->{
             System.out.println("@@@@@@@@@@@@ "+sf.toString());
             if(sf!=null) {
                 em.merge(sf);

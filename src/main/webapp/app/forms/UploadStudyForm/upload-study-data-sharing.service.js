@@ -9,7 +9,6 @@ angular.module('vivaxDataManagerApp')
         var flag;
         var publi;
 
-        //TODO change names of variable and methods to make the service universal
         var getObject= function(){
             return object;
         }

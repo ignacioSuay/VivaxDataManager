@@ -1,8 +1,7 @@
 package org.wwarn.vivax.manager.service;
 
 import org.wwarn.vivax.manager.domain.Publication;
-import org.wwarn.vivax.manager.domain.SiteData;
-import org.wwarn.vivax.manager.domain.Treatment;
+import org.wwarn.vivax.manager.domain.Study;
 import org.wwarn.vivax.manager.repository.PublicationRepository;
 import org.wwarn.vivax.manager.repository.SiteDataRepository;
 import org.wwarn.vivax.manager.repository.StudyRepository;
@@ -18,10 +17,6 @@ import org.wwarn.vivax.manager.repository.search.StudySearchRepository;
 import org.wwarn.vivax.manager.web.rest.dto.FormResourceDTO;
 
 import javax.inject.Inject;
-import java.util.List;
-import java.util.Set;
-import java.util.stream.Collectors;
-import java.util.stream.StreamSupport;
 
 import static org.elasticsearch.index.query.QueryBuilders.*;
 
@@ -118,19 +113,18 @@ public class PublicationService {
     public FormResourceDTO updatePublicationAndAllCollections(FormResourceDTO formResourceDTO) {
         formResourceDTO.getStudyDTOList().stream().forEach(sd ->{
             if(sd!=null){
-               siteDataRepository.flush();
-               siteDataRepository.save(sd.getSiteDatas());
-               siteDataSearchRepository.save(sd.getSiteDatas());
-             }
-        });
-           /*formResourceDTO.getStudies().stream().forEach(sf ->{
-            if(sf!=null) {
+                Study study = sd.getStudyDetails();
+                studyRepository.save(study);
+                studySearchRepository.save(study);
                 studyRepository.flush();
-                studyRepository.save(sf);
-                studySearchRepository.save(sf);
+                sd.getSiteDatas().stream().forEach(sf ->{
+                    sf.setStudy(study);
+                    siteDataRepository.save(sf);
+                    siteDataSearchRepository.save(sf);
+                    siteDataRepository.flush();
+                });
             }
-        });*/
-
+        });
         return formResourceDTO;
     }
 
