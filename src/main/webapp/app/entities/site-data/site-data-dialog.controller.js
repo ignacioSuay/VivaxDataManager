@@ -29,7 +29,9 @@
         var onSaveError = function () {
             vm.isSaving = false;
         };
-
+        /**
+         * Option for when save is called from the entities menu
+         */
         if(!ShareDataService.getFlag()) {
             vm.save = function () {
                 vm.isSaving = true;
@@ -40,6 +42,9 @@
                 }
             };
         }
+        /**
+         * Option for when save is called from the upload Study menu
+         */
         else {
             vm.save = function () {
                 if(ShareDataService.getObject()===null){
@@ -47,19 +52,8 @@
                     ShareDataService.setObject(siteData);
                     $uibModalInstance.close(siteData);
                 }
-
-
-
-                /*vm.isSaving = true;
-                if (vm.treatment.id !== undefined) {
-                    console.log(vm.treatment.id);
-                    Treatment.update(vm.treatment, onSaveSuccess, onSaveError);
-                } else {
-                    Treatment.save(vm.treatment, onSaveSuccess, onSaveError);
-                }*/
             };
         }
-
         vm.clear = function() {
             $uibModalInstance.dismiss('cancel');
         };

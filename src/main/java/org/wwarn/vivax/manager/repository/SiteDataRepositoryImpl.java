@@ -29,6 +29,9 @@ import org.wwarn.vivax.manager.domain.util.Filter;
 import org.wwarn.vivax.manager.web.rest.TreatmentResource;
 import org.wwarn.vivax.manager.web.rest.dto.SiteDataViewDTO;
 
+/**
+ * Implementation of the custom repository
+ */
 public class SiteDataRepositoryImpl implements SiteDataRepositoryCustom{
 
 	Study s = new Study();

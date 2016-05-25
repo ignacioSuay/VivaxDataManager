@@ -54,6 +54,8 @@ public class TreatmentResource {
      * POST  /treatments : Create a new treatment.
      *
      * @param treatment the treatment to create
+     * @param siteDataId if the call comes from the upload Study Form, the treatment will
+     *                   be linked to a particular SiteData
      * @return the ResponseEntity with status 201 (Created) and with body the new treatment, or with status 400 (Bad Request) if the treatment has already an ID
      * @throws URISyntaxException if the Location URI syntax is incorrect
      */

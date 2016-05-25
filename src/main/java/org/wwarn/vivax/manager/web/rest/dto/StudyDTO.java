@@ -7,6 +7,8 @@ import java.util.Set;
 
 /**
  * Created by steven on 19/05/16.
+ * Class created to contain all studies and child collections
+ * (SiteDatas and SiteDatas Treatments collection)
  */
 public class StudyDTO {
 
@@ -57,4 +59,11 @@ public class StudyDTO {
     }
 
 
+    @Override
+    public String toString() {
+        return "StudyDTO{" +
+            "studyDetails=" + studyDetails +
+            ", siteDatas=" + siteDatas +
+            '}';
+    }
 }

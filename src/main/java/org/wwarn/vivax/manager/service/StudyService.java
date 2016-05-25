@@ -48,7 +48,7 @@ public class StudyService {
     }
 
     /**
-     * Save a study.
+     * Save a study returning a studyDTO entity.
      *
      * @param study the entity to save
      * @return the persisted entity
@@ -92,7 +92,8 @@ public class StudyService {
 
     /**
      *  Delete the  study by id.
-     *
+     *  This method also removes all references to it
+     *  in any publications studies collection
      *  @param id the id of the entity
      */
     public void delete(Long id) {

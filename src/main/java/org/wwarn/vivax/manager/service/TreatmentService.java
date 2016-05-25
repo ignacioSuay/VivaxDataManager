@@ -43,6 +43,13 @@ public class TreatmentService {
     @Inject
     private TreatmentSearchRepository treatmentSearchRepository;
 
+    /**
+     * Transactional method which will delete the treatment entity
+     * from the database, but will also enter the collections
+     * of any siteData containing this treatment and delete it
+     *
+     * @param id the id of the treatment we are going to delete
+     */
     @Transactional
     public void deleteTreatment(Long id){
         Treatment treatment = treatmentRepository.findOne(id);
@@ -57,6 +64,15 @@ public class TreatmentService {
         treatmentSearchRepository.delete(id);
     }
 
+    /**
+     * Transactional method which will save the treatment entity
+     * in the database, but will also enter the collections
+     * of any particular siteData linked to this treatment and it
+     * will save it there too
+     * @param treatment the Treatment object that we want to save
+     * @param siteDataId if the method is called from the upload Study form, the
+     *                   treatment will be directly linked to a particular siteData
+     */
     @Transactional
     public Treatment saveTreatment(Treatment treatment, Long siteDataId){
 

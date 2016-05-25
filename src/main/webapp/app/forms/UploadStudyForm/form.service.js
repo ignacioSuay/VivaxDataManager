@@ -3,7 +3,6 @@
         .factory('Form', function ($http) {
             return {
                 save: function(formDTO){
-                    console.log('In save function' +formDTO);
                     return $http.post("api/studyUpload/updatePublicationDTOAndAllEagerRelationships/",formDTO);
                 },
                 load: function(pubMedId){

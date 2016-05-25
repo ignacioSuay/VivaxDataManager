@@ -10,10 +10,16 @@ import java.util.Set;
 
 /**
  * Created by steven on 06/05/16.
- */
+ * DTO Class that will collect all data concerning a Publication
+ * (it's collection of studies, the collection of SiteDatas per each study
+ * and the collection of treatments per each SiteData)
+ **/
 public class FormResourceDTO {
 
     private Publication publication;
+    /**
+     * All studies and related collections are contained in this property
+     */
     private List<StudyDTO> studyDTOList;
 
     public FormResourceDTO() {

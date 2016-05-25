@@ -109,6 +109,14 @@ public class PublicationService {
         return publicationSearchRepository.search(queryStringQuery(query), pageable);
     }
 
+    /**
+     * Transactional method that updates and or saves the publication
+     * and all eager collections of a publication, this could be an already
+     * existing publication searched from the upload Study form or a newly created
+     * one in the same form.
+     * @param formResourceDTO
+     * @return
+     */
     @Transactional
     public FormResourceDTO updatePublicationAndAllCollections(FormResourceDTO formResourceDTO) {
         formResourceDTO.getStudyDTOList().stream().forEach(sd ->{

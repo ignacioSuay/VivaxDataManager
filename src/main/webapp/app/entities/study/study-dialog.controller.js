@@ -28,6 +28,9 @@
         var onSaveError = function () {
             vm.isSaving = false;
         };
+        /**
+         * Option for when save is called from the entities menu
+         */
         if(!ShareDataService.getFlag()) {
             vm.save = function () {
                 vm.isSaving = true;
@@ -38,6 +41,9 @@
                 }
             };
         }
+        /**
+         * Option for when save is called from the upload Study form
+         */
         else {
             vm.save = function () {
                 var sDTO = StudyDTO.save(vm.study);
@@ -47,6 +53,5 @@
         }
         vm.clear = function() {
             $uibModalInstance.dismiss('cancel');
-
-    }
+        }
 }})();

@@ -14,6 +14,9 @@
         vm.clear = function() {
             $uibModalInstance.dismiss('cancel');
         };
+        /**
+         * Option for when delete is called from the entities menu
+         */
         if (!flag) {
             vm.confirmDelete = function (id) {
                 SiteData.delete({id: id},
@@ -22,6 +25,9 @@
                     });
             };
         }
+        /**
+         * Option for when delete is called from the upload Study menu
+         */
         else {
             var siteData = ShareDataService.getObject();
             var publi = ShareDataService.getPubli();

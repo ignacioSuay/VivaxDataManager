@@ -10,6 +10,11 @@ import org.wwarn.vivax.manager.domain.Treatment;
 import org.wwarn.vivax.manager.domain.Location;
 import org.wwarn.vivax.manager.domain.Publication;
 
+/**
+ * Created by steven on 15/04/16.
+ * Class created to contain all properties we want to collect to show on
+ * the view option
+ */
 public class SiteDataViewDTO implements Serializable{
 
 	private long id;
@@ -196,9 +201,5 @@ public class SiteDataViewDTO implements Serializable{
     public String toString() {
         return "SiteDataViewDTO{" + "id=" + id + ", typeStudy=" + typeStudy + ", upper95CI=" + upper95CI + ", yearStart=" + yearStart + ", yearEnd=" + yearEnd + ", category=" + category + ", ref=" + ref + ", location=" + location + ", listTreatments=" + listTreatments + ", listPublications=" + listPublications + ", listTreatmentArmCodes=" + listTreatmentArmCodes + ", listPubMedIds=" + listPubMedIds + '}';
     }
-
-
-
-
 }
 

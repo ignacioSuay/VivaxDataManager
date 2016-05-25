@@ -11,7 +11,7 @@
 
         $scope.publi;
         $scope.pubMedId;
-        
+
         $scope.retrievePublicationByPubMedId = function () {
             Form.load($scope.pubMedId).then(function (result) {
                 $scope.publi = result.data;
@@ -20,8 +20,7 @@
         };
 
         $scope.saveAll = function(){
-            console.log($scope.publi);
-            console.log(Form.save($scope.publi));
+            Form.save($scope.publi);
         }
 
         $scope.newPublication = function () {
@@ -39,7 +38,6 @@
                 }
             }).result.then(function (result) {
                 $scope.pubMedId = result.pubMedId;
-                console.log(result);
                 $scope.retrievePublicationByPubMedId();
                 $scope.myHidingValue=true;
                 console.log('The pubMedId '+result.pubMedId);
@@ -111,7 +109,6 @@
             }).result.then(function (result) {
                 studyDTO.siteDatas.push(ShareDataService.getObject());
                 ShareDataService.setFlag(false);
-                console.log($scope.publi.studyDTOList);
             }, function () {
             })
         };
