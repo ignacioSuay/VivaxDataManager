@@ -14,6 +14,9 @@
         vm.clear = function() {
             $uibModalInstance.dismiss('cancel');
         };
+        /**
+         * Option for when delete is called from the entities menu
+         */
         if (!flag) {
             vm.confirmDelete = function (id) {
                 Treatment.delete({id: id},
@@ -22,6 +25,9 @@
                     });
             };
         }
+        /**
+         * Option for when delete is called from the upload Study menu
+         */
         else {
             var treatment = ShareDataService.getObject();
             var publi = ShareDataService.getPubli();
@@ -44,14 +50,7 @@
                     }
                 }
                 ShareDataService.setPubli(publi);
-                Treatment.delete({id: treatment.id
-                },
-                    function () {
-                        $uibModalInstance.close(true);
-                    });
             };
         }
     }
 })();
-
-

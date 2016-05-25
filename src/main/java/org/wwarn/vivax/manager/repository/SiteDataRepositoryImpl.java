@@ -29,6 +29,9 @@ import org.wwarn.vivax.manager.domain.util.Filter;
 import org.wwarn.vivax.manager.web.rest.TreatmentResource;
 import org.wwarn.vivax.manager.web.rest.dto.SiteDataViewDTO;
 
+/**
+ * Implementation of the custom repository
+ */
 public class SiteDataRepositoryImpl implements SiteDataRepositoryCustom{
 
 	Study s = new Study();
@@ -76,7 +79,12 @@ public class SiteDataRepositoryImpl implements SiteDataRepositoryCustom{
             objectFiller.setTypeStudy(siteData.getTypeStudy());
             objectFiller.setRef(siteData.getStudy().getRef());
             objectFiller.setLocation(siteData.getLocation());
-            objectFiller.setCategory(siteData.getCategory().getName());
+            if (siteData.getCategory()!=null) {
+                objectFiller.setCategory(siteData.getCategory().getName());
+            }
+            else{
+                objectFiller.setCategory("Uncategorised");
+            }
             objectFiller.setUpper95CI(siteData.getUpper95CI());
             objectFiller.setYearStart(siteData.getYearStart());
             objectFiller.setYearEnd(siteData.getYearEnd());

@@ -3,7 +3,6 @@ package org.wwarn.vivax.manager.service;
 import org.wwarn.vivax.manager.domain.Publication;
 import org.wwarn.vivax.manager.domain.SiteData;
 import org.wwarn.vivax.manager.domain.Study;
-import org.wwarn.vivax.manager.domain.Treatment;
 import org.wwarn.vivax.manager.repository.StudyRepository;
 import org.wwarn.vivax.manager.repository.search.StudySearchRepository;
 import org.slf4j.Logger;
@@ -15,10 +14,8 @@ import org.springframework.stereotype.Service;
 import org.wwarn.vivax.manager.web.rest.dto.StudyDTO;
 
 import javax.inject.Inject;
-import java.util.List;
+import java.util.HashSet;
 import java.util.Set;
-import java.util.stream.Collectors;
-import java.util.stream.StreamSupport;
 
 import static org.elasticsearch.index.query.QueryBuilders.*;
 
@@ -51,7 +48,7 @@ public class StudyService {
     }
 
     /**
-     * Save a study.
+     * Save a study returning a studyDTO entity.
      *
      * @param study the entity to save
      * @return the persisted entity
@@ -59,9 +56,11 @@ public class StudyService {
     public StudyDTO saveReturnDTO(Study study) {
         log.debug("Request to save Study : {}", study);
         Study result = studyRepository.save(study);
+        Set<SiteData>siteDatas = new HashSet<>();
         studySearchRepository.save(result);
         StudyDTO studyDTO = new StudyDTO();
-        studyDTO.setStudies(study);
+        studyDTO.setStudyDetails(study);
+        studyDTO.setSiteDatas(siteDatas);
         return studyDTO;
     }
 
@@ -93,7 +92,8 @@ public class StudyService {
 
     /**
      *  Delete the  study by id.
-     *
+     *  This method also removes all references to it
+     *  in any publications studies collection
      *  @param id the id of the entity
      */
     public void delete(Long id) {

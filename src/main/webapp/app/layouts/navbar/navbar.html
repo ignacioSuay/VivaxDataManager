@@ -49,7 +49,6 @@
 
                      </ul>
                 </li>
-                <!-- jhipster-needle-add-element-to-menu - JHipster will add new menu items here -->
                 <li ng-class="{active: vm.$state.includes('entity')}" ng-switch-when="true" uib-dropdown class="dropdown pointer">
                     <a class="dropdown-toggle" uib-dropdown-toggle href="" id="entity-menu">
                         <span>
@@ -73,7 +72,6 @@
                         &#xA0;<span >Site Data</span></a></li>
                         <li ui-sref-active="active" ><a ui-sref="publication" data-toggle="collapse" data-target=".navbar-collapse.in"><span class="glyphicon glyphicon-asterisk"></span>
                             &#xA0;<span >Publication</span></a></li>
-                        <!-- jhipster-needle-add-entity-to-menu - JHipster will add entities to the menu here -->
                     </ul>
                 </li>
                 <li ng-class="{active: vm.$state.includes('account')}" uib-dropdown class="dropdown pointer">
@@ -124,7 +122,6 @@
                             &#xA0;<span>Logs</span></a></li>
                         <li ng-hide="vm.inProduction" ui-sref-active="active"><a ui-sref="docs" data-toggle="collapse" data-target=".navbar-collapse.in"><span class="glyphicon glyphicon-book"></span>
                             &#xA0;<span>API</span></a></li>
-                        <!-- jhipster-needle-add-element-to-admin-menu - JHipster will add entities to the admin menu here -->
                     </ul>
                 </li>
             </ul>

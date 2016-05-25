@@ -11,21 +11,16 @@
 
         $scope.publi;
         $scope.pubMedId;
-        $scope.studies = [];
-        $scope.siteDatas = [];
-        $scope.treatments = [];
 
         $scope.retrievePublicationByPubMedId = function () {
             Form.load($scope.pubMedId).then(function (result) {
                 $scope.publi = result.data;
                 $scope.myHidingValue=true;
-                $scope.studies=$scope.publi.studyDTOList;
             });
         };
 
         $scope.saveAll = function(){
-            //console.log($scope.publi);
-            console.log(Form.save($scope.publi));
+            Form.save($scope.publi);
         }
 
         $scope.newPublication = function () {
@@ -42,6 +37,7 @@
                     }
                 }
             }).result.then(function (result) {
+                $scope.pubMedId = result.pubMedId;
                 $scope.retrievePublicationByPubMedId();
                 $scope.myHidingValue=true;
                 console.log('The pubMedId '+result.pubMedId);
@@ -65,11 +61,8 @@
                     }
                 }
             }).result.then(function (result) {
-                $scope.publi.studyDTOList.push(result);
-                var position = $scope.publi.studyDTOList.length-1;
-                $scope.publi.studyDTOList[position].studies=result;
-                $scope.publi.studyDTOList[position].studies.publicationss.push($scope.publi.publication);
-                $scope.publi.studyDTOList[position].siteDatas = [];
+                result.data.studyDetails.publicationss.push($scope.publi.publication);
+                $scope.publi.studyDTOList.push(result.data);
                 ShareDataService.setFlag(false);
             }, function () {
             })
@@ -98,6 +91,9 @@
         };
 
         $scope.newSiteData = function (studyDTO) {
+            ShareDataService.setFlag(true);
+            ShareDataService.setPubli($scope.publi);
+            ShareDataService.setObject(null);
             $scope.myHidingValue=true;
             $uibModal.open({
                 templateUrl: 'app/entities/site-data/site-data-dialog.html',
@@ -111,7 +107,8 @@
                     }
                 }
             }).result.then(function (result) {
-                studyDTO.siteDatas.push(result);
+                studyDTO.siteDatas.push(ShareDataService.getObject());
+                ShareDataService.setFlag(false);
             }, function () {
             })
         };
@@ -155,7 +152,6 @@
                 }
             }).result.then(function (result) {
                 siteData = ShareDataService.getObject();
-                /*siteData.treatments.push(result);*/
                 ShareDataService.setFlag(false);
             }, function () {
             })
@@ -184,4 +180,3 @@
         };
     }
 })();
-

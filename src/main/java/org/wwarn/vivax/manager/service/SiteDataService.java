@@ -98,6 +98,12 @@ public class SiteDataService {
         return siteDataSearchRepository.search(queryStringQuery(query), pageable);
     }
 
+    /**
+     * Transactional method to delete a given SiteData and
+     * all the references to it in Treatments collections
+     * of SiteDatas
+     * @param id
+     */
     @Transactional
     public void deleteSiteData(Long id){
         SiteData siteData = siteDataRepository.findOne(id);

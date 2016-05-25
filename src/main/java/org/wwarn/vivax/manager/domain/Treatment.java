@@ -106,9 +106,4 @@ public class Treatment implements Serializable {
             ", treatmentArmCode='" + treatmentArmCode + "'" +
             '}';
     }
-
-    public void removeFromSiteDatas(SiteData siteData) {
-        this.getSiteDatas().remove(siteData);
-        siteData.getTreatments().remove(this);
-    }
 }

@@ -1,4 +1,4 @@
-<div class="container">
+<div class="container-fluid">
     <h1>Publication Upload Form</h1>
     <div class="form-group row">
         <label class="col-md-2 form-control-label">Search Publication by pubMedId:</label>
@@ -56,22 +56,22 @@
         </div>
         <div class="well" ng-repeat="studyDTO in publi.studyDTOList">
             <h3>Study {{$index+1}}:</h3>
-            <div class="form-group row" ng-model="studyDTO.studies">
+            <div class="form-group row" ng-model="studyDTO.studyDetails">
                 <label class="col-md-2 form-control-label">Study Ref:</label>
                 <div class="col-md-10">
-                    <input type="text" class="form-control ng-pristine ng-valid ng-not-empty ng-touched" name="StudyRefForm" id="existingPublicationStudyRef" ng-model="studyDTO.studies.ref" readonly aria-invalid="false">
+                    <input type="text" class="form-control ng-pristine ng-valid ng-not-empty ng-touched" name="StudyRefForm" id="existingPublicationStudyRef" ng-model="studyDTO.studyDetails.ref" readonly aria-invalid="false">
                 </div>
             </div>
-            <div class="form-group row" ng-model="studyDTO.studies">
+            <div class="form-group row" ng-model="studyDTO.studyDetails">
                 <label class="col-md-2 form-control-label">Study Type:</label>
                 <div class="col-md-10">
-                    <input type="text" class="form-control ng-pristine ng-valid ng-not-empty ng-touched" name="StudyTypeForm" id="existingPublicationStudyType" ng-model="studyDTO.studies.studyType" aria-invalid="false">
+                    <input type="text" class="form-control ng-pristine ng-valid ng-not-empty ng-touched" name="StudyTypeForm" id="existingPublicationStudyType" ng-model="studyDTO.studyDetails.studyType" aria-invalid="false">
                 </div>
             </div>
             <div class="form-group row">
                 <label class="col-md-2 form-control-label">Publications:</label>
                 <div class="col-md-10">
-                    <input type="text" ng-repeat="publication in studyDTO.studies.publicationss" class="form-control ng-pristine ng-valid ng-not-empty ng-touched" name="StudyPublicationsForm" id="existingPublicationStudyPublications" ng-model="publication.title" aria-invalid="false">
+                    <input type="text" ng-repeat="publication in studyDTO.studyDetails.publicationss" class="form-control ng-pristine ng-valid ng-not-empty ng-touched" name="StudyPublicationsForm" id="existingPublicationStudyPublications" ng-model="publication.title" aria-invalid="false">
                </div>
             </div>
             <div class="form-group row">

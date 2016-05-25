@@ -9,7 +9,6 @@
 
     function PasswordController (Auth, Principal) {
         var vm = this;
-
         vm.changePassword = changePassword;
         vm.doNotMatch = null;
         vm.error = null;
