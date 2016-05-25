@@ -1,45 +1,40 @@
 body {
-    background-image:url(../images/background.jpg);
-    background-repeat: repeat;
-    font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
-    color: #333; }
+  background-image: url(../content/images/background.jpg);
+  background-repeat: repeat;
+  font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+  color: #333; }
 
-#welcome{
-    background-color: lightblue;
-    width: 500px;
-    opacity: .5;
-}
+#welcome {
+  background-color: lightblue;
+  width: 500px;
+  opacity: .5; }
 
 #indexContentDiv {
-    background-color: transparent;
-    border-color: transparent;
-}
+  background-color: transparent;
+  border-color: transparent; }
 
 #features .features-item {
-    max-width: 320px;
-    position:relative;
-    display: block;
-    margin-left: auto;
-    margin-right: auto;
-    text-align: center;
-    padding: 20px;
-    height: 270px;
-}
+  max-width: 320px;
+  position: relative;
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+  text-align: center;
+  padding: 20px;
+  height: 270px; }
 
 #features {
-    background-color: lightblue;
-    width:95%;
-    opacity: .7;
-}
+  background-color: lightblue;
+  width: 95%;
+  opacity: .7; }
 
 #features .features-item .icon {
-    padding-top: 11%;
-    font-size: 50px;
-    border-radius: 50%;
-    background-color: #337ab7;
-    width: 120px;
-    height: 120px;
-    text-align: center;
-    color: #fff;
-    display: inline-block;
-}
+  padding-top: 11%;
+  font-size: 50px;
+  border-radius: 50%;
+  background-color: #337ab7;
+  width: 120px;
+  height: 120px;
+  text-align: center;
+  color: #fff;
+  display: inline-block; }

@@ -15,35 +15,26 @@
     <hr>
     <div ng-show="myHidingValue" class>
         <h2>Publication Details</h2>
+        <br>
         <div class="form-group row" ng-model="publi">
             <label class="col-md-2 form-control-label">PubMedId:</label>
-            <div class="col-md-10">
-                <input type="number" class="form-control ng-pristine ng-valid ng-not-empty ng-touched" name="pubMedIdForm" id="existingPublicationPubMedId" ng-model="publi.publication.pubMedId" readonly aria-invalid="false">
-            </div>
+            <p class="form-control-static, col-md-10">{{publi.publication.pubMedId}}</p>
         </div>
         <div class="form-group row" ng-model="publi">
             <label class="col-md-2 form-control-label">Title:</label>
-            <div class="col-md-10">
-                <input type="text" class="form-control ng-pristine ng-valid ng-not-empty ng-touched" name="pubTitleForm" id="existingPublicationTitle" ng-model="publi.publication.title" aria-invalid="false">
-            </div>
+            <p class="form-control-static, , col-md-10">{{publi.publication.title}}</p>
         </div>
         <div class="form-group row" ng-model="publi">
             <label class="col-md-2 form-control-label">Authors:</label>
-            <div class="col-md-10">
-                <input type="text" class="form-control ng-pristine ng-valid ng-not-empty ng-touched" name="pubAuthorsForm" id="existingPublicationAuthors" ng-model="publi.publication.authors" aria-invalid="false">
-            </div>
+            <p class="form-control-static, col-md-10">{{publi.publication.authors}}</p>
         </div>
         <div class="form-group row" ng-model="publi">
             <label class="col-md-2 form-control-label">Journal:</label>
-            <div class="col-md-10">
-                <input type="text" class="form-control ng-pristine ng-valid ng-not-empty ng-touched" name="pubJournalForm" id="existingPublicationJournal" ng-model="publi.publication.journal" aria-invalid="false">
-            </div>
+            <p class="form-control-static, col-md-10">{{publi.publication.journal}}</p>
         </div>
         <div class="form-group row" ng-model="publi">
             <label class="col-md-2 form-control-label">Year Publish:</label>
-            <div class="col-md-10">
-                <input type="number" class="form-control ng-pristine ng-valid ng-not-empty ng-touched" name="pubYearPublishForm" id="existingPublicationYear" ng-model="publi.publication.yearPublish" aria-invalid="false">
-            </div>
+            <p class="form-control-static, col-md-10">{{publi.publication.yearPublish}}</p>
         </div>
         <hr>
         <h2>Study Details</h2>
@@ -57,15 +48,23 @@
         <div class="well" ng-repeat="studyDTO in publi.studyDTOList">
             <h3>Study {{$index+1}}:</h3>
             <div class="form-group row" ng-model="studyDTO.studyDetails">
+                <label class="col-md-2 form-control-label">Id:</label>
+                <div class="col-md-4">
+                    <input type="text" class="form-control ng-pristine ng-valid ng-not-empty ng-touched" name="StudyRefForm" id="existingPublicationStudyId" ng-model="studyDTO.studyDetails.id" readonly aria-invalid="false">
+                </div>
                 <label class="col-md-2 form-control-label">Study Ref:</label>
-                <div class="col-md-10">
+                <div class="col-md-4">
                     <input type="text" class="form-control ng-pristine ng-valid ng-not-empty ng-touched" name="StudyRefForm" id="existingPublicationStudyRef" ng-model="studyDTO.studyDetails.ref" readonly aria-invalid="false">
                 </div>
             </div>
             <div class="form-group row" ng-model="studyDTO.studyDetails">
                 <label class="col-md-2 form-control-label">Study Type:</label>
-                <div class="col-md-10">
+                <div class="col-md-4">
                     <input type="text" class="form-control ng-pristine ng-valid ng-not-empty ng-touched" name="StudyTypeForm" id="existingPublicationStudyType" ng-model="studyDTO.studyDetails.studyType" aria-invalid="false">
+                </div>
+                <label class="col-md-2 form-control-label">Number of SiteDatas:</label>
+                <div class="col-md-4">
+                    <input type="text" class="form-control ng-pristine ng-valid ng-not-empty ng-touched" name="StudyRefForm" id="existingPublicationNumSite" ng-model="studyDTO.studyDetails.numSites" readonly aria-invalid="false">
                 </div>
             </div>
             <div class="form-group row">
@@ -92,77 +91,113 @@
         <div class="well" ng-repeat="siteData in studyDTO.siteDatas">
             <h3>SiteData {{$index+1}}:</h3>
            <div class="form-group row" ng-model="siteData">
+               <label class="col-md-2 form-control-label">Id:</label>
+               <div class="col-md-4">
+                   <input type="text" class="form-control ng-pristine ng-valid ng-not-empty ng-touched" name="SiteDataCountryForm" id="existingPublicatiodsfnSDCountry" ng-model="siteData.id" readonly aria-invalid="false">
+               </div>
                <label class="col-md-2 form-control-label">Category:</label>
-                <div class="col-md-10">
-                    <input type="text" class="form-control ng-pristine ng-valid ng-not-empty ng-touched" name="SiteDataCategoryForm" id="existingPublicationSDCategory" ng-model="siteData.category.name" aria-invalid="false">
-                </div>
-            </div>
-            <div class="form-group row" ng-model="siteData">
+               <div class="col-md-4">
+                   <input type="text" class="form-control ng-pristine ng-valid ng-not-empty ng-touched" name="SiteDataCategoryForm" id="existingPublicationSDCategory" ng-model="siteData.category.name" aria-invalid="false">
+               </div>
+           </div>
+               <div class="form-group row" ng-model="siteData">
                 <label class="col-md-2 form-control-label">Country:</label>
-                <div class="col-md-10">
+                <div class="col-md-4">
                     <input type="text" class="form-control ng-pristine ng-valid ng-not-empty ng-touched" name="SiteDataCountryForm" id="existingPublicationSDCountry" ng-model="siteData.location.country" aria-invalid="false">
                 </div>
-            </div>
-            <div class="form-group row" ng-model="siteData">
-                <label class="col-md-2 form-control-label">Id:</label>
-                <div class="col-md-10">
-                    <input type="text" class="form-control ng-pristine ng-valid ng-not-empty ng-touched" name="SiteDataCountryForm" id="existingPublicatiodsfnSDCountry" ng-model="siteData.id" aria-invalid="false">
-                </div>
-            </div>
-            <div class="form-group row" ng-model="siteData">
                 <label class="col-md-2 form-control-label">Location:</label>
-                <div class="col-md-10">
+                <div class="col-md-4">
                     <input type="text" class="form-control ng-pristine ng-valid ng-not-empty ng-touched" name="SiteDataLocationForm" id="existingPublicationSDLocation" ng-model="siteData.location.location" aria-invalid="false">
                 </div>
             </div>
             <div class="form-group row" ng-model="siteData">
                 <label class="col-md-2 form-control-label">upper95CI:</label>
-                <div class="col-md-10">
+                <div class="col-md-4">
                     <input type="text" class="form-control ng-pristine ng-valid ng-not-empty ng-touched" name="SiteDataUpper95Form" id="existingPublicationSDUpper95" ng-model="siteData.upper95CI" aria-invalid="false">
                 </div>
-            </div>
-            <div class="form-group row">
-                <button ng-click="deleteSiteData(siteData, $index)"
-                        class="btn btn-danger btn-sm">
-                     Remove SiteData
-                </button>
-            </div>
-            <hr>
-            <h4>Treatments for SiteData {{$index+1}}</h4>
-            <div class="table-responsive">
-                <table class="jh-table table table-striped">
-                    <thead>
-                    <tr jh-sort="vm.predicate" ascending="vm.reverse" callback="vm.transition()">
-                        <th jh-sort-by="id"><span>Treatment Id</span> <span class="glyphicon glyphicon-sort"></span></th>
-                        <th jh-sort-by="studyRef"><span>Treatment Name</span> <span class="glyphicon glyphicon-sort"></span></th>
-                        <th jh-sort-by="country"><span>Treatment Arm Code</span> <span class="glyphicon glyphicon-sort"></span></th>
-                        <th></th>
-                    </tr>
-                    </thead>
-                    <tbody>
-                    <tr ng-repeat="treatment in siteData.treatments track by treatment.id">
-                        <td>{{treatment.id}}</td>
-                        <td>{{treatment.treatmentName}}</td>
-                        <td>{{treatment.treatmentArmCode}}</td>
-                        <td class="text-right">
-                            <button ng-click="deleteTreatment(treatment, siteData)"
-                                class="btn btn-danger btn-sm">
-                                <span class="glyphicon glyphicon-remove-circle"></span>
-                                <span class="hidden-xs hidden-sm"></span>
-                            </button>
-                        </td>
-                    </tr>
-                    </tbody>
-                </table>
-            </div>
-            <div class="form-group row">
-                <div class="col-md-2">
-                    <a class="btn btn-success" ng-click="newTreatment($index, siteData)">
-                        Add Treatment
-                    </a>
+                <label class="col-md-2 form-control-label">Lower95CI:</label>
+                <div class="col-md-4">
+                    <input type="text" class="form-control ng-pristine ng-valid ng-not-empty ng-touched" name="SiteDataLocationForm" id="existingPublicationSD" ng-model="siteData.lowest95CI" aria-invalid="false">
                 </div>
             </div>
-       </div>
+               <div class="form-group row" ng-model="siteData">
+                   <label class="col-md-2 form-control-label">Year Start:</label>
+                   <div class="col-md-4">
+                       <input type="text" class="form-control ng-pristine ng-valid ng-not-empty ng-touched" name="SiteDataUpper95Form" id="existingPublicationSDYearStart" ng-model="siteData.yearStart" aria-invalid="false">
+                   </div>
+                   <label class="col-md-2 form-control-label">Year End:</label>
+                   <div class="col-md-4">
+                       <input type="text" class="form-control ng-pristine ng-valid ng-not-empty ng-touched" name="SiteDataLocationForm" id="existingPublcationSDYearEnd" ng-model="siteData.yearEnd" aria-invalid="false">
+                   </div>
+               </div>
+               <div class="form-group row" ng-model="siteData">
+                   <label class="col-md-2 form-control-label">Study Type:</label>
+                   <div class="col-md-4">
+                       <input type="text" class="form-control ng-pristine ng-valid ng-not-empty ng-touched" name="SiteDataUpper95Form" id="existingPublicationSDStudyType" ng-model="siteData.typeStudy" aria-invalid="false">
+                   </div>
+                   <label class="col-md-2 form-control-label">Number Enroled:</label>
+                   <div class="col-md-4">
+                       <input type="text" class="form-control ng-pristine ng-valid ng-not-empty ng-touched" name="SiteDataLocationForm" id="existingPublcationSDNumEnroled" ng-model="siteData.numEnroled" aria-invalid="false">
+                   </div>
+               </div>
+               <div class="form-group row" ng-model="siteData">
+                   <label class="col-md-2 form-control-label">Day 28 Recurrence:</label>
+                   <div class="col-md-4">
+                       <input type="text" class="form-control ng-pristine ng-valid ng-not-empty ng-touched" name="SiteDataUpper95Form" id="existingPublicationSDday28Recurrence" ng-model="siteData.day28Recurrence" aria-invalid="false">
+                   </div>
+                   <label class="col-md-2 form-control-label">Num Patients Treat CQ:</label>
+                   <div class="col-md-4">
+                       <input type="text" class="form-control ng-pristine ng-valid ng-not-empty ng-touched" name="SiteDataLocationForm" id="existingPublcationSDnumPatientsTreatCQ" ng-model="siteData.numPatientsTreatCQ" aria-invalid="false">
+                   </div>
+               </div>
+               <div class="form-group row" ng-model="siteData">
+                   <label class="col-md-2 form-control-label">Comments:</label>
+                   <div class="col-md-10">
+                       <input type="text" class="form-control ng-pristine ng-valid ng-not-empty ng-touched" name="SiteDataUpper95Form" id="existingPublicationSDComments" ng-model="siteData.comments" aria-invalid="false">
+                   </div>
+               </div>
+                <div class="form-group row">
+                    <button ng-click="deleteSiteData(siteData, $index)"
+                            class="btn btn-danger btn-sm">
+                         Remove SiteData
+                    </button>
+                </div>
+                <hr>
+                <h4>Treatments for SiteData {{$index+1}}</h4>
+                <div class="table-responsive">
+                    <table class="jh-table table table-striped">
+                        <thead>
+                        <tr jh-sort="vm.predicate" ascending="vm.reverse" callback="vm.transition()">
+                            <th jh-sort-by="id"><span>Treatment Id</span> <span class="glyphicon glyphicon-sort"></span></th>
+                            <th jh-sort-by="studyRef"><span>Treatment Name</span> <span class="glyphicon glyphicon-sort"></span></th>
+                            <th jh-sort-by="country"><span>Treatment Arm Code</span> <span class="glyphicon glyphicon-sort"></span></th>
+                            <th></th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        <tr ng-repeat="treatment in siteData.treatments track by treatment.id">
+                            <td>{{treatment.id}}</td>
+                            <td>{{treatment.treatmentName}}</td>
+                            <td>{{treatment.treatmentArmCode}}</td>
+                            <td class="text-right">
+                                <button ng-click="deleteTreatment(treatment, siteData)"
+                                    class="btn btn-danger btn-sm">
+                                    <span class="glyphicon glyphicon-remove-circle"></span>
+                                    <span class="hidden-xs hidden-sm"></span>
+                                </button>
+                            </td>
+                        </tr>
+                        </tbody>
+                    </table>
+                </div>
+                <div class="form-group row">
+                    <div class="col-md-2">
+                        <a class="btn btn-success" ng-click="newTreatment($index, siteData)">
+                            Add Treatment
+                        </a>
+                    </div>
+                </div>
+             </div>
         </div>
         <div class="form-group row">
             <div class="col-md-2">
