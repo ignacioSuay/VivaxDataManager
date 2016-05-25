@@ -43,7 +43,7 @@
                 </tr>
             </thead>
             <tbody>
-                <tr ng-repeat="study in vm.studyDetails track by study.id">
+                <tr ng-repeat="study in vm.studies track by study.id">
                     <td><a ui-sref="study-detail({id:study.id})">{{study.id}}</a></td>
                     <td>{{study.numSites}}</td>
                     <td>{{study.ref}}</td>

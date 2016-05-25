@@ -9,7 +9,7 @@
 
     function AuditsController ($filter, AuditsService, ParseLinks) {
         var vm = this;
-
+        $scope.myHidingValueIndex=true;
         vm.audits = null;
         vm.fromDate = null;
         vm.links = null;

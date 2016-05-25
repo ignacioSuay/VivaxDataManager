@@ -12,6 +12,7 @@
     <link rel="stylesheet" href="bower_components/angular-loading-bar/build/loading-bar.css" />
     <!-- endbower -->
     <link rel="stylesheet" href="content/css/vendor.css">
+    <link rel="stylesheet" href="http://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.4.0/css/font-awesome.min.css">
     <!-- endbuild -->
     <!-- build:css content/css/main.css -->
     <link rel="stylesheet" href="content/css/main.css">
@@ -24,10 +25,11 @@
 <div ng-show="{{ENV === 'dev'}}" class="development" ng-cloak></div>
 <div ui-view="navbar" ng-cloak></div>
 <div class="container">
-    <div class="well" ui-view="content"></div>
+    <div class="well" ui-view="content" id="indexContentDiv"></div>
 
     <div class="footer" ng-cloak>
-        <p>This is your footer</p>
+        <p>From WWARN with <span class="glyphicon glyphicon-heart"></span></p>
+
     </div>
 </div>
 
@@ -190,13 +192,13 @@
 <script src="app/admin/audits/audits.controller.js"></script>
 <script src="app/account/settings/settings.state.js"></script>
 <script src="app/account/settings/settings.controller.js"></script>
-<script src="app/account/password/password.state.js"></script>
-<script src="app/account/password/password.controller.js"></script>
-<script src="app/account/password/password-strength-bar.directive.js"></script>
 <script src="app/account/sessions/sessions.state.js"></script>
 <script src="app/account/sessions/sessions.controller.js"></script>
 <script src="app/account/register/register.state.js"></script>
 <script src="app/account/register/register.controller.js"></script>
+<script src="app/account/password/password.state.js"></script>
+<script src="app/account/password/password.controller.js"></script>
+<script src="app/account/password/password-strength-bar.directive.js"></script>
 <script src="app/account/activate/activate.state.js"></script>
 <script src="app/account/activate/activate.controller.js"></script>
 <script src="app/views/views.state.js"></script>
