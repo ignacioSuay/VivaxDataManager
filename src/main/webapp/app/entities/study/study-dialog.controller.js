@@ -12,6 +12,11 @@
         vm.study = entity;
         vm.publications = Publication.query();
         vm.sitedatas = SiteData.query();
+        StudyDTO.getStudyTypes().then(function (result) {
+            vm.types = result.data;
+            console.log(vm.types);
+        });
+
         vm.load = function(id) {
             Study.get({id : id}, function(result) {
                 vm.study = result;
@@ -33,6 +38,8 @@
          */
         if(!ShareDataService.getFlag()) {
             vm.save = function () {
+                console.log(vm.study);
+                vm.study.studyType.trim();
                 vm.isSaving = true;
                 if (vm.study.id !== null) {
                     Study.update(vm.study, onSaveSuccess, onSaveError);
@@ -46,6 +53,9 @@
          */
         else {
             vm.save = function () {
+                var str = vm.study.studyType;
+                str = str.trim();
+                vm.study.studyType=str;
                 var sDTO = StudyDTO.save(vm.study);
                 $uibModalInstance.close(sDTO);
                 vm.isSaving = false;

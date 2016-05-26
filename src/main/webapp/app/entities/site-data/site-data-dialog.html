@@ -79,12 +79,18 @@
                     ng-model="vm.siteData.yearStart"
                      />
         </div>
-
-        <div class="form-group">
+        <!--<div class="form-group">
             <label for="field_category">category</label>
             <select class="form-control" id="field_category" name="category" ng-model="vm.siteData.category" ng-options="category as category.name for category in vm.categorys track by category.id">
                 <option value=""></option>
             </select>
+        </div>-->
+        <div class="form-group">
+            <label for="singleSelect">Category</label>
+            <!--<select class="form-control" id="field_type" multiple name="types" ng-model="study.studyType.singleSelect">
+                --><select name="singleSelect" id="singleSelect" ng-model="vm.siteData.Category">
+            <option ng-repeat="category in vm.categorys"> <!--value="{{study.studyType}}"-->{{category.name}}</option>
+        </select>
         </div>
         <div class="form-group">
             <label for="field_location">location</label>

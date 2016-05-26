@@ -2,6 +2,17 @@
     'use strict';
     angular
         .module('vivaxDataManagerApp')
+
+        .factory('LocationHttp', function ($http) {
+            return {
+                getDistinctCountries: function(){
+                    return $http.get("api/location/countries");
+                },
+                getDistinctLocations: function(){
+                    return $http.get("api/location/locations");
+                }
+            }
+        })
         .factory('Location', Location);
 
     Location.$inject = ['$resource'];

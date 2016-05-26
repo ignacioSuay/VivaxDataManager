@@ -193,14 +193,9 @@ public class StudyResource {
         method = RequestMethod.GET,
         produces = MediaType.APPLICATION_JSON_VALUE)
     @Timed
-    public /*ResponseEntity*/List<String> getStudyTypes() {
+    public List<String> getStudyTypes() {
         log.debug("REST request to get Study Types : {}");
-        List<String> listTypes = studyService.findStudyTypes();
-        /*return Optional.ofNullable(listTypes)
-            .map(result -> new ResponseEntity<>(
-                result,
-                HttpStatus.OK))
-            .orElse(new ResponseEntity<>(HttpStatus.NOT_FOUND));*/
+        List<String> listTypes = studyRepository.findStudyTypes();
         return listTypes;
     }
 }

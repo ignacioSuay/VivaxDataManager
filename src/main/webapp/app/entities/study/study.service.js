@@ -7,6 +7,9 @@
             return {
                 save: function(study){
                     return $http.post("api/studies/createStudyDTO/",study);
+                },
+                getStudyTypes: function(){
+                    return $http.get("api/studies/types");
                 }
             }
         })

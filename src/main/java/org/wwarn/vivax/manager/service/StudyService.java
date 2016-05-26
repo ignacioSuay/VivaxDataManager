@@ -122,14 +122,4 @@ public class StudyService {
         log.debug("Request to search for a page of Studies for query {}", query);
         return studySearchRepository.search(queryStringQuery(query), pageable);
     }
-
-    /**
-     * Search for the study corresponding to the query.
-     *  @return the list of types
-     */
-    @Transactional(readOnly = true)
-    public List<String> findStudyTypes() {
-        log.debug("Request to search for all study types");
-        return studyRepository.findStudyTypes();
-    }
 }
