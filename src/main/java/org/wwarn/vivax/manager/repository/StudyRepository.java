@@ -18,4 +18,7 @@ public interface StudyRepository extends JpaRepository<Study,Long> {
     @Query("select study from Study study left join fetch study.publications where study.id =:id")
     Study findOneWithEagerRelationships(@Param("id") Long id);
 
+    @Query("select distinct studyType from Study")
+    List<String> findStudyTypes();
+
 }

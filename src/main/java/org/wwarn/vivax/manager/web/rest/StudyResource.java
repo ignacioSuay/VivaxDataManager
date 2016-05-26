@@ -2,6 +2,7 @@ package org.wwarn.vivax.manager.web.rest;
 
 import com.codahale.metrics.annotation.Timed;
 import org.wwarn.vivax.manager.domain.Study;
+import org.wwarn.vivax.manager.repository.StudyRepository;
 import org.wwarn.vivax.manager.service.StudyService;
 import org.wwarn.vivax.manager.web.rest.dto.StudyDTO;
 import org.wwarn.vivax.manager.web.rest.util.HeaderUtil;
@@ -37,6 +38,9 @@ public class StudyResource {
 
     @Inject
     private StudyService studyService;
+
+    @Inject
+    private StudyRepository studyRepository;
 
     /**
      * POST  /studies : Create a new study.
@@ -180,4 +184,23 @@ public class StudyResource {
         return new ResponseEntity<>(page.getContent(), headers, HttpStatus.OK);
     }
 
+    /**
+     * GET  /studies/categories : get all the studies types.
+     *
+     * @return the ResponseEntity with status 200 (OK) and with list of types, or with status 404 (Not Found)
+     */
+    @RequestMapping(value = "/studies/types",
+        method = RequestMethod.GET,
+        produces = MediaType.APPLICATION_JSON_VALUE)
+    @Timed
+    public /*ResponseEntity*/List<String> getStudyTypes() {
+        log.debug("REST request to get Study Types : {}");
+        List<String> listTypes = studyService.findStudyTypes();
+        /*return Optional.ofNullable(listTypes)
+            .map(result -> new ResponseEntity<>(
+                result,
+                HttpStatus.OK))
+            .orElse(new ResponseEntity<>(HttpStatus.NOT_FOUND));*/
+        return listTypes;
+    }
 }
