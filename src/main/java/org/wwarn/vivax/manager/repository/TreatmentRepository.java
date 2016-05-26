@@ -13,4 +13,7 @@ import java.util.List;
  * Spring Data JPA repository for the Treatment entity.
  */
 public interface TreatmentRepository extends JpaRepository<Treatment,Long> {
+
+    @Query("from Treatment t order by t.treatmentName")
+    List<Treatment> findAllNonPagedTreatments();
 }

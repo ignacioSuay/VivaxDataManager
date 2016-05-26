@@ -5,13 +5,13 @@
         .module('vivaxDataManagerApp')
         .controller('UploadStudyController', UploadStudyController);
 
-    UploadStudyController.$inject = ['$scope', '$state', '$http', 'Form', '$uibModal', 'SiteData', 'StudyDTO', 'ShareDataService', 'Category', 'LocationHttp'];
+    UploadStudyController.$inject = ['$scope', '$state', '$http', 'Form', '$uibModal', 'SiteData', 'StudyDTO', 'ShareDataService', 'Category', 'LocationHttp', 'TreatmentHttp'];
 
-    function UploadStudyController ($scope, $state, $http, Form, $uibModal, SiteData, StudyDTO, ShareDataService, Category, LocationHttp) {
+    function UploadStudyController ($scope, $state, $http, Form, $uibModal, SiteData, StudyDTO, ShareDataService, Category, LocationHttp, TreatmentHttp) {
 
         $scope.publi;
         $scope.pubMedId;
-        $scope.theValue='Tu Puta Madre';
+
         StudyDTO.getStudyTypes().then(function (result) {
             $scope.types = result.data;
         });
@@ -20,6 +20,9 @@
         });
         LocationHttp.getDistinctLocations().then(function (result) {
             $scope.locations = result.data;
+        });
+        TreatmentHttp.getDistinctTreatments().then(function (result) {
+            $scope.treatments = result.data;
         });
         $scope.categorys = Category.query();
 
