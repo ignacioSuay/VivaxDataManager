@@ -53,9 +53,11 @@
          */
         else {
             vm.save = function () {
-                var str = vm.study.studyType;
-                str = str.trim();
-                vm.study.studyType=str;
+                if (vm.study.studyType!==undefined){
+                    var str = vm.study.studyType;
+                    str = str.trim();
+                    vm.study.studyType = str;
+                }
                 var sDTO = StudyDTO.save(vm.study);
                 $uibModalInstance.close(sDTO);
                 vm.isSaving = false;

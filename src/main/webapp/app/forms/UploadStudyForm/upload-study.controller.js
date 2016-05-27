@@ -11,6 +11,9 @@
 
         $scope.publi;
         $scope.pubMedId;
+        $scope.newTreat;
+        var flag=false;
+        $scope.newTreatments = [{}];
 
         StudyDTO.getStudyTypes().then(function (result) {
             $scope.types = result.data;
@@ -57,6 +60,35 @@
                 console.log('The pubMedId '+result.pubMedId);
             }, function () {
             })
+        };
+
+        $scope.setTreatment = function(item){
+            $scope.newTreat = item;
+        }
+
+        $scope.addTreatments = function (siteData) {
+            for (var i=0; i<$scope.newTreatments.length; i++) {
+                if(i>0){
+                    console.log(i);
+                    if($scope.newTreatments[i].id === $scope.newTreat.id) {
+                        flag = false;
+                        alert('Sorry, duplicated treatment!');
+                        $scope.newTreatments.splice(i, 1);
+                    }
+                    else{
+                        flag=true;
+                    }
+                }
+                else{
+                    flag=true;
+                }
+            }
+            if(flag===true){
+                $scope.newTreatments.push($scope.newTreat);
+                console.log($scope.newTreatments);
+                siteData.treatments.push($scope.newTreat);
+                $scope.$item='';
+            }
         };
 
         $scope.newStudy = function(studyDTOList) {
@@ -171,26 +203,8 @@
             })
         };
 
-        $scope.deleteTreatment = function(treatment) {
-            ShareDataService.setFlag(true);
-            ShareDataService.setObject(treatment);
-            ShareDataService.setPubli($scope.publi);
-            $uibModal.open({
-                templateUrl: 'app/entities/treatment/treatment-delete-dialog.html',
-                controller: 'TreatmentDeleteController',
-                size: 'lg',
-                controllerAs: 'vm',
-                backdrop: 'static',
-                resolve: {
-                    entity: function () {
-                        return {};
-                    }
-                }
-            }).result.then(function (result) {
-                $scope.publi=ShareDataService.getPubli();
-                ShareDataService.setFlag(false);
-            }, function () {
-            })
+        $scope.deleteTreatment = function(index, siteData) {
+            siteData.treatments.splice(index, 1);
         };
     }
 })();

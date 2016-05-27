@@ -50,6 +50,7 @@
                     }
                 }
                 ShareDataService.setPubli(publi);
+                $uibModalInstance.close(true);
             };
         }
     }

@@ -6,9 +6,9 @@
         .controller('SiteDataViewController', SiteDataViewController);
 
     SiteDataViewController.$inject = ['$scope', '$state', 'SiteDataViewDTO', 'SiteDataSearch'];
-    
+
     function SiteDataViewController ($scope, $state, SiteDataViewDTO, SiteDataSearch) {
-            
+
         $scope.names = [
             {text: "Study Type", type: "text"},
             {text: "Study Ref", type: "text"},
