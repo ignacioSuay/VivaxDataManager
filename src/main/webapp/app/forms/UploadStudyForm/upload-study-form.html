@@ -176,32 +176,6 @@
                 </div>
                 <hr>
                 <h4>Treatments for SiteData {{$index+1}}</h4>
-                <!--<div class="table-responsive">
-                    <table class="jh-table table table-striped">
-                        <thead>
-                        <tr jh-sort="vm.predicate" ascending="vm.reverse" callback="vm.transition()">
-                            <th jh-sort-by="id"><span>Treatment Id</span> <span class="glyphicon glyphicon-sort"></span></th>
-                            <th jh-sort-by="studyRef"><span>Treatment Name</span> <span class="glyphicon glyphicon-sort"></span></th>
-                            <th jh-sort-by="country"><span>Treatment Arm Code</span> <span class="glyphicon glyphicon-sort"></span></th>
-                            <th></th>
-                        </tr>
-                        </thead>
-                        <tbody>
-                        <tr ng-repeat="treatment in siteData.treatments track by treatment.id">
-                            <td>{{treatment.id}}</td>
-                            <td>{{treatment.treatmentName}}</td>
-                            <td>{{treatment.treatmentArmCode}}</td>
-                            <td class="text-right">
-                                <button ng-click="deleteTreatment(treatment, siteData)"
-                                    class="btn btn-danger btn-sm">
-                                    <span class="glyphicon glyphicon-remove-circle"></span>
-                                    <span class="hidden-xs hidden-sm"></span>
-                                </button>
-                            </td>
-                        </tr>
-                        </tbody>
-                    </table>
-                </div>-->
             <div class="form-group row">
                 <div class="input-group col-md-6" ng-repeat="treatment in siteData.treatments track by treatment.id">
                     <input type="text" class="form-control" ng-model="treatment" placeholder="Search" readonly
@@ -213,7 +187,7 @@
                         <button class="btn btn-danger" type="button" ng-click="deleteTreatment($index, siteData)">X</button>
                     </span>
                 </div>
-                <div class="input-group col-md-6"> <!--ng-repeat="treatment in newTreatments">-->
+                <div class="input-group col-md-6">
                     <input type="text" class="form-control" ng-model="treatmen" placeholder="Search"
                            uib-typeahead="treatment as treatment.id
                             + ', ' +treatment.treatmentName+ ', ' +treatment.treatmentArmCode for treatment
@@ -244,4 +218,5 @@
             </div>
         </div>
     </div>
+</div>
 </div>
