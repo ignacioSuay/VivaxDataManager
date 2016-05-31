@@ -10,6 +10,9 @@
                 },
                 getDistinctLocations: function(){
                     return $http.get("api/location/locations");
+                },
+                getLocationIdByCountryName: function(country){
+                    return $http.get("api/location/locationIdByCountryName/"+country);
                 }
             }
         })

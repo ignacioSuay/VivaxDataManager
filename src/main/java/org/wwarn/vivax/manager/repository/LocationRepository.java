@@ -1,5 +1,6 @@
 package org.wwarn.vivax.manager.repository;
 
+import org.springframework.data.repository.query.Param;
 import org.wwarn.vivax.manager.domain.Location;
 
 import org.springframework.data.jpa.repository.*;
@@ -18,5 +19,8 @@ public interface LocationRepository extends JpaRepository<Location,Long> {
 
     @Query("select distinct l.location from Location l order by l.location")
     List<String> findAllDistinctLocations();
+
+    @Query("select l from Location l where l.country=:country")
+    List<Location>findIdByName(@Param("country")String country);
 
 }

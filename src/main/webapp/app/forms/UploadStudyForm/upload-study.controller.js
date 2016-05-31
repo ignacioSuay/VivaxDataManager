@@ -12,7 +12,9 @@
         $scope.publi;
         $scope.pubMedId;
         $scope.newTreat;
-        var flag=false;
+        $scope.countryId;
+
+        var flag=true;
         $scope.newTreatments = [{}];
 
         StudyDTO.getStudyTypes().then(function (result) {
@@ -33,11 +35,19 @@
             Form.load($scope.pubMedId).then(function (result) {
                 $scope.publi = result.data;
                 $scope.myHidingValue=true;
+                $scope.selectLocation=true;
             });
         };
 
         $scope.saveAll = function(){
             Form.save($scope.publi);
+        }
+
+        $scope.setLocationSelectEnabled = function(country){
+            LocationHttp.getLocationIdByCountryName(country).then(function(result){
+                $scope.countryId=result.data;
+            });
+            $scope.selectLocation=false;
         }
 
         $scope.newPublication = function () {
@@ -67,20 +77,31 @@
         }
 
         $scope.addTreatments = function (siteData) {
-            for (var i=0; i<$scope.newTreatments.length; i++) {
-                if(i>0){
-                    console.log(i);
-                    if($scope.newTreatments[i].id === $scope.newTreat.id) {
-                        flag = false;
-                        alert('Sorry, duplicated treatment!');
-                        $scope.newTreatments.splice(i, 1);
-                    }
-                    else{
-                        flag=true;
-                    }
+            for (var i=0; i<siteData.treatments.length; i++) {
+                console.log(i);
+                if ($scope.newTreat.id === siteData.treatments[i].id) {
+                    alert('Sorry, duplicated treatment!');
+                    flag = false;
                 }
-                else{
-                    flag=true;
+            }
+            if(flag===true){
+                for (var i = 0; i < $scope.newTreatments.length; i++) {
+                    if (i > 0) {
+                        console.log(i);
+                        if ($scope.newTreatments[i].id !== undefined) {
+                            if ($scope.newTreatments[i].id === $scope.newTreat.id) {
+                                flag = false;
+                                alert('Sorry, duplicated treatment!');
+                                $scope.newTreatments.splice(i, 1);
+                            }
+                        }
+                        else {
+                            flag = true;
+                        }
+                    }
+                    else {
+                        flag = true;
+                    }
                 }
             }
             if(flag===true){

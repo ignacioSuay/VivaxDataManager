@@ -99,27 +99,28 @@
                    <input type="text" class="form-control ng-pristine ng-valid ng-not-empty ng-touched" name="SiteDataCountryForm" id="existingPublicatiodsfnSDCountry" ng-model="siteData.id" readonly aria-invalid="false">
                </div>
                <label class="col-md-2" for="sigleSelect">Category</label>
-               <div class="col-md-4">
-                   <select name="singleSelect" id="sigleSelect" ng-model="siteData.category.name">
+               <!--<div class="col-md-4">
+                   <select name="categorySelect" id="sigleSelect" ng-model="siteData.category.name">
                    <option ng-repeat="category in categorys" value="{{category.name}}">{{category.name}}</option>
                </select>
+               </div>-->
+               <div class="col-md-4">
+                   <select ng-options="category.id as category.id +', '+category.name for category in categorys" name="singleSelect" id="sigleSelect" ng-model="siteData.category.id" >
+                   </select>
                </div>
            </div>
             <div class="form-group row" ng-model="siteData">
                 <label class="col-md-2" for="sinagleSelect">Country</label>
                 <div class="col-md-4">
-                   <select ng-options="country for country in countries" name="singleSelect" id="sinagleSelect" ng-model="siteData.location.country">
+                   <select ng-options="country for country in countries" ng-change="setLocationSelectEnabled(siteData.location.country)" name="singleSelect" id="sinagleSelect" ng-model="siteData.location.country" >
                    </select>
                 </div>
                    <label class="col-md-2" for="sinogleSelect">Location:</label>
                 <div class="col-md-4">
-                   <select ng-options="location for location in locations" name="singleSelect" id="sinogleSelect" ng-model="siteData.location.location">
-                       <button ng-click="deleteTreatment(treatment, siteData)"
-                               class="btn btn-danger btn-sm">
-                           <span class="glyphicon glyphicon-remove-circle"></span>
-                           <span class="hidden-xs hidden-sm"></span>
-                       </button>
-                   </select>
+                   <!--<select ng-disabled="selectLocation" ng-options="location for location in locations" name="singleSelect" id="sinogleSelect" ng-model="siteData.location.location">
+                   </select>-->
+                    <select  ng-disabled="selectLocation" ng-options="location.id as location.id +', '+location.location +', Longitude: '+location.longitude+', Latitude: '+location.latitude for location in countryId" name="singleSelect" id="sinogleSelect" ng-model="siteData.location.id">
+                    </select>
                 </div>
             </div>
             <div class="form-group row" ng-model="siteData">

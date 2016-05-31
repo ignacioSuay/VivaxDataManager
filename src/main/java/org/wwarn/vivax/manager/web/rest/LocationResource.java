@@ -194,4 +194,19 @@ public class LocationResource {
         return listLocations;
     }
 
+    /**
+     * GET  /location/locations : get all the different locations.
+     *
+     * @return the ResponseEntity with status 200 (OK) and with list of types, or with status 404 (Not Found)
+     */
+    @RequestMapping(value = "/location/locationIdByCountryName/{country}",
+        method = RequestMethod.GET,
+        produces = MediaType.APPLICATION_JSON_VALUE)
+    @Timed
+    public List<Location> getLocationIdByCountryName(@PathVariable String country) {
+        log.debug("REST request to get location id by country name : {}");
+        List<Location> id = locationRepository.findIdByName(country);
+        return id;
+    }
+
 }
