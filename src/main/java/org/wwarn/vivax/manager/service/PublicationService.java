@@ -18,6 +18,8 @@ import org.wwarn.vivax.manager.web.rest.dto.FormResourceDTO;
 
 import javax.inject.Inject;
 
+import java.util.List;
+
 import static org.elasticsearch.index.query.QueryBuilders.*;
 
 /**
@@ -72,6 +74,13 @@ public class PublicationService {
         Page<Publication> result = publicationRepository.findAll(pageable);
         return result;
     }
+
+    @Transactional(readOnly = true)
+    public List<Publication> findAll() {
+        log.debug("Request to get all Publications");
+        return publicationRepository.findAll();
+    }
+
 
     /**
      *  Get one publication by id.

@@ -5,14 +5,15 @@
         .module('vivaxDataManagerApp')
         .controller('UploadStudyController', UploadStudyController);
 
-    UploadStudyController.$inject = ['$scope', '$state', '$http', 'Form', '$uibModal', 'SiteData', 'StudyDTO', 'ShareDataService', 'Category', 'LocationHttp', 'TreatmentHttp'];
+    UploadStudyController.$inject = ['$scope', '$state', '$http', 'Form', '$uibModal', 'SiteData', 'StudyDTO', 'ShareDataService', 'Category', 'LocationHttp', 'TreatmentHttp', 'Publication'];
 
-    function UploadStudyController ($scope, $state, $http, Form, $uibModal, SiteData, StudyDTO, ShareDataService, Category, LocationHttp, TreatmentHttp) {
+    function UploadStudyController ($scope, $state, $http, Form, $uibModal, SiteData, StudyDTO, ShareDataService, Category, LocationHttp, TreatmentHttp, Publication) {
 
         $scope.publi;
         $scope.pubMedId;
         $scope.newTreat;
         $scope.countryId;
+        $scope.allPublications = Publication.queryAll();
 
         var flag=true;
         $scope.newTreatments = [{}];
@@ -33,7 +34,7 @@
         $scope.categorys = Category.query();
 
         $scope.retrievePublicationByPubMedId = function () {
-            Form.load($scope.pubMedId).then(function (result) {
+            Form.load($scope.publication.pubMedId).then(function (result) {
                 $scope.publi = result.data;
                 $scope.myHidingValue=true;
                 $scope.hideSelectLocation=true;

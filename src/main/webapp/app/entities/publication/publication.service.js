@@ -18,7 +18,8 @@
                     return data;
                 }
             },
-            'update': { method:'PUT' }
+            'update': { method:'PUT' }, 
+            'queryAll': {method: 'GET', isArray: true, url: 'api/publications/all'}
         });
     }
 })();

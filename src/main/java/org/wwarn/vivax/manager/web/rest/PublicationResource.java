@@ -102,6 +102,17 @@ public class PublicationResource {
         return new ResponseEntity<>(page.getContent(), headers, HttpStatus.OK);
     }
 
+    @RequestMapping(value = "/publications/all",
+        method = RequestMethod.GET,
+        produces = MediaType.APPLICATION_JSON_VALUE)
+    @Timed
+    public ResponseEntity<List<Publication>> getAllPublications()
+        throws URISyntaxException {
+        log.debug("REST request to get a page of Publications");
+        List<Publication> pubs = publicationService.findAll();
+        return new ResponseEntity<>(pubs, HttpStatus.OK);
+    }
+
     /**
      * GET  /publications/:id : get the "id" publication.
      *

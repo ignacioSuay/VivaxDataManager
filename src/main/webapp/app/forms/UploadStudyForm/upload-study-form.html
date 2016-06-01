@@ -4,7 +4,12 @@
         <label class="col-md-2 form-control-label">Search Publication by pubMedId:</label>
         <div class="col-md-4">
             <div class="input-group">
-                <input class="form-control ng-pristine ng-valid ng-empty ng-touched" type="text" ww-enter="retrievePublicationByPubMedId()" ng-model="pubMedId" placeholder="Search" aria-invalid="false">
+                <input type="text" class="form-control" id="field_publication" ng-model="publication"
+                       placeholder="Search"
+                       uib-typeahead="publication as publication.pubMedId +',' + publication.title for publication in allPublications | filter:$viewValue | limitTo:8"
+                       ww-enter="retrievePublicationByPubMedId()"
+                       typeahead-editable="false">
+                <!--<input class="form-control ng-pristine ng-valid ng-empty ng-touched" type="text" ww-enter="retrievePublicationByPubMedId()" ng-model="pubMedId" placeholder="Search" aria-invalid="false">-->
                 <span id="basic-addon2" class="input-group-addon btn btn-primary" ng-click="retrievePublicationByPubMedId()" role="button" tabindex="0">Search</span>
             </div>
         </div>
