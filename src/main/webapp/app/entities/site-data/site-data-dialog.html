@@ -57,9 +57,10 @@
         </div>
         <div class="form-group">
             <label class="control-label" for="field_typeStudy">TypeStudy</label>
-            <input type="text" class="form-control" name="typeStudy" id="field_typeStudy"
-                    ng-model="vm.siteData.typeStudy"
-                     />
+            <select class="form-control" name="typeStudy" id="field_typeStudy" ng-model="vm.siteData.typeStudy">
+                <option value="Case Report">Case Report</option>
+                <option value="Clinical Trial">Clinical Trial</option>
+            </select>
         </div>
         <div class="form-group">
             <label class="control-label" for="field_upper95CI">Upper95CI</label>
@@ -79,24 +80,22 @@
                     ng-model="vm.siteData.yearStart"
                      />
         </div>
-        <!--<div class="form-group">
-            <label for="field_category">category</label>
-            <select class="form-control" id="field_category" name="category" ng-model="vm.siteData.category" ng-options="category as category.name for category in vm.categorys track by category.id">
-                <option value=""></option>
-            </select>
-        </div>-->
         <div class="form-group">
             <label for="singleSelect">Category</label>
-            <!--<select class="form-control" id="field_type" multiple name="types" ng-model="study.studyType.singleSelect">
-                --><select class="form-control" name="singleSelect" id="singleSelect" ng-model="vm.siteData.Category">
-            <option ng-repeat="category in vm.categorys"> <!--value="{{study.studyType}}"-->{{category.name}}</option>
-        </select>
+            <select class="form-control" ng-options="category as category.name for category in vm.categorys" name="singleSelect" id="singleSelect" ng-model="vm.siteData.category" >
+            </select>
         </div>
         <div class="form-group">
-            <label for="field_location">location</label>
-            <select class="form-control" id="field_location" name="location" ng-model="vm.siteData.location" ng-options="location as location.location for location in vm.locations track by location.id">
-                <option value=""></option>
-            </select>
+            <label for="field_location">Location:</label>
+            <div class="input-group, col-md-13">
+                <input type="text" class="form-control" id="field_location" ng-model="vm.siteData.location"
+                       placeholder="Search"
+                       uib-typeahead="location as location.country +',' +
+                                location.location +', Longitude: '+location.longitude +
+                                ', Latitude: '+location.latitude for location in vm.locations
+                                 | filter:$viewValue | limitTo:20"
+                       typeahead-editable="false" ng-selected="selectedOne">
+            </div>
         </div>
         <div class="form-group">
             <label for="field_study">study</label>
@@ -106,7 +105,14 @@
         </div>
         <div class="form-group">
             <label for="field_treatments">treatments</label>
-            <select class="form-control" id="field_treatments" multiple name="treatments" ng-model="vm.siteData.treatments" ng-options="treatment as treatment.treatmentName for treatment in vm.treatmentss track by treatment.id"></select>
+            <!--<select class="form-control" id="field_treatments" multiple name="treatments" ng-model="vm.siteData.treatments" ng-options="treatment as treatment.treatmentName for treatment in vm.treatmentss track by treatment.id"></select>
+            --><input type="text" class="form-control" ng-model="treatment" placeholder="Search"
+                   id="field_treatments"
+                   uib-typeahead="treatment as treatment.id
+                            + ', ' +treatment.treatmentName+ ', ' +treatment.treatmentArmCode for treatment
+                            in vm.treatments | filter:$viewValue | limitTo:100" typeahead-editable="false"
+                   typeahead-on-select="setTreatment($item)"
+            >
         </div>
     </div>
     <div class="modal-footer">
