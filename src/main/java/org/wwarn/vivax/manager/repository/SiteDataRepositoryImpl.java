@@ -42,8 +42,7 @@ public class SiteDataRepositoryImpl implements SiteDataRepositoryCustom{
 	@Override
 	public List <SiteDataViewDTO> searchSiteDataByFilter(List<Filter> listFilters) {
 		TypedQuery<SiteData> query = buildQuery(listFilters);
-        Hibernate.initialize(s.getPublicationss());
-		int count=0;
+        int count=0;
 		for (Filter filter: listFilters){
 			if("Country".equals(filter.getName()))
                 query.setParameter(filter.getName(), filter.getQuery());

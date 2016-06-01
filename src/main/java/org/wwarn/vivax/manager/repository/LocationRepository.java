@@ -17,8 +17,8 @@ public interface LocationRepository extends JpaRepository<Location,Long> {
     @Query("select distinct l.country from Location l order by l.country")
     List<String> findAllDistinctCountries();
 
-    @Query("select distinct l.location from Location l order by l.location")
-    List<String> findAllDistinctLocations();
+    @Query("select distinct l from Location l")
+    List<Location> findAllDistinctLocations();
 
     @Query("select l from Location l where l.country=:country")
     List<Location>findIdByName(@Param("country")String country);

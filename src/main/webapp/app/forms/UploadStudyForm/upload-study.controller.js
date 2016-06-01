@@ -5,9 +5,9 @@
         .module('vivaxDataManagerApp')
         .controller('UploadStudyController', UploadStudyController);
 
-    UploadStudyController.$inject = ['$scope', '$state', '$http', 'Form', '$uibModal', 'SiteData', 'StudyDTO', 'ShareDataService', 'Category', 'LocationHttp', 'TreatmentHttp', 'Publication'];
+    UploadStudyController.$inject = ['$scope', '$state', '$http', 'Form', '$uibModal', 'SiteData', 'StudyDTO', 'ShareDataService', 'Category', 'LocationHttp', 'TreatmentHttp', 'Publication', 'Location'];
 
-    function UploadStudyController ($scope, $state, $http, Form, $uibModal, SiteData, StudyDTO, ShareDataService, Category, LocationHttp, TreatmentHttp, Publication) {
+    function UploadStudyController ($scope, $state, $http, Form, $uibModal, SiteData, StudyDTO, ShareDataService, Category, LocationHttp, TreatmentHttp, Publication, Location) {
 
         $scope.publi;
         $scope.pubMedId;
@@ -25,7 +25,7 @@
             $scope.countries = result.data;
         });
         LocationHttp.getDistinctLocations().then(function (result) {
-            $scope.locations = result.data;
+            $scope.allLocations = result.data;
         });
         TreatmentHttp.getDistinctTreatments().then(function (result) {
             $scope.treatments = result.data;
@@ -76,7 +76,7 @@
                     }
                 }
             }).result.then(function (result) {
-                $scope.pubMedId = result.pubMedId;
+                $scope.publication = result;
                 $scope.retrievePublicationByPubMedId();
                 $scope.myHidingValue=true;
                 console.log('The pubMedId '+result.pubMedId);

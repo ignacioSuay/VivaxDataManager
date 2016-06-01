@@ -9,7 +9,6 @@
                        uib-typeahead="publication as publication.pubMedId +',' + publication.title for publication in allPublications | filter:$viewValue | limitTo:8"
                        ww-enter="retrievePublicationByPubMedId()"
                        typeahead-editable="false">
-                <!--<input class="form-control ng-pristine ng-valid ng-empty ng-touched" type="text" ww-enter="retrievePublicationByPubMedId()" ng-model="pubMedId" placeholder="Search" aria-invalid="false">-->
                 <span id="basic-addon2" class="input-group-addon btn btn-primary" ng-click="retrievePublicationByPubMedId()" role="button" tabindex="0">Search</span>
             </div>
         </div>
@@ -109,29 +108,19 @@
                    </select>
                </div>
            </div>
-            <div class="form-group row" ng-model="siteData">
-                <label class="col-md-2" for="sinagleSelect">Country</label>
-                <div class="col-md-3">
-                   <select class="form-control" ng-options="country for country in countries"
-                           ng-change="setLocationSelectEnabled(siteData.location.country)"
-                           name="singleSelect" id="sinagleSelect" ng-model="siteData.location.country">
-                   </select>
+            <div class="form-group row">
+                <label class="col-md-2 form-control-label">Location:</label>
+                <div class="input-group, col-md-6">
+                        <input type="text" class="form-control" id="field_location" ng-model="siteData.location"
+                               placeholder="Search"
+                               uib-typeahead="location as location.country +',' +
+                                location.location +', Longitude: '+location.longitude +
+                                ', Latitude: '+location.latitude for location in allLocations
+                                 | filter:$viewValue | limitTo:20"
+                               typeahead-editable="false" ng-selected="selectedOne">
                 </div>
                 <div class="col-md-2">
                     <a class="btn btn-success" ng-click="newLocation(siteData)">Create new Location</a>
-                </div>
-            </div>
-            <div class="form-group row" ng-model="siteData">
-                <label class="col-md-2" for="sinogleSelect">Location:</label>
-                <div class="col-md-10">
-                    <p class="form-control-static, col-md-10" ng-show="hideSelectLocation">{{siteData.location.location}}, Latitude: {{siteData.location.latitude}}, Longitude: {{siteData.location.longitude}}</p>
-                    <select class="form-control" ng-show="hideChangeLocation" ng-disabled="selectLocation"
-                            ng-options="location.id as location.id +', '+location.location +
-                            ', Longitude: '+location.longitude+', Latitude: '+
-                            location.latitude for location in countryId" name="singleSelect"
-                            id="sinogleSelect" ng-model="location.id" ng-selected="selectedOne">
-                        <!--<option value="" selected="selected">Select a new location:</option>-->
-                    </select>
                 </div>
             </div>
             <div class="form-group row" ng-model="siteData">
@@ -193,8 +182,7 @@
                     <input type="text" class="form-control" ng-model="treatment" placeholder="Search" readonly
                            uib-typeahead="treatment as treatment.id
                             + ', ' +treatment.treatmentName+ ', ' +treatment.treatmentArmCode for treatment
-                            in treatments | filter:$viewValue | limitTo:100" typeahead-editable="false"
-                           ww-enter="searchPublication()">
+                            in treatments | filter:$viewValue | limitTo:100" typeahead-editable="false">
                     <span class="input-group-btn">
                         <button class="btn btn-danger" type="button" ng-click="deleteTreatment($index, siteData)">X</button>
                     </span>

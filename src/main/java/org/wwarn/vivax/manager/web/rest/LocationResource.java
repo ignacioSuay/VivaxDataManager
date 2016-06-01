@@ -188,9 +188,9 @@ public class LocationResource {
         method = RequestMethod.GET,
         produces = MediaType.APPLICATION_JSON_VALUE)
     @Timed
-    public List<String> getDistinctLocations() {
+    public List<Location> getDistinctLocations() {
         log.debug("REST request to get distinct locations : {}");
-        List<String> listLocations = locationRepository.findAllDistinctLocations();
+        List<Location> listLocations = locationRepository.findAllDistinctLocations();
         return listLocations;
     }
 
