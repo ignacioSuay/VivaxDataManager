@@ -29,12 +29,14 @@
         TreatmentHttp.getDistinctTreatments().then(function (result) {
             $scope.treatments = result.data;
         });
+
         $scope.categorys = Category.query();
 
         $scope.retrievePublicationByPubMedId = function () {
             Form.load($scope.pubMedId).then(function (result) {
                 $scope.publi = result.data;
                 $scope.myHidingValue=true;
+                $scope.hideSelectLocation=true;
                 $scope.selectLocation=true;
             });
         };
@@ -46,8 +48,11 @@
         $scope.setLocationSelectEnabled = function(country){
             LocationHttp.getLocationIdByCountryName(country).then(function(result){
                 $scope.countryId=result.data;
+                $scope.selectedOne=$scope.countryId[0];
             });
+            $scope.hideSelectLocation=false;
             $scope.selectLocation=false;
+            $scope.hideChangeLocation=true;
         }
 
         $scope.newPublication = function () {
@@ -130,6 +135,30 @@
             }).result.then(function (result) {
                 result.data.studyDetails.publicationss.push($scope.publi.publication);
                 $scope.publi.studyDTOList.push(result.data);
+                ShareDataService.setFlag(false);
+            }, function () {
+            })
+        };
+
+        $scope.newLocation = function(siteData) {
+            ShareDataService.setFlag(true);
+            ShareDataService.setObject(siteData);
+            $scope.myHidingValue=true;
+            $uibModal.open({
+                templateUrl: 'app/entities/location/location-dialog.html',
+                controller: 'LocationDialogController',
+                size: 'lg',
+                controllerAs: 'vm',
+                backdrop: 'static',
+                resolve: {
+                    entity: function () {
+                        return {};
+                    }
+                }
+            }).result.then(function (result) {
+                siteData = ShareDataService.getObject();
+                siteData.location=result;
+                console.log(result.data);
                 ShareDataService.setFlag(false);
             }, function () {
             })
@@ -219,6 +248,8 @@
                 }
             }).result.then(function (result) {
                 siteData = ShareDataService.getObject();
+                siteData.treatments.push(result);
+                console.log(siteData);
                 ShareDataService.setFlag(false);
             }, function () {
             })

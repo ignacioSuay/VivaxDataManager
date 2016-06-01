@@ -54,6 +54,7 @@ public class StudyService {
      * @param study the entity to save
      * @return the persisted entity
      */
+    @Transactional
     public StudyDTO saveReturnDTO(Study study) {
         log.debug("Request to save Study : {}", study);
         Study result = studyRepository.save(study);
@@ -97,6 +98,7 @@ public class StudyService {
      *  in any publications studies collection
      *  @param id the id of the entity
      */
+    @Transactional
     public void delete(Long id) {
         log.debug("Request to delete Study : {}", id);
         Study study = studyRepository.findOne(id);

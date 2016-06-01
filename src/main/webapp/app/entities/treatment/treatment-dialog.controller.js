@@ -30,34 +30,14 @@
         /**
          * Option for when save is called from the entities menu
          */
-        if(!ShareDataService.getFlag()){
-            vm.save = function () {
-                vm.isSaving = true;
-                if (vm.treatment.id !== null) {
-                    Treatment.update(vm.treatment, onSaveSuccess, onSaveError);
-                } else {
-                    Treatment.save(vm.treatment, onSaveSuccess, onSaveError);
-                }
-            };
-        }
-        /**
-         * Option for when save is called from the upload Study form
-         */
-        else{
-            vm.save = function () {
-                var siteData = ShareDataService.getObject();
-                siteData.treatments.push(vm.treatment);
-                ShareDataService.setObject(siteData);
-                vm.isSaving = true;
-                if (vm.treatment.id !== undefined) {
-                    console.log(vm.treatment.id);
-                    Treatment.update(vm.treatment, onSaveSuccess, onSaveError);
-                } else {
-                    Treatment.save(vm.treatment, onSaveSuccess, onSaveError);
-                }
-            };
-        }
-
+        vm.save = function () {
+            vm.isSaving = true;
+            if (vm.treatment.id !== null) {
+                Treatment.update(vm.treatment, onSaveSuccess, onSaveError);
+            } else {
+                Treatment.save(vm.treatment, onSaveSuccess, onSaveError);
+            }
+        };
         vm.clear = function() {
             $uibModalInstance.dismiss('cancel');
         };

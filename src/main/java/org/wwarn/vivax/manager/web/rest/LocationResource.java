@@ -205,8 +205,8 @@ public class LocationResource {
     @Timed
     public List<Location> getLocationIdByCountryName(@PathVariable String country) {
         log.debug("REST request to get location id by country name : {}");
-        List<Location> id = locationRepository.findIdByName(country);
-        return id;
+        List<Location> locationList = locationRepository.findIdByName(country);
+        return locationList;
     }
 
 }

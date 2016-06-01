@@ -38,7 +38,7 @@ public class FormResource {
     }
 
     @RequestMapping(value = "/studyUpload/updatePublicationDTOAndAllEagerRelationships",
-        method = RequestMethod.POST,
+        method = RequestMethod.PUT,
         produces = MediaType.APPLICATION_JSON_VALUE)
     @Timed
     public FormResourceDTO updatePublicationDTOAndAllEagerRelationships(@RequestBody FormResourceDTO formResourceDTO) {

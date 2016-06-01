@@ -25,17 +25,11 @@
                     ng-model="vm.study.ref"
                      />
         </div>
-        <!--<div class="form-group">
-            <label class="control-label" for="field_studyType">StudyType</label>
-            <input type="text" class="form-control" name="studyType" id="field_studyType"
-                    ng-model="vm.study.studyType"
-                     />
-        </div>-->
         <div class="form-group">
             <label for="singleSelect">Study Type</label>
-            <!--<select class="form-control" id="field_type" multiple name="types" ng-model="study.studyType.singleSelect">
-                --><select name="singleSelect" id="singleSelect" ng-model="vm.study.studyType">
-                <option ng-repeat="type in vm.types"> <!--value="{{study.studyType}}"-->{{type}}</option>
+            <select class="form-control" name="singleSelect" id="singleSelect" ng-model="vm.study.studyType">
+                <option value="Case Report">Case Report</option>
+                <option value="Clinical Trial">Clinical Trial</option>
             </select>
         </div>
 

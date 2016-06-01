@@ -119,6 +119,7 @@ public class PublicationService {
      */
     @Transactional
     public FormResourceDTO updatePublicationAndAllCollections(FormResourceDTO formResourceDTO) {
+        publicationRepository.retrievePublicationByPubMedId(formResourceDTO.getPublication().getPubMedId());
         formResourceDTO.getStudyDTOList().stream().forEach(sd ->{
             if(sd!=null){
                 Study study = sd.getStudyDetails();

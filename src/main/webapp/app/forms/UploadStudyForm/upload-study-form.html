@@ -60,9 +60,9 @@
             <div class="form-group row" ng-model="studyDTO.studyDetails">
                 <label class="col-md-2" for="singleSelect">Study Type</label>
                 <div class="col-md-4">
-                    <select name="singleSelect" id="singleSelect" ng-model="studyDTO.studyDetails.studyType">
-                        <option value="Case Report"><!--ng-repeat="type in types"-->Case Report</option>
-                        <option value="Clinical Trial"><!--ng-repeat="type in types"-->Clinical Trial</option>
+                    <select class="form-control" name="singleSelect" id="singleSelect" ng-model="studyDTO.studyDetails.studyType">
+                        <option value="Case Report">Case Report</option>
+                        <option value="Clinical Trial">Clinical Trial</option>
                     </select>
                 </div>
                 <label class="col-md-2 form-control-label">Study Ref:</label>
@@ -99,27 +99,33 @@
                    <input type="text" class="form-control ng-pristine ng-valid ng-not-empty ng-touched" name="SiteDataCountryForm" id="existingPublicatiodsfnSDCountry" ng-model="siteData.id" readonly aria-invalid="false">
                </div>
                <label class="col-md-2" for="sigleSelect">Category</label>
-               <!--<div class="col-md-4">
-                   <select name="categorySelect" id="sigleSelect" ng-model="siteData.category.name">
-                   <option ng-repeat="category in categorys" value="{{category.name}}">{{category.name}}</option>
-               </select>
-               </div>-->
                <div class="col-md-4">
-                   <select ng-options="category.id as category.id +', '+category.name for category in categorys" name="singleSelect" id="sigleSelect" ng-model="siteData.category.id" >
+                   <select class="form-control" ng-options="category.id as category.id +', '+category.name for category in categorys" name="singleSelect" id="sigleSelect" ng-model="siteData.category.id" >
                    </select>
                </div>
            </div>
             <div class="form-group row" ng-model="siteData">
                 <label class="col-md-2" for="sinagleSelect">Country</label>
-                <div class="col-md-4">
-                   <select ng-options="country for country in countries" ng-change="setLocationSelectEnabled(siteData.location.country)" name="singleSelect" id="sinagleSelect" ng-model="siteData.location.country" >
+                <div class="col-md-3">
+                   <select class="form-control" ng-options="country for country in countries"
+                           ng-change="setLocationSelectEnabled(siteData.location.country)"
+                           name="singleSelect" id="sinagleSelect" ng-model="siteData.location.country">
                    </select>
                 </div>
-                   <label class="col-md-2" for="sinogleSelect">Location:</label>
-                <div class="col-md-4">
-                   <!--<select ng-disabled="selectLocation" ng-options="location for location in locations" name="singleSelect" id="sinogleSelect" ng-model="siteData.location.location">
-                   </select>-->
-                    <select  ng-disabled="selectLocation" ng-options="location.id as location.id +', '+location.location +', Longitude: '+location.longitude+', Latitude: '+location.latitude for location in countryId" name="singleSelect" id="sinogleSelect" ng-model="siteData.location.id">
+                <div class="col-md-2">
+                    <a class="btn btn-success" ng-click="newLocation(siteData)">Create new Location</a>
+                </div>
+            </div>
+            <div class="form-group row" ng-model="siteData">
+                <label class="col-md-2" for="sinogleSelect">Location:</label>
+                <div class="col-md-10">
+                    <p class="form-control-static, col-md-10" ng-show="hideSelectLocation">{{siteData.location.location}}, Latitude: {{siteData.location.latitude}}, Longitude: {{siteData.location.longitude}}</p>
+                    <select class="form-control" ng-show="hideChangeLocation" ng-disabled="selectLocation"
+                            ng-options="location.id as location.id +', '+location.location +
+                            ', Longitude: '+location.longitude+', Latitude: '+
+                            location.latitude for location in countryId" name="singleSelect"
+                            id="sinogleSelect" ng-model="location.id" ng-selected="selectedOne">
+                        <!--<option value="" selected="selected">Select a new location:</option>-->
                     </select>
                 </div>
             </div>
@@ -211,12 +217,12 @@
                 </div>
             </div>
         </div>
-        <div class="form-group row">
-            <div class="col-md-2">
-                <a class="btn btn-success" ng-click="saveAll()">
-                    Save Publication
-                </a>
-            </div>
+    </div>
+    <div class="form-group row">
+        <div class="col-md-2">
+            <a class="btn btn-success" ng-click="saveAll()">
+                Save Publication
+            </a>
         </div>
     </div>
 </div>
