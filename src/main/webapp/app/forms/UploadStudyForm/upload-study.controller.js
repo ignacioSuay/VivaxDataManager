@@ -35,16 +35,22 @@
 
         $scope.retrievePublicationByPubMedId = function () {
             Form.load($scope.publication.pubMedId).then(function (result) {
-                $scope.publi = result.data;
-                $scope.myHidingValue=true;
-                $scope.hideSelectLocation=true;
-                $scope.selectLocation=true;
+                loadDataByFormDTO(result.data);
             });
         };
 
         $scope.saveAll = function(){
-            Form.save($scope.publi);
-        }
+            Form.save($scope.publi).then(function(result){
+                loadDataByFormDTO(result.data);
+            });
+        };
+
+        var loadDataByFormDTO = function (formDTO){
+            $scope.publi = formDTO;
+            $scope.myHidingValue=true;
+            $scope.hideSelectLocation=true;
+            $scope.selectLocation=true;
+        };
 
         $scope.setLocationSelectEnabled = function(country){
             LocationHttp.getLocationIdByCountryName(country).then(function(result){
