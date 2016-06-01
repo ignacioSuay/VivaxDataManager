@@ -18,6 +18,8 @@ import org.wwarn.vivax.manager.web.rest.dto.FormResourceDTO;
 
 import javax.inject.Inject;
 
+import java.util.List;
+
 import static org.elasticsearch.index.query.QueryBuilders.*;
 
 /**
@@ -73,6 +75,13 @@ public class PublicationService {
         return result;
     }
 
+    @Transactional(readOnly = true)
+    public List<Publication> findAll() {
+        log.debug("Request to get all Publications");
+        return publicationRepository.findAll();
+    }
+
+
     /**
      *  Get one publication by id.
      *
@@ -119,6 +128,7 @@ public class PublicationService {
      */
     @Transactional
     public FormResourceDTO updatePublicationAndAllCollections(FormResourceDTO formResourceDTO) {
+        publicationRepository.retrievePublicationByPubMedId(formResourceDTO.getPublication().getPubMedId());
         formResourceDTO.getStudyDTOList().stream().forEach(sd ->{
             if(sd!=null){
                 Study study = sd.getStudyDetails();

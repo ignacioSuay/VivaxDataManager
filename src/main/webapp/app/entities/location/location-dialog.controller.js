@@ -5,9 +5,9 @@
         .module('vivaxDataManagerApp')
         .controller('LocationDialogController', LocationDialogController);
 
-    LocationDialogController.$inject = ['$scope', '$stateParams', '$uibModalInstance', 'entity', 'Location', 'SiteData'];
+    LocationDialogController.$inject = ['$scope', '$stateParams', '$uibModalInstance', 'entity', 'Location', 'SiteData', 'ShareDataService'];
 
-    function LocationDialogController ($scope, $stateParams, $uibModalInstance, entity, Location, SiteData) {
+    function LocationDialogController ($scope, $stateParams, $uibModalInstance, entity, Location, SiteData, ShareDataService) {
         var vm = this;
         vm.location = entity;
         vm.sitedatas = SiteData.query();

@@ -34,13 +34,13 @@ import static org.elasticsearch.index.query.QueryBuilders.*;
 public class LocationResource {
 
     private final Logger log = LoggerFactory.getLogger(LocationResource.class);
-        
+
     @Inject
     private LocationRepository locationRepository;
-    
+
     @Inject
     private LocationSearchRepository locationSearchRepository;
-    
+
     /**
      * POST  /locations : Create a new location.
      *
@@ -103,7 +103,7 @@ public class LocationResource {
     public ResponseEntity<List<Location>> getAllLocations(Pageable pageable)
         throws URISyntaxException {
         log.debug("REST request to get a page of Locations");
-        Page<Location> page = locationRepository.findAll(pageable); 
+        Page<Location> page = locationRepository.findAll(pageable);
         HttpHeaders headers = PaginationUtil.generatePaginationHttpHeaders(page, "/api/locations");
         return new ResponseEntity<>(page.getContent(), headers, HttpStatus.OK);
     }
@@ -162,6 +162,51 @@ public class LocationResource {
         Page<Location> page = locationSearchRepository.search(queryStringQuery(query), pageable);
         HttpHeaders headers = PaginationUtil.generateSearchPaginationHttpHeaders(query, page, "/api/_search/locations");
         return new ResponseEntity<>(page.getContent(), headers, HttpStatus.OK);
+    }
+
+    /**
+     * GET  /location/countries : get all the different countries.
+     *
+     * @return the ResponseEntity with status 200 (OK) and with list of types, or with status 404 (Not Found)
+     */
+    @RequestMapping(value = "/location/countries",
+        method = RequestMethod.GET,
+        produces = MediaType.APPLICATION_JSON_VALUE)
+    @Timed
+    public List<String> getDistinctCountries() {
+        log.debug("REST request to get distinct countries : {}");
+        List<String> listCountries = locationRepository.findAllDistinctCountries();
+        return listCountries;
+    }
+
+    /**
+     * GET  /location/locations : get all the different locations.
+     *
+     * @return the ResponseEntity with status 200 (OK) and with list of types, or with status 404 (Not Found)
+     */
+    @RequestMapping(value = "/location/locations",
+        method = RequestMethod.GET,
+        produces = MediaType.APPLICATION_JSON_VALUE)
+    @Timed
+    public List<Location> getDistinctLocations() {
+        log.debug("REST request to get distinct locations : {}");
+        List<Location> listLocations = locationRepository.findAllDistinctLocations();
+        return listLocations;
+    }
+
+    /**
+     * GET  /location/locations : get all the different locations.
+     *
+     * @return the ResponseEntity with status 200 (OK) and with list of types, or with status 404 (Not Found)
+     */
+    @RequestMapping(value = "/location/locationIdByCountryName/{country}",
+        method = RequestMethod.GET,
+        produces = MediaType.APPLICATION_JSON_VALUE)
+    @Timed
+    public List<Location> getLocationIdByCountryName(@PathVariable String country) {
+        log.debug("REST request to get location id by country name : {}");
+        List<Location> locationList = locationRepository.findIdByName(country);
+        return locationList;
     }
 
 }

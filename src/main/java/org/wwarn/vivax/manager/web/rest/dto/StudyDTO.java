@@ -3,6 +3,7 @@ package org.wwarn.vivax.manager.web.rest.dto;
 import org.wwarn.vivax.manager.domain.SiteData;
 import org.wwarn.vivax.manager.domain.Study;
 
+import javax.persistence.Version;
 import java.util.Set;
 
 /**

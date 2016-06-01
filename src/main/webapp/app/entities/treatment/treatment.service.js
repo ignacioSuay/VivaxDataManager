@@ -2,6 +2,15 @@
     'use strict';
     angular
         .module('vivaxDataManagerApp')
+
+        .factory('TreatmentHttp', function ($http) {
+            return {
+                getDistinctTreatments: function(){
+                    return $http.get("api/treatment/allTreatments");
+                }
+            }
+        })
+
         .factory('Treatment', Treatment);
 
     Treatment.$inject = ['$resource'];

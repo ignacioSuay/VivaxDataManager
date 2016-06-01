@@ -4,11 +4,13 @@ import com.codahale.metrics.annotation.Timed;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.http.MediaType;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.wwarn.vivax.manager.domain.Publication;
 import org.wwarn.vivax.manager.repository.PublicationRepository;
 import org.wwarn.vivax.manager.service.PublicationService;
 import org.wwarn.vivax.manager.web.rest.dto.FormResourceDTO;
+import org.wwarn.vivax.manager.web.rest.util.HeaderUtil;
 
 import javax.inject.Inject;
 
@@ -38,12 +40,15 @@ public class FormResource {
     }
 
     @RequestMapping(value = "/studyUpload/updatePublicationDTOAndAllEagerRelationships",
-        method = RequestMethod.POST,
+        method = RequestMethod.PUT,
         produces = MediaType.APPLICATION_JSON_VALUE)
     @Timed
-    public FormResourceDTO updatePublicationDTOAndAllEagerRelationships(@RequestBody FormResourceDTO formResourceDTO) {
+    public ResponseEntity<FormResourceDTO> updatePublicationDTOAndAllEagerRelationships(@RequestBody FormResourceDTO formResourceDTO) {
         log.debug("REST request to get Publication : {}", formResourceDTO);
         FormResourceDTO formResDTO = publicationService.updatePublicationAndAllCollections(formResourceDTO);
-        return formResDTO;
+        FormResourceDTO updatedFormResourceDTO = publicationRepository.retrievePublicationByPubMedId(formResourceDTO.getPublication().getPubMedId());
+        return ResponseEntity.ok()
+            .headers(HeaderUtil.createEntityUpdateAlert("formDTO", formResourceDTO.getPublication().getId().toString()))
+            .body(updatedFormResourceDTO);
     }
 }

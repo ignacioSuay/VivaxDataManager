@@ -174,4 +174,19 @@ public class TreatmentResource {
         return new ResponseEntity<>(page.getContent(), headers, HttpStatus.OK);
     }
 
+    /**
+     * GET  /treatment/allTreatments: get all the different treatments.
+     *
+     * @return the ResponseEntity with status 200 (OK) and with list of types, or with status 404 (Not Found)
+     */
+    @RequestMapping(value = "/treatment/allTreatments",
+        method = RequestMethod.GET,
+        produces = MediaType.APPLICATION_JSON_VALUE)
+    @Timed
+    public List<Treatment> getDistinctTreatments() {
+        log.debug("REST request to get distinct treatments : {}");
+        List<Treatment> listTreatments = treatmentRepository.findAllNonPagedTreatments();
+        return listTreatments;
+    }
+
 }
