@@ -5,18 +5,20 @@
         .module('vivaxDataManagerApp')
         .controller('SiteDataDialogController', SiteDataDialogController);
 
-    SiteDataDialogController.$inject = ['$scope', '$stateParams', '$uibModalInstance', 'entity', 'SiteData', 'Category', 'Location', 'Study', 'Treatment', 'ShareDataService', 'LocationHttp', 'TreatmentHttp'];
+    SiteDataDialogController.$inject = ['$scope', '$stateParams', '$uibModalInstance', 'entity', 'SiteData', 'Category', 'Location', 'Study', 'Treatment', 'ShareDataService', 'LocationHttp', 'TreatmentHttp', 'StudyDTO'];
 
-    function SiteDataDialogController ($scope, $stateParams, $uibModalInstance, entity, SiteData, Category, Location, Study, Treatment, ShareDataService, LocationHttp, TreatmentHttp) {
+    function SiteDataDialogController ($scope, $stateParams, $uibModalInstance, entity, SiteData, Category, Location, Study, Treatment, ShareDataService, LocationHttp, TreatmentHttp, StudyDTO) {
         var vm = this;
         vm.siteData = entity;
         vm.categorys = Category.query();
         LocationHttp.getDistinctLocations().then(function (result) {
             vm.locations = result.data;
         });
-        vm.studys = Study.query();
         TreatmentHttp.getDistinctTreatments().then(function (result) {
             vm.treatments = result.data;
+        });
+        StudyDTO.getAllStudiesNonPaged().then(function(result){
+            vm.studys = result.data;
         });
         vm.load = function(id) {
             SiteData.get({id : id}, function(result) {
@@ -33,15 +35,14 @@
         var onSaveError = function () {
             vm.isSaving = false;
         };
-        
+
         $scope.setTreatment = function(item){
             $scope.newTreat = item;
         }
-        
+
         /**
          * Option for when save is called from the entities menu
          */
-        if(!ShareDataService.getFlag()) {
             vm.save = function () {
                 vm.isSaving = true;
                 if (vm.siteData.id !== null) {
@@ -50,19 +51,10 @@
                     SiteData.save(vm.siteData, onSaveSuccess, onSaveError);
                 }
             };
-        }
+
         /**
          * Option for when save is called from the upload Study menu
          */
-        else {
-            vm.save = function () {
-                if(ShareDataService.getObject()===null){
-                    var siteData = vm.siteData;
-                    ShareDataService.setObject(siteData);
-                    $uibModalInstance.close(siteData);
-                }
-            };
-        }
         vm.clear = function() {
             $uibModalInstance.dismiss('cancel');
         };

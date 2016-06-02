@@ -142,7 +142,8 @@ public class SiteDataResource {
         produces = MediaType.APPLICATION_JSON_VALUE)
     @Timed
     public ResponseEntity<Void> deleteSiteData(@PathVariable Long id) {
-        log.debug("REST request to delete SiteData : {}", id);
+        System.out.println("@@@@@@@@@@@@@@@@@@@@@REST request to delete SiteData : {}");
+        log.debug("@@@@@@@@@@@@@@@@@@@@@REST request to delete SiteData : {}", id);
         siteDataService.deleteSiteData(id);
         return ResponseEntity.ok().headers(HeaderUtil.createEntityDeletionAlert("siteData", id.toString())).build();
     }

@@ -198,4 +198,22 @@ public class StudyResource {
         List<String> listTypes = studyRepository.findStudyTypes();
         return listTypes;
     }
+
+    /**
+     * GET  /studies : get all the studies with no paging.
+     *
+     * @return list of studies
+     * @throws URISyntaxException if there is an error to generate the pagination HTTP headers
+     */
+    @RequestMapping(value = "/studies/allNonPaged",
+        method = RequestMethod.GET,
+        produces = MediaType.APPLICATION_JSON_VALUE)
+    @Timed
+    public List<Study> getAllStudies()
+        throws URISyntaxException {
+        log.debug("REST request to get a page of Studies");
+        List<Study> listStudies= studyRepository.findNonPagedStudies();
+
+        return listStudies;
+    }
 }

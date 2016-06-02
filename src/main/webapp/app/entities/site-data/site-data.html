@@ -43,14 +43,14 @@
                     <th jh-sort-by="numPatientsTreatCQ"><span>NumPatientsTreatCQ</span> <span class="glyphicon glyphicon-sort"></span></th>
                     <th jh-sort-by="primaquine"><span>Primaquine</span> <span class="glyphicon glyphicon-sort"></span></th>
                     <th jh-sort-by="timePrimaquine"><span>TimePrimaquine</span> <span class="glyphicon glyphicon-sort"></span></th>
-                    <th jh-sort-by="typeStudy"><span>TypeStudy</span> <span class="glyphicon glyphicon-sort"></span></th>
+                    <th jh-sort-by="typeStudy"><span>Study Type</span> <span class="glyphicon glyphicon-sort"></span></th>
                     <th jh-sort-by="upper95CI"><span>Upper95CI</span> <span class="glyphicon glyphicon-sort"></span></th>
                     <th jh-sort-by="yearEnd"><span>YearEnd</span> <span class="glyphicon glyphicon-sort"></span></th>
                     <th jh-sort-by="yearStart"><span>YearStart</span> <span class="glyphicon glyphicon-sort"></span></th>
                     <th jh-sort-by="category.name"><span>category</span> <span class="glyphicon glyphicon-sort"></span></th>
                     <th jh-sort-by="location.location"><span>location</span> <span class="glyphicon glyphicon-sort"></span></th>
-                    <th jh-sort-by="study.studyType"><span>study</span> <span class="glyphicon glyphicon-sort"></span></th>
-                    <th jh-sort-by="treatment.treatmentArmCode"><span>Treatments</span> <span class="glyphicon glyphicon-sort"></span></th>
+                    <th jh-sort-by="study.studyType"><span>Study Ref</span> <span class="glyphicon glyphicon-sort"></span></th>
+                    <th jh-sort-by="treatments"><span>Treatments</span> <span class="glyphicon glyphicon-sort"></span></th>
                     <th></th>
                 </tr>
             </thead>
@@ -75,7 +75,7 @@
                         <a ui-sref="location-detail({id:siteData.location.id})">{{siteData.location.location}}</a>
                     </td>
                     <td>
-                        <a ui-sref="study-detail({id:siteData.study.id})">{{siteData.study.studyType}}</a>
+                        <a ui-sref="study-detail({id:siteData.study.id})">{{siteData.study.ref}}</a>
                     </td>
                     <td>
                         <ul>

@@ -38,6 +38,7 @@
                     }
                 }
                 ShareDataService.setPubli(publi);
+                console.log(publi);
                 SiteData.delete({id: siteData.id
                     },
                     function () {

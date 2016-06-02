@@ -12,7 +12,7 @@
                 </div>
             </section>
         </div>
-        <div id="section2">
+        <div id="section2" ng-show="vm.account!==null">
             <section id="features">
                 <div class="container">
                     <h1>An easy and intuitive tool to manage Vivax related Publications</h1>
@@ -29,6 +29,19 @@
                                 <h2>Publication filtered views</h2>
                             </div>
                         </a>
+                    </div>
+                </div>
+            </section>
+        </div>
+        <div id="section3" ng-show="vm.account===null">
+            <section id="login">
+                <div class="container">
+                    <div class="form-group row center-block">
+                        <h1>An easy and intuitive tool to manage Vivax related Publications</h1>
+                        <button  ng-click="vm.login()"
+                                 class="btn btn-success btn-lg center-block">
+                            Login
+                        </button>
                     </div>
                 </div>
             </section>

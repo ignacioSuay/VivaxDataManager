@@ -21,4 +21,6 @@ public interface StudyRepository extends JpaRepository<Study,Long> {
     @Query("select distinct studyType from Study")
     List<String> findStudyTypes();
 
+    @Query("select distinct study from Study study")
+    List<Study> findNonPagedStudies();
 }

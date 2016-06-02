@@ -112,7 +112,12 @@ public class SiteDataService {
             setSite.remove(siteData);
             treatment.setSiteDatas(setSite);
         }
+        Study study = siteData.getStudy();
+        Set<SiteData> setSites = study.getSiteDatas();
+        setSites.remove(siteData);
+        study.setSiteDatas(setSites);
         siteData.setTreatments(null);
+        siteData.setStudy(null);
         siteDataRepository.flush();
         siteDataRepository.delete(id);
         siteDataSearchRepository.delete(id);

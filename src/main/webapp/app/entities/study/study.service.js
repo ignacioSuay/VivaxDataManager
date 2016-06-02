@@ -10,6 +10,9 @@
                 },
                 getStudyTypes: function(){
                     return $http.get("api/studies/types");
+                },
+                getAllStudiesNonPaged: function(){
+                    return $http.get("api/studies/allNonPaged")
                 }
             }
         })
