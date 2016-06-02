@@ -166,11 +166,11 @@
                <div class="form-group row" ng-model="siteData">
                    <label class="col-md-2 form-control-label">Comments:</label>
                    <div class="col-md-10">
-                       <input type="text" ng-maxlength=3 class="form-control ng-pristine ng-valid ng-not-empty ng-touched" name="SiteDataUpper95Form" id="existingPublicationSDComments" ng-model="siteData.comments" aria-invalid="false">
+                       <input type="text" maxlength=250 class="form-control ng-pristine ng-valid ng-not-empty ng-touched" name="SiteDataUpper95Form" id="existingPublicationSDComments" ng-model="siteData.comments" aria-invalid="false">
                    </div>
                </div>
                 <div class="form-group row">
-                    <button ng-click="deleteSiteData(siteData, $index)"
+                    <button  ng-click="deleteSiteData(siteData, $index)"
                             class="btn btn-danger btn-sm">
                          Remove SiteData
                     </button>

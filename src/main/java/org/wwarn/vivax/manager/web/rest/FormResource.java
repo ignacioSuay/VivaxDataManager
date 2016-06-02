@@ -46,6 +46,7 @@ public class FormResource {
     public ResponseEntity<FormResourceDTO> updatePublicationDTOAndAllEagerRelationships(@RequestBody FormResourceDTO formResourceDTO) {
         log.debug("REST request to get Publication : {}", formResourceDTO);
         FormResourceDTO formResDTO = publicationService.updatePublicationAndAllCollections(formResourceDTO);
+        publicationRepository.flush();
         FormResourceDTO updatedFormResourceDTO = publicationRepository.retrievePublicationByPubMedId(formResourceDTO.getPublication().getPubMedId());
         return ResponseEntity.ok()
             .headers(HeaderUtil.createEntityUpdateAlert("formDTO", formResourceDTO.getPublication().getId().toString()))

@@ -14,6 +14,6 @@ import java.util.List;
  */
 public interface TreatmentRepository extends JpaRepository<Treatment,Long> {
 
-    @Query("from Treatment t order by t.treatmentName")
+    @Query("from Treatment t order by t.treatmentArmCode")
     List<Treatment> findAllNonPagedTreatments();
 }

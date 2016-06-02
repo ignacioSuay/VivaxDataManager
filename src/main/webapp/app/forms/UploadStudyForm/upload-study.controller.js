@@ -33,7 +33,7 @@
 
         $scope.categorys = Category.query();
 
-        $scope.retrievePublicationByPubMedId = function () {
+        $scope.retrievePublicationByPubMedId = function() {
             Form.load($scope.publication.pubMedId).then(function (result) {
                 loadDataByFormDTO(result.data);
             });
@@ -41,6 +41,8 @@
 
         $scope.saveAll = function(){
             Form.save($scope.publi).then(function(result){
+                console.log($scope.publi);
+                console.log(result.data);
                 loadDataByFormDTO(result.data);
             });
         };
@@ -51,16 +53,6 @@
             $scope.hideSelectLocation=true;
             $scope.selectLocation=true;
         };
-
-        $scope.setLocationSelectEnabled = function(country){
-            LocationHttp.getLocationIdByCountryName(country).then(function(result){
-                $scope.countryId=result.data;
-                $scope.selectedOne=$scope.countryId[0];
-            });
-            $scope.hideSelectLocation=false;
-            $scope.selectLocation=false;
-            $scope.hideChangeLocation=true;
-        }
 
         $scope.newPublication = function () {
             $scope.myHidingValue=false;
@@ -117,10 +109,9 @@
                 }
             }
             if(flag===true){
-                $scope.newTreatments.push($scope.newTreat);
+                $scope.newTreatments.push({});
                 console.log($scope.newTreatments);
                 siteData.treatments.push($scope.newTreat);
-                $scope.$item='';
             }
         };
 
@@ -206,11 +197,13 @@
                 backdrop: 'static',
                 resolve: {
                     entity: function () {
-                        return {};
+                        return {
+                            study:studyDTO.studyDetails.ref
+                        };
                     }
                 }
             }).result.then(function (result) {
-                studyDTO.siteDatas.push(ShareDataService.getObject());
+                studyDTO.siteDatas.push(result);
                 ShareDataService.setFlag(false);
             }, function () {
             })
@@ -256,7 +249,6 @@
             }).result.then(function (result) {
                 siteData = ShareDataService.getObject();
                 siteData.treatments.push(result);
-                console.log(siteData);
                 ShareDataService.setFlag(false);
             }, function () {
             })

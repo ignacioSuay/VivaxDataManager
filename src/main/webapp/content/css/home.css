@@ -29,7 +29,18 @@ body {
   opacity: .7; }
 
 #features .features-item .icon {
-  padding-top: 11%;
+  padding-top: 13%;
+  font-size: 50px;
+  border-radius: 50%;
+  background-color: #337ab7;
+  width: 120px;
+  height: 120px;
+  text-align: center;
+  color: #fff;
+  display: inline-block; }
+
+#features .features-item .icon2 {
+  padding-top: 30%;
   font-size: 50px;
   border-radius: 50%;
   background-color: #337ab7;

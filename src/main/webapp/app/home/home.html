@@ -12,23 +12,36 @@
                 </div>
             </section>
         </div>
-        <div id="section2">
+        <div id="section2" ng-show="vm.account!==null">
             <section id="features">
                 <div class="container">
                     <h1>An easy and intuitive tool to manage Vivax related Publications</h1>
                     <div class="row">
                         <a ui-sref="studyUpload">
-                            <div class="features-item col-sm-6 wow fadeInLeftBig" style="visibility: visible; animation-name: fadeInLeftBig;">
-                                <span class="icon fa fa-pencil fa-5x"></span>
+                            <div class="features-item col-sm-6" style="visibility: visible; animation-name: fadeInLeftBig;">
+                                <span class="icon glyphicon glyphicon-pencil"></span>
                                 <h2>Publication searcher and uploader</h2>
                             </div>
                         </a>
                         <a class="pull-right" ui-sref="siteDataView">
                             <div class="features-item col-sm-6 wow fadeInLeftBig" style="visibility: visible; animation-name: fadeInLeftBig;">
-                                <span class="icon fa fa-eye fa-6x" ></span>
+                                <span class="icon2 glyphicon glyphicon-search" ></span>
                                 <h2>Publication filtered views</h2>
                             </div>
                         </a>
+                    </div>
+                </div>
+            </section>
+        </div>
+        <div id="section3" ng-show="vm.account===null">
+            <section id="login">
+                <div class="container">
+                    <div class="form-group row center-block">
+                        <h1>An easy and intuitive tool to manage Vivax related Publications</h1>
+                        <button  ng-click="vm.login()"
+                                 class="btn btn-success btn-lg center-block">
+                            Login
+                        </button>
                     </div>
                 </div>
             </section>
