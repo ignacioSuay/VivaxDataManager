@@ -117,10 +117,9 @@
                 }
             }
             if(flag===true){
-                $scope.newTreatments.push($scope.newTreat);
+                $scope.newTreatments.push({});
                 console.log($scope.newTreatments);
                 siteData.treatments.push($scope.newTreat);
-                $scope.$item='';
             }
         };
 
