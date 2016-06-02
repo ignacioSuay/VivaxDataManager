@@ -50,6 +50,7 @@
                     <th jh-sort-by="category.name"><span>category</span> <span class="glyphicon glyphicon-sort"></span></th>
                     <th jh-sort-by="location.location"><span>location</span> <span class="glyphicon glyphicon-sort"></span></th>
                     <th jh-sort-by="study.studyType"><span>study</span> <span class="glyphicon glyphicon-sort"></span></th>
+                    <th jh-sort-by="treatment.treatmentArmCode"><span>Treatments</span> <span class="glyphicon glyphicon-sort"></span></th>
                     <th></th>
                 </tr>
             </thead>
@@ -75,6 +76,11 @@
                     </td>
                     <td>
                         <a ui-sref="study-detail({id:siteData.study.id})">{{siteData.study.studyType}}</a>
+                    </td>
+                    <td>
+                        <ul>
+                            <li ng-repeat="treatment in siteData.treatments"><a ui-sref="treatment-detail({id:treatment.id})">{{treatment.treatmentArmCode}}</a></li>
+                        </ul>
                     </td>
                     <td class="text-right">
                         <div class="btn-group flex-btn-group-container">
